@@ -259,7 +259,7 @@ export interface WineTastingSheet {
 // Factory function to create a new empty WineTastingSheet
 export function createEmptyWineTastingSheet(): WineTastingSheet {
     return {
-        id: crypto.randomUUID(),
+        id: new Date().toDateString(),
         location: '',
         date: new Date().toISOString().split('T')[0],
         time: new Date().toTimeString().split(' ')[0].substring(0, 5),
