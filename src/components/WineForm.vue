@@ -15,7 +15,7 @@
                 required
               />
             </div>
-          </div>
+          </div> 
           <div class="form-col">
             <div class="form-group">
               <label for="date" class="form-label">Date</label>
@@ -600,7 +600,7 @@
     BodyLevel, AlcoholLevel, SoftnessLevel, SugarLevel, AcidityLevel,
     SalinityLevel, TanninLevel, Balance, RetroOlfactoryQuality, 
     RetroOlfactoryPersistence, EvolutionaryState
-  } from '../models/WineTastingSheet';
+  } from '@/models/WineTastingSheet';
   
   // Props
   interface Props {
@@ -853,7 +853,7 @@
   }
   
   .form-check-label {
-    font-weight: normal;
+    font-weight: normal; 
   }
   
   @media (max-width: 768px) {
