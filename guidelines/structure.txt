@@ -1,0 +1,38 @@
+# Wine Tasting Sheet Application
+
+## Project Structure
+```
+wine-tasting-app/
+├── public/
+│   ├── index.html
+│   └── favicon.ico
+├── src/
+│   ├── assets/
+│   │   └── logo.png
+│   ├── components/
+│   │   ├── AppHeader.vue
+│   │   ├── WineForm.vue
+│   │   ├── WineList.vue
+│   │   ├── WineDetails.vue
+│   │   └── ImportExport.vue
+│   ├── models/
+│   │   └── WineTastingSheet.ts
+│   ├── services/
+│   │   ├── StorageService.ts
+│   │   └── DataService.ts
+│   ├── views/
+│   │   ├── HomeView.vue
+│   │   ├── CreateWineView.vue
+│   │   ├── EditWineView.vue
+│   │   └── DetailWineView.vue
+│   ├── router/
+│   │   └── index.ts
+│   ├── store/
+│   │   └── index.ts
+│   ├── App.vue
+│   └── main.ts
+├── .gitignore
+├── package.json
+├── tsconfig.json
+└── vite.config.ts
+```
