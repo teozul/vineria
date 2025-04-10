@@ -1,3 +1,4 @@
+import {v4 as uuidv4} from 'uuid';
 // Wine Tasting Sheet TypeScript Interfaces and Classes
 
 // Enums for various categorical ratings
@@ -259,7 +260,7 @@ export interface WineTastingSheet {
 // Factory function to create a new empty WineTastingSheet
 export function createEmptyWineTastingSheet(): WineTastingSheet {
     return {
-        id: new Date().toDateString(),
+        id: uuidv4(),
         location: '',
         date: new Date().toISOString().split('T')[0],
         time: new Date().toTimeString().split(' ')[0].substring(0, 5),
@@ -274,7 +275,7 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
         
         visualExam: {
             limpidity: LimpidityLevel.Limpid,
-            transparency: TransparencyLevel.Transparent,
+            transparency: TransparencyLevel.Transparent, 
             color: {
                 tone: ColorTone.RubyRed,
                 intensity: ColorIntensity.Intense
