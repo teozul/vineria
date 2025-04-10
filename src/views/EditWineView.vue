@@ -18,9 +18,9 @@
       
       <WineForm 
         v-else 
-        :initialData="wineSheet" 
+        :wineSheet="wineSheet" 
         :isEdit="true" 
-        @submit="updateWineSheet" 
+        @save="updateWineSheet" 
         @cancel="goBack" 
       />
     </div>

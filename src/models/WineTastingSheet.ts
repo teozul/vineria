@@ -260,7 +260,7 @@ export interface WineTastingSheet {
 // Factory function to create a new empty WineTastingSheet
 export function createEmptyWineTastingSheet(): WineTastingSheet {
     return {
-        id: uuidv4(),
+        id: new Date().getTime().toString(),
         location: '',
         date: new Date().toISOString().split('T')[0],
         time: new Date().toTimeString().split(' ')[0].substring(0, 5),
