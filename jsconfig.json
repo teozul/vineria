@@ -9,6 +9,7 @@
         "src/*"
       ]
     },
+    "types": ["jest"],
     "lib": [
       "esnext",
       "dom",

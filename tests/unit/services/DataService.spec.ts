@@ -1,5 +1,4 @@
 // tests/unit/services/DataService.spec.ts
-
 import { DataService } from '@/services/DataService';
 import { storageService } from '@/services/StorageService';
 import { createEmptyWineTastingSheet, WineTastingSheet } from '@/models/WineTastingSheet';

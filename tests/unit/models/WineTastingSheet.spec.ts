@@ -1,11 +1,10 @@
 // tests/unit/models/WineTastingSheet.spec.ts
-
 import { 
     createEmptyWineTastingSheet, 
     WineTastingSheet, 
     LimpidityLevel,
     EvolutionaryState,
-    ColorTone 
+    ColorTone  
   } from '@/models/WineTastingSheet';
   
   describe('WineTastingSheet', () => {

@@ -1,5 +1,4 @@
 // tests/unit/components/WineList.spec.ts
-
 import { mount } from '@vue/test-utils';
 import WineList from '@/components/WineList.vue';
 import { WineTastingSheet, createEmptyWineTastingSheet } from '@/models/WineTastingSheet';

@@ -1,5 +1,4 @@
 // tests/unit/services/StorageService.spec.ts
-import '@types/jest';
 import { LocalStorageProvider } from '@/services/StorageService';
 import { createEmptyWineTastingSheet, WineTastingSheet } from '@/models/WineTastingSheet';
 

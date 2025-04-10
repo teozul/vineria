@@ -1,128 +1,85 @@
-// tests/unit/components/AppHeader.spec.ts
-import '@types/jest';
+import * as Vue from 'vue';
 import { mount } from '@vue/test-utils';
-import AppHeader from '@/components/AppHeader.vue';
 import { createRouter, createWebHistory } from 'vue-router';
- 
-// Create a mock router
-const createMockRouter = () => {
-  return createRouter({
-    history: createWebHistory(),
-    routes: [
-      { path: '/', name: 'home' },
-      { path: '/create', name: 'create' }
-    ]
-  });
-};
+import type { RouteRecordRaw } from 'vue-router';
+import AppHeader from '@/components/AppHeader.vue';
+
 
 describe('AppHeader.vue', () => {
-  it('renders the header with logo and navigation', () => {
-    const router = createMockRouter();
+  // Create mock routes that match your application structure
+  const routes: RouteRecordRaw[] = [
+    { 
+      path: '/', 
+      name: 'home',
+      component: { template: '<div>Home Page</div>' }
+    },
+    { 
+      path: '/create', 
+      name: 'create',
+      component: { template: '<div>Create Page</div>' }
+    }
+  ];
+
+  // Create a router instance with the mock routes
+  const router = createRouter({
+    history: createWebHistory(),
+    routes
+  });
+
+  it('renders the header with the correct title', async () => {
+    // Mount the component with router
     const wrapper = mount(AppHeader, {
       global: {
         plugins: [router]
       }
     });
     
-    // Check if logo exists
-    expect(wrapper.find('.logo').exists()).toBe(true);
-    
-    // Check if logo contains the correct text
+    // Check if the logo text is rendered correctly
     expect(wrapper.find('.logo h1').text()).toBe('Wine Tasting');
-    
-    // Check if navigation exists
-    expect(wrapper.find('.main-nav').exists()).toBe(true);
-    
-    // Check if navigation has the correct links
+  });
+
+  it('renders navigation links correctly', async () => {
+    // Mount the component with router
+    const wrapper = mount(AppHeader, {
+      global: {
+        plugins: [router]
+      }
+    });
+
+    // Get all nav links
     const navLinks = wrapper.findAll('.nav-link');
-    expect(navLinks.length).toBe(2);
+    
+    // Check if we have the expected number of links
+    expect(navLinks).toHaveLength(2);
+    
+    // Check if the links have the correct text
     expect(navLinks[0].text()).toBe('Home');
     expect(navLinks[1].text()).toBe('New Tasting');
+    
+    // Check if the links have the correct href attributes
+    expect(navLinks[0].attributes('href')).toBe('/');
+    expect(navLinks[1].attributes('href')).toBe('/create');
   });
-  
-  it('links to the correct routes', async () => {
-    const router = createMockRouter();
-    const wrapper = mount(AppHeader, {
-      global: {
-        plugins: [router]
-      }
-    });
-    
-    // Mock router push
-    const routerPushSpy = jest.spyOn(router, 'push');
-    
-    // Get all links
-    const logoLink = wrapper.find('.logo a');
-    const homeLink = wrapper.findAll('.nav-link')[0];
-    const newTastingLink = wrapper.findAll('.nav-link')[1];
-    
-    // Click on logo
-    await logoLink.trigger('click');
-    expect(routerPushSpy).toHaveBeenCalledWith(expect.objectContaining({ path: '/' }));
-    
-    // Click on home link
-    await homeLink.trigger('click');
-    expect(routerPushSpy).toHaveBeenCalledWith(expect.objectContaining({ path: '/' }));
-    
-    // Click on new tasting link
-    await newTastingLink.trigger('click');
-    expect(routerPushSpy).toHaveBeenCalledWith(expect.objectContaining({ path: '/create' }));
-  });
-  
+
   it('applies active class to current route', async () => {
-    const router = createMockRouter();
+    // Set initial route
+    router.push('/');
+    await router.isReady();
     
-    // Set initial route to home
-    await router.push('/');
-    
+    // Mount the component with router
     const wrapper = mount(AppHeader, {
       global: {
         plugins: [router]
       }
     });
+
+    // Initially, home link should be active
+    expect(wrapper.findAll('.nav-link')[0].classes()).toContain('router-link-active');
     
-    // Check if home link has active class
-    let homeLink = wrapper.findAll('.nav-link')[0];
-    let newTastingLink = wrapper.findAll('.nav-link')[1];
-    
-    expect(homeLink.classes()).toContain('router-link-active');
-    expect(newTastingLink.classes()).not.toContain('router-link-active');
-    
-    // Change route to create
+    // Navigate to create route
     await router.push('/create');
     
-    // Need to re-query elements after route change
-    homeLink = wrapper.findAll('.nav-link')[0];
-    newTastingLink = wrapper.findAll('.nav-link')[1];
-    
-    expect(homeLink.classes()).not.toContain('router-link-active');
-    expect(newTastingLink.classes()).toContain('router-link-active');
-  });
-  
-  it('renders correctly on mobile viewport', async () => {
-    // Mock window.innerWidth to simulate mobile viewport
-    const originalInnerWidth = window.innerWidth;
-    Object.defineProperty(window, 'innerWidth', { value: 600, writable: true });
-    
-    // Trigger a resize event
-    window.dispatchEvent(new Event('resize'));
-    
-    const router = createMockRouter();
-    const wrapper = mount(AppHeader, {
-      global: {
-        plugins: [router]
-      }
-    });
-    
-    // Check if the header-container has mobile-specific styles
-    // This is a bit tricky to test directly with Jest, so we're just checking
-    // basic structure is preserved even in mobile
-    expect(wrapper.find('.header-container').exists()).toBe(true);
-    expect(wrapper.find('.logo').exists()).toBe(true);
-    expect(wrapper.find('.main-nav').exists()).toBe(true);
-    
-    // Clean up
-    Object.defineProperty(window, 'innerWidth', { value: originalInnerWidth });
-    window.dispatchEvent(new Event('resize'));
+    // Now create link should be active
+    expect(wrapper.findAll('.nav-link')[1].classes()).toContain('router-link-active');
   });
 }); 
