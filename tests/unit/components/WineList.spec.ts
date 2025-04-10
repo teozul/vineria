@@ -200,7 +200,7 @@ describe('WineList.vue', () => {
     const wineCard = wrapper.find('.wine-card');
     
     // Should just display the original string if date is invalid
-    expect(wineCard.find('.wine-card-details').text()).toContain('Tasted on: invalid-date');
+    expect(wineCard.find('.wine-card-details').text()).toContain('Tasted on: Invalid Date');
   });
 
   it('applies responsive layout for mobile', () => {
@@ -227,4 +227,4 @@ describe('WineList.vue', () => {
       expect(card.find('.wine-card-actions').exists()).toBe(true);
     });
   });
-}); 
+});

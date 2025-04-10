@@ -15,6 +15,7 @@ module.exports = {
   moduleFileExtensions: ['vue', 'js', 'ts', 'tsx', 'json'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
+    "^@vue/test-utils": "<rootDir>/node_modules/@vue/test-utils/dist/vue-test-utils.cjs.js"
   },
   collectCoverage: true,
   collectCoverageFrom: [
