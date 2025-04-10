@@ -4,11 +4,11 @@ import { mount, flushPromises, VueWrapper } from '@vue/test-utils';
 import { createRouter, createWebHistory, Router } from 'vue-router';
 import { dataService } from '@/services/DataService';
 import { createEmptyWineTastingSheet } from '@/models/WineTastingSheet';
-import { ComponentPublicInstance } from 'vue';
+import { ComponentPublicInstance, defineComponent } from 'vue';
 
 // You would import your main views here
 // For this test, we'll mock them to avoid having to import the entire app
-const HomeView = {
+const HomeView = defineComponent({
   template: `
     <div class="home-view">
       <h1>Wine Tasting Sheets</h1>
@@ -37,9 +37,9 @@ const HomeView = {
     
     return { deleteSheet };
   }
-};
+});
 
-const CreateWineView = {
+const CreateWineView = defineComponent({
   template: `
     <div class="create-view">
       <h1>Create Wine Tasting Sheet</h1>
@@ -67,9 +67,9 @@ const CreateWineView = {
       this.$router.push('/');
     }
   }
-};
+});
 
-const EditWineView = {
+const EditWineView = defineComponent({
   template: `
     <div class="edit-view">
       <h1>Edit Wine Tasting Sheet</h1>
@@ -107,9 +107,9 @@ const EditWineView = {
       this.$router.push('/');
     }
   }
-};
+});
 
-const ViewWineView = {
+const ViewWineView = defineComponent({
   template: `
     <div class="view-view">
       <h1>View Wine Tasting Sheet</h1>
@@ -137,7 +137,7 @@ const ViewWineView = {
   async created(this: any) {
     this.sheet = await dataService.getSheetById(this.id);
   }
-};
+});
 
 // Mock the dataService methods
 jest.mock('@/services/DataService', () => {
