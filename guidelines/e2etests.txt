@@ -1,0 +1,314 @@
+# E2E Testing Plan for Wine Tasting Sheet Application
+
+This document outlines a plan for end-to-end testing of the Wine Tasting Sheet application using Cypress.
+
+## Setup Instructions
+
+1. Install Cypress:
+```bash
+npm install --save-dev cypress
+```
+
+2. Add Cypress scripts to package.json:
+```json
+"scripts": {
+  "cypress:open": "cypress open",
+  "cypress:run": "cypress run"
+}
+```
+
+3. Initialize Cypress (this will create a cypress folder in your project):
+```bash
+npx cypress open
+```
+
+## Test Scenarios
+
+### 1. Basic Navigation Test
+
+**File:** `cypress/integration/navigation.spec.js`
+
+**Purpose:** Verify that navigation between different views works correctly.
+
+**Steps:**
+- Visit the home page
+- Verify the header elements are visible
+- Navigate to the Create New Tasting page
+- Verify we are on the create page
+- Navigate back to home using the header link
+- Verify we are back on the home page
+
+### 2. Create Wine Tasting Sheet Test
+
+**File:** `cypress/integration/create-wine.spec.js`
+
+**Purpose:** Verify that users can create a new wine tasting sheet.
+
+**Steps:**
+- Visit the home page
+- Click on "New Tasting" button
+- Fill out the wine sheet form with test data
+  - Basic Information section
+  - Wine Details section
+  - Visual Examination section
+  - Olfactory Examination section
+  - Gustatory Examination section
+  - Final Evaluation section
+- Submit the form
+- Verify redirection to home page
+- Verify the new wine sheet appears in the list
+
+### 3. View Wine Tasting Sheet Test
+
+**File:** `cypress/integration/view-wine.spec.js`
+
+**Purpose:** Verify that users can view a wine tasting sheet's details.
+
+**Steps:**
+- Create a test wine sheet (using a fixture or directly through the UI)
+- Visit the home page
+- Click on a wine sheet card or view button
+- Verify that all sections of the wine sheet are displayed correctly:
+  - Basic Information
+  - Visual Examination
+  - Olfactory Examination
+  - Gustatory Examination
+  - Final Evaluation
+
+### 4. Edit Wine Tasting Sheet Test
+
+**File:** `cypress/integration/edit-wine.spec.js`
+
+**Purpose:** Verify that users can edit an existing wine tasting sheet.
+
+**Steps:**
+- Create a test wine sheet (using a fixture or directly through the UI)
+- Visit the home page
+- Click on edit button for the created wine sheet
+- Modify several fields in different sections
+- Save the changes
+- Verify redirection to home page
+- View the wine sheet details
+- Verify the changes were saved correctly
+
+### 5. Delete Wine Tasting Sheet Test
+
+**File:** `cypress/integration/delete-wine.spec.js`
+
+**Purpose:** Verify that users can delete a wine tasting sheet.
+
+**Steps:**
+- Create a test wine sheet (using a fixture or directly through the UI)
+- Visit the home page
+- Verify the wine sheet is in the list
+- Delete the wine sheet
+- Verify the wine sheet is removed from the list
+
+### 6. Import/Export Test
+
+**File:** `cypress/integration/import-export.spec.js`
+
+**Purpose:** Verify the import and export functionality.
+
+**Steps:**
+- Create several test wine sheets
+- Export the data
+- Verify the downloaded file exists and has the correct content
+- Clear all data
+- Import the previously exported file
+- Verify all wine sheets are restored correctly
+
+### 7. Form Validation Test
+
+**File:** `cypress/integration/form-validation.spec.js`
+
+**Purpose:** Verify that form validation works correctly.
+
+**Steps:**
+- Visit the create page
+- Try to submit the form without filling required fields
+- Verify validation errors are shown
+- Fill the required fields
+- Verify the form can be submitted
+
+### 8. Responsive Design Test
+
+**File:** `cypress/integration/responsive.spec.js`
+
+**Purpose:** Verify that the application is responsive and works on different screen sizes.
+
+**Steps:**
+- Test on desktop viewport (e.g., 1280x800)
+- Test on tablet viewport (e.g., 768x1024)
+- Test on mobile viewport (e.g., 375x667)
+- Verify key elements are displayed correctly on each viewport
+- Verify functionality works correctly on each viewport
+
+## Test Fixture Example
+
+Create a fixture file with sample wine tasting sheet data:
+
+```json
+// cypress/fixtures/wine-sheet.json
+{
+  "denomination": "Barolo Riserva",
+  "producer": "Cypress Test Producer",
+  "vintage": 2018,
+  "wineType": "Rosso",
+  "classification": "DOCG",
+  "alcoholContent": 14.5,
+  "temperature": 18,
+  "location": "Test Cellar",
+  "visualExam": {
+    "limpidity": "Limpido",
+    "transparency": "Trasparente",
+    "color": {
+      "tone": "Rosso rubino",
+      "intensity": "Intenso"
+    }
+  },
+  "finalConsiderations": "This is a test wine created by Cypress"
+}
+```
+
+## Sample Test Implementation
+
+Here's a sample implementation for the create test:
+
+```javascript
+// cypress/integration/create-wine.spec.js
+
+describe('Create Wine Tasting Sheet', () => {
+  it('should create a new wine tasting sheet', () => {
+    // Visit the home page
+    cy.visit('/');
+    
+    // Click on "New Tasting" button
+    cy.contains('New Tasting').click();
+    
+    // Verify we are on the create page
+    cy.url().should('include', '/create');
+    
+    // Fill Basic Information
+    cy.get('#location').type('Test Cellar');
+    cy.get('#date').type('2023-06-15');
+    cy.get('#time').type('14:30');
+    
+    // Fill Wine Details
+    cy.get('#producer').type('E2E Test Producer');
+    cy.get('#denomination').type('Barolo Test');
+    cy.get('#classification').select('DOCG');
+    cy.get('#vintage').type('2018');
+    cy.get('#wineType').select('Rosso');
+    cy.get('#alcoholContent').type('14.5');
+    cy.get('#temperature').type('18');
+    
+    // Fill Visual Examination
+    cy.get('#limpidity').select('Limpido');
+    cy.get('#transparency').select('Trasparente');
+    cy.get('#colorTone').select('Rosso rubino');
+    cy.get('#colorIntensity').select('Intenso');
+    cy.get('#fluidity').select('Poco denso');
+    
+    // Fill Olfactory Examination
+    cy.get('#olfactoryIntensity').select('Intenso');
+    cy.get('#olfactoryFranchness').select('Schietto');
+    cy.get('#olfactoryFineness').select('Fine');
+    cy.get('#aroma-0').check(); // Select first aroma type
+    cy.get('#olfactoryComplexity').select('Mediamente complesso');
+    
+    // Fill Gustatory Examination
+    cy.get('#body').select('Di corpo');
+    cy.get('#alcoholLevel').select('Caldo');
+    cy.get('#softness').select('Morbido');
+    cy.get('#sugars').select('Secco');
+    cy.get('#acidity').select('Fresco');
+    cy.get('#salinity').select('Leggerm. sapido');
+    cy.get('#tannins').select('Giusto tannico');
+    cy.get('#balance').select('Equilibrato');
+    cy.get('#retroIntensity').select('Intenso');
+    cy.get('#retroQuality').select('Fine');
+    cy.get('#retroPersistence').select('Persistente');
+    
+    // Fill Final Evaluation
+    cy.get('#evolutionaryState').select('Pronto');
+    cy.get('#finalConsiderations').type('This is a test wine created by Cypress E2E tests.');
+    
+    // Submit the form
+    cy.get('.form-actions button[type="submit"]').click();
+    
+    // Verify redirection to home page
+    cy.url().should('eq', Cypress.config().baseUrl + '/');
+    
+    // Verify the new wine sheet appears in the list
+    cy.get('.wine-card').should('have.length.at.least', 1);
+    cy.contains('Barolo Test').should('exist');
+    cy.contains('E2E Test Producer').should('exist');
+  });
+});
+```
+
+## Tips for Effective E2E Testing
+
+1. **Use data-testid attributes**: Add `data-testid` attributes to key elements to make them easier to target in tests.
+
+2. **Create helper commands**: Create Cypress custom commands for common operations like creating a wine sheet or logging in.
+
+3. **Use fixtures**: Use fixture data to make tests more maintainable.
+
+4. **Setup and teardown**: Clean up data before and after tests to ensure isolation.
+
+5. **Consider test speed**: Group related tests together to avoid unnecessary navigation.
+
+6. **Visual regression testing**: Consider integrating Cypress with a visual regression testing tool to catch UI changes.
+
+7. **CI integration**: Run E2E tests as part of your CI pipeline, but be selective to avoid long build times.
+
+## Example Custom Command
+
+Add this to `cypress/support/commands.js`:
+
+```javascript
+// Create a wine sheet via the UI
+Cypress.Commands.add('createWineSheet', (wineData) => {
+  cy.visit('/create');
+  
+  // Fill out form with data
+  cy.get('#denomination').type(wineData.denomination);
+  cy.get('#producer').type(wineData.producer);
+  cy.get('#wineType').select(wineData.wineType);
+  // ... fill out other fields
+  
+  // Submit form
+  cy.get('.form-actions button[type="submit"]').click();
+  
+  // Wait for redirection
+  cy.url().should('eq', Cypress.config().baseUrl + '/');
+});
+
+// Create a wine sheet via API (faster)
+Cypress.Commands.add('createWineSheetViaApi', (wineData) => {
+  // This would require backend API endpoint or direct localStorage manipulation
+  // Example with localStorage:
+  cy.window().then(win => {
+    const sheet = { ...createEmptyWineTastingSheet(), ...wineData };
+    const existingSheets = JSON.parse(win.localStorage.getItem('wine-tasting-sheets') || '[]');
+    existingSheets.push(sheet);
+    win.localStorage.setItem('wine-tasting-sheets', JSON.stringify(existingSheets));
+  });
+  
+  // Refresh the page to see changes
+  cy.visit('/');
+});
+```
+
+## Conclusion
+
+These tests cover the core functionality of the Wine Tasting Sheet application. To execute the tests, run:
+
+```bash
+npm run cypress:open  # For interactive mode
+npm run cypress:run   # For headless mode
+```
+
+As you develop the application further, continue to update and expand these tests to ensure all functionality works as expected.

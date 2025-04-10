@@ -1,0 +1,85 @@
+# Test Setup for Wine Tasting Sheet Application
+
+## Prerequisites
+
+To set up testing for the Wine Tasting Sheet application, you'll need to install the following dependencies:
+
+```bash
+# Install Jest and related utilities
+npm install --save-dev jest @types/jest ts-jest
+
+# Install Vue Test Utils
+npm install --save-dev @vue/test-utils
+
+# Install Vue Jest transformer (for handling single-file components)
+npm install --save-dev @vue/vue3-jest
+
+# Install needed utilities
+npm install --save-dev jest-environment-jsdom
+```
+
+## Configuration
+
+Create a `jest.config.js` file in the root of your project:
+
+```javascript
+module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'jsdom',
+  transform: {
+    '^.+\\.vue$': '@vue/vue3-jest',
+    '^.+\\.(ts|tsx)$': 'ts-jest'
+  },
+  moduleFileExtensions: ['vue', 'js', 'ts'],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
+  collectCoverage: true,
+  collectCoverageFrom: [
+    'src/**/*.{ts,vue}',
+    '!src/main.ts', 
+    '!src/router/index.ts',
+    '!**/node_modules/**'
+  ],
+  testMatch: [
+    '**/tests/unit/**/*.spec.[jt]s?(x)',
+    '**/__tests__/*.[jt]s?(x)'
+  ]
+};
+```
+
+## Project Structure
+
+Create a directory structure for your tests:
+
+```
+wine-tasting-app/
+├── ...
+├── tests/
+│   ├── unit/
+│   │   ├── models/
+│   │   ├── services/
+│   │   └── components/
+│   └── integration/
+└── ...
+```
+
+## Update package.json
+
+Add the following script to your package.json:
+
+```json
+"scripts": {
+  "test": "jest",
+  "test:watch": "jest --watch",
+  "test:coverage": "jest --coverage"
+}
+```
+
+With this setup, you'll be able to run your tests using:
+
+```bash
+npm run test       # Run all tests
+npm run test:watch # Run tests in watch mode
+npm run test:coverage # Run tests with coverage report
+```

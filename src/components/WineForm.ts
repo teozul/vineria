@@ -40,16 +40,16 @@ export default defineComponent({
     );
 
     // Handle effervescence properties separately
-    const effervescenceGrain = ref<string>(
+    const effervescenceGrain = ref<EffervescenceGrain>(
       localWineSheet.visualExam.effervescence?.grain || EffervescenceGrain.Fine
     );
 
-    const effervescencePersistence = ref<string>(
+    const effervescencePersistence = ref<EffervescencePersistence>(
       localWineSheet.visualExam.effervescence?.persistence || EffervescencePersistence.Persistent
     );
 
     // Handle aroma types as a separate array for checkboxes
-    const selectedAromaTypes = ref<string[]>(
+    const selectedAromaTypes = ref<AromaType[]>(
       [...(localWineSheet.olfactoryExam.aromaTypes || [])]
     );
 
@@ -76,8 +76,8 @@ export default defineComponent({
     });
 
     // Watch for changes in selected aroma types
-    watch(selectedAromaTypes, (newAromaTypes: string[]): void => {
-      localWineSheet.olfactoryExam.aromaTypes = (AromaType[]) [...newAromaTypes];
+    watch(selectedAromaTypes, (newAromaTypes: AromaType[]): void => {
+      localWineSheet.olfactoryExam.aromaTypes = [...newAromaTypes];
     });
 
     // Initialize values on component mount
@@ -95,7 +95,7 @@ export default defineComponent({
     });
 
     // Color tone filtering helpers
-    const isWhiteWineColorTone = (tone: string): boolean => {
+    const isWhiteWineColorTone = (tone: ColorTone): boolean => {
       return [
         ColorTone.GreenishYellow,
         ColorTone.StrawYellow,
@@ -104,7 +104,7 @@ export default defineComponent({
       ].includes(tone);
     };
 
-    const isRoseWineColorTone = (tone: string): boolean => {
+    const isRoseWineColorTone = (tone: ColorTone): boolean => {
       return [
         ColorTone.LightPink,
         ColorTone.CherryPink,
@@ -112,7 +112,7 @@ export default defineComponent({
       ].includes(tone);
     };
 
-    const isRedWineColorTone = (tone: string): boolean => {
+    const isRedWineColorTone = (tone: ColorTone): boolean => {
       return [
         ColorTone.PurpleRed,
         ColorTone.RubyRed,

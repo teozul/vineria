@@ -1,0 +1,19 @@
+{
+  "denomination": "Barolo Riserva",
+  "producer": "Cypress Test Producer",
+  "vintage": 2018,
+  "wineType": "Rosso",
+  "classification": "DOCG",
+  "alcoholContent": 14.5,
+  "temperature": 18,
+  "location": "Test Cellar",
+  "visualExam": {
+    "limpidity": "Limpido",
+    "transparency": "Trasparente",
+    "color": {
+      "tone": "Rosso rubino",
+      "intensity": "Intenso"
+    }
+  },
+  "finalConsiderations": "This is a test wine created by Cypress"
+}

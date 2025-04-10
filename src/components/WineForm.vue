@@ -591,5 +591,6 @@
 </template>
 
 <script lang="ts">
-import { WineForm } from './WineTastingSheet';
+import WineFormComponent from './WineForm';
+export default WineFormComponent;
 </script>
