@@ -19,8 +19,8 @@ jest.mock('@/services/StorageService', () => {
 });
 
 // Mock for document and URL functionality
-global.URL.createObjectURL = jest.fn();
-global.URL.revokeObjectURL = jest.fn();
+(window as any).URL.createObjectURL = jest.fn();
+(window as any).URL.revokeObjectURL = jest.fn();
 
 const mockDocument = {
   createElement: jest.fn(() => ({
@@ -29,7 +29,7 @@ const mockDocument = {
     click: jest.fn()
   }))
 };
-Object.defineProperty(global, 'document', { value: mockDocument });
+Object.defineProperty(window, 'document', { value: mockDocument });
 
 describe('DataService', () => {
   let dataService: DataService;
@@ -263,7 +263,7 @@ describe('DataService', () => {
         onerror: null
       };
       
-      global.FileReader = jest.fn(() => mockFileReader) as any;
+      (window as any).FileReader = jest.fn(() => mockFileReader);
       
       // Mock importFromJson
       const importFromJsonSpy = jest.spyOn(dataService, 'importFromJson').mockResolvedValue(true);
@@ -287,7 +287,7 @@ describe('DataService', () => {
         onerror: null
       };
       
-      global.FileReader = jest.fn(() => mockFileReader) as any;
+      (window as any).FileReader = jest.fn(() => mockFileReader);
       
       await expect(dataService.handleFileUpload(mockFile)).rejects.toThrow('Error reading file');
     });
@@ -304,7 +304,7 @@ describe('DataService', () => {
         onerror: null
       };
       
-      global.FileReader = jest.fn(() => mockFileReader) as any;
+      (window as any).FileReader = jest.fn(() => mockFileReader);
       
       await expect(dataService.handleFileUpload(mockFile)).rejects.toThrow('Failed to read file');
     });

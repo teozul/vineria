@@ -1,9 +1,10 @@
 // tests/integration/WineTastingFlow.spec.ts
 
-import { mount, flushPromises } from '@vue/test-utils';
-import { createRouter, createWebHistory } from 'vue-router';
+import { mount, flushPromises, VueWrapper } from '@vue/test-utils';
+import { createRouter, createWebHistory, Router } from 'vue-router';
 import { dataService } from '@/services/DataService';
 import { createEmptyWineTastingSheet } from '@/models/WineTastingSheet';
+import { ComponentPublicInstance } from 'vue';
 
 // You would import your main views here
 // For this test, we'll mock them to avoid having to import the entire app
@@ -22,9 +23,14 @@ const HomeView = {
       </div>
     </div>
   `,
-  props: ['sheets'],
-  setup(props, { emit }) {
-    const deleteSheet = async (id) => {
+  props: {
+    sheets: {
+      type: Array,
+      default: () => []
+    }
+  },
+  setup(props: { sheets: any[] }, { emit }: { emit: (event: string) => void }) {
+    const deleteSheet = async (id: string) => {
       await dataService.deleteSheet(id);
       emit('refresh');
     };
@@ -56,7 +62,7 @@ const CreateWineView = {
     };
   },
   methods: {
-    async saveSheet() {
+    async saveSheet(this: any) {
       await dataService.createSheet(this.sheet);
       this.$router.push('/');
     }
@@ -81,17 +87,22 @@ const EditWineView = {
       <div v-else>Loading...</div>
     </div>
   `,
-  props: ['id'],
+  props: {
+    id: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       sheet: null
     };
   },
-  async created() {
+  async created(this: any) {
     this.sheet = await dataService.getSheetById(this.id);
   },
   methods: {
-    async updateSheet() {
+    async updateSheet(this: any) {
       await dataService.updateSheet(this.sheet);
       this.$router.push('/');
     }
@@ -112,25 +123,30 @@ const ViewWineView = {
       <div v-else>Loading...</div>
     </div>
   `,
-  props: ['id'],
+  props: {
+    id: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       sheet: null
     };
   },
-  async created() {
+  async created(this: any) {
     this.sheet = await dataService.getSheetById(this.id);
   }
 };
 
 // Mock the dataService methods
 jest.mock('@/services/DataService', () => {
-  const mockSheets = [];
+  const mockSheets: any[] = [];
   
   return {
     dataService: {
       getAllSheets: jest.fn(() => Promise.resolve([...mockSheets])),
-      getSheetById: jest.fn((id) => {
+      getSheetById: jest.fn((id: string) => {
         const sheet = mockSheets.find(s => s.id === id);
         return Promise.resolve(sheet ? { ...sheet } : null);
       }),
@@ -150,7 +166,7 @@ jest.mock('@/services/DataService', () => {
         }
         return Promise.reject(new Error('Sheet not found'));
       }),
-      deleteSheet: jest.fn((id) => {
+      deleteSheet: jest.fn((id: string) => {
         const index = mockSheets.findIndex(s => s.id === id);
         if (index >= 0) {
           mockSheets.splice(index, 1);
@@ -163,8 +179,8 @@ jest.mock('@/services/DataService', () => {
 });
 
 describe('Wine Tasting Flow', () => {
-  let router;
-  let app;
+  let router: Router;
+  let app: any;
   
   beforeEach(() => {
     // Reset the dataService mocks
@@ -190,14 +206,14 @@ describe('Wine Tasting Flow', () => {
       `,
       data() {
         return {
-          sheets: []
+          sheets: [] as any[]
         };
       },
       async created() {
         await this.loadSheets();
       },
       methods: {
-        async loadSheets() {
+        async loadSheets(this: any) {
           this.sheets = await dataService.getAllSheets();
         }
       }
@@ -210,7 +226,7 @@ describe('Wine Tasting Flow', () => {
       global: {
         plugins: [router]
       }
-    });
+    }) as VueWrapper<ComponentPublicInstance & { loadSheets: () => Promise<void> }>;
     
     // Wait for initial data loading
     await flushPromises();
@@ -277,8 +293,8 @@ describe('Wine Tasting Flow', () => {
     
     // Form should be pre-filled
     await flushPromises();
-    expect(wrapper.find('input[placeholder="Denomination"]').element.value).toBe('Barolo');
-    expect(wrapper.find('input[placeholder="Producer"]').element.value).toBe('Test Producer');
+    expect((wrapper.find('input[placeholder="Denomination"]').element as HTMLInputElement).value).toBe('Barolo');
+    expect((wrapper.find('input[placeholder="Producer"]').element as HTMLInputElement).value).toBe('Test Producer');
     
     // Update the form
     await wrapper.find('input[placeholder="Denomination"]').setValue('Barolo Riserva');
@@ -325,7 +341,7 @@ describe('Wine Tasting Flow', () => {
       global: {
         plugins: [router]
       }
-    });
+    }) as VueWrapper<ComponentPublicInstance & { loadSheets: () => Promise<void> }>;
     
     // Wait for initial data loading
     await flushPromises();
@@ -415,7 +431,7 @@ describe('Wine Tasting Flow', () => {
       global: {
         plugins: [router]
       }
-    });
+    }) as VueWrapper<ComponentPublicInstance & { loadSheets: () => Promise<void> }>;
     
     // Wait for initial data loading
     await flushPromises();
