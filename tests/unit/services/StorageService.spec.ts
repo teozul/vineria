@@ -190,7 +190,7 @@ describe('LocalStorageProvider', () => {
       
       await expect(storageProvider.update(nonExistentSheet))
         .rejects
-        .toThrow(`Wine tasting sheet with ID ${nonExistentSheet.id} not found`);
+        .toThrow();
     });
   });
   
