@@ -4,14 +4,16 @@
         <h1>New Wine Tasting Sheet</h1>
       </div>
       
-      <WineForm @submit="saveWineSheet" @cancel="goBack" />
+      <WineForm @save="saveWineSheet" @cancel="goBack" />
     </div>
   </template>
   
   <script setup lang="ts">
   import { useRouter } from 'vue-router';
   import WineForm from '@/components/WineForm.vue';
-  import { WineTastingSheet } from '@/models/WineTastingSheet';
+  import { 
+    WineTastingSheet,
+  } from '@/models/WineTastingSheet';
   import { dataService } from '@/services/DataService';
   
   const router = useRouter();
