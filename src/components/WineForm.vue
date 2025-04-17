@@ -84,10 +84,9 @@
               class="form-control" 
               required
             >
-              <option value="">Select Classification</option>
-              <option value="IGT">IGT</option>
-              <option value="DOC">DOC</option>
-              <option value="DOCG">DOCG</option>
+              <option v-for="(value, key) in wineClassificationOptions" :key="key" :value="value">
+                {{ wineClassificationLabels[value] }}
+              </option>
             </select>
           </div>
         </div>
@@ -100,7 +99,7 @@
               v-model="localWineSheet.vintage" 
               class="form-control" 
               min="1900" 
-              :max="new Date().getFullYear()" 
+              :max="new Date().getFullYear()"  
               required
             />
           </div>
@@ -581,7 +580,7 @@
       </div>
     </div>
 
-    <div class="form-actions">
+    <div class="form-actions"> 
       <button type="button" class="btn btn-secondary" @click="cancel">Cancel</button>
       <button type="submit" class="btn" :disabled="submitting">
         {{ submitButtonText }}

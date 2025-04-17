@@ -227,6 +227,20 @@ export interface GustatoryExam {
     };
 }
 
+export enum WineClassification {
+    NONE= "NONE",
+    IGT = 'IGT',
+    DOC = 'DOC',
+    DOCG = 'DOCG'
+} 
+
+export const wineClassificationLabels = {
+    [WineClassification.NONE]: 'Nessuna classificazione',
+    [WineClassification.IGT]: 'Indicazione Geografica Tipica (IGT)',
+    [WineClassification.DOC]: 'Denominazione di Origine Controllata (DOC)',
+    [WineClassification.DOCG]: 'Denominazione di Origine Controllata e Garantita (DOCG)'
+};
+
 // Main Wine Tasting Sheet Interface
 export interface WineTastingSheet {
     id: string; // Unique identifier for each sheet
@@ -241,7 +255,7 @@ export interface WineTastingSheet {
     alcoholContent: number;
     temperature: number;
     vintage: number;
-    classification: string; // IGT, DOC, DOCG
+    classification: WineClassification;
     producer: string;
     wineType: 'Rosso' | 'Bianco' | 'Rosé';
 
@@ -269,7 +283,7 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
         alcoholContent: 0, 
         temperature: 0,
         vintage: new Date().getFullYear(),
-        classification: '',
+        classification: WineClassification.IGT,
         producer: '',
         wineType: 'Rosso',
         

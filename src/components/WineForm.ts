@@ -6,7 +6,8 @@ import {
   OlfactoryFranchness, OlfactoryFineness, AromaType, OlfactoryComplexity,
   BodyLevel, AlcoholLevel, SoftnessLevel, SugarLevel, AcidityLevel,
   SalinityLevel, TanninLevel, Balance, RetroOlfactoryQuality, 
-  RetroOlfactoryPersistence, EvolutionaryState
+  RetroOlfactoryPersistence, EvolutionaryState, WineClassification,
+  wineClassificationLabels
 } from '@/models/WineTastingSheet';
  
 export default defineComponent({
@@ -213,6 +214,7 @@ export default defineComponent({
     const retroOlfactoryQualityOptions = Object.values(RetroOlfactoryQuality);
     const retroOlfactoryPersistenceOptions = Object.values(RetroOlfactoryPersistence);
     const evolutionaryStateOptions = Object.values(EvolutionaryState);
+    const wineClassificationOptions = Object.values(WineClassification);
 
     return {
       localWineSheet,
@@ -225,6 +227,8 @@ export default defineComponent({
       handleSubmit,
       cancel,
       getColorToneOptions,
+      WineClassification,
+      wineClassificationLabels,
       // Options
       limpidityOptions,
       transparencyOptions,
@@ -247,7 +251,8 @@ export default defineComponent({
       balanceOptions,
       retroOlfactoryQualityOptions,
       retroOlfactoryPersistenceOptions,
-      evolutionaryStateOptions
+      evolutionaryStateOptions,
+      wineClassificationOptions
     };
   }
 });
