@@ -1,30 +1,30 @@
-name: Deploy Vue 3 App to GitHub Pages
+name: Deploy - build and create deploy branch  
 
 on:
   push:
     branches:
-      - main # or master, depending on your default branch
+      - main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: checkout
         uses: actions/checkout@v3
 
-      - name: Setup Node.js
+      - name: setup_node
         uses: actions/setup-node@v3
         with:
-          node-version: 18 # or your preferred Node.js version
+          node-version: 18
 
-      - name: Install Dependencies
-        run: yarn install # or yarn install
+      - name: install_dependencies
+        run: yarn install
 
-      - name: Build Vue 3 App
-        run: yarn build # or yarn build
+      - name: build
+        run: yarn build
 
-      - name: Deploy to GitHub Pages
+      - name: create_deploy_branch
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist
