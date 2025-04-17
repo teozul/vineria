@@ -12,9 +12,11 @@ import {
       it('should create a new wine tasting sheet with default values', () => {
         const sheet = createEmptyWineTastingSheet();
         
-        // Check that ID is generated and not null
-        expect(sheet.id).not.toBeNull();
+        // Check that ID is a non-empty string
         expect(sheet.id).toBeDefined();
+        expect(sheet.id).not.toBeNull();
+        expect(typeof sheet.id).toBe('string');
+        expect(sheet.id.length).toBeGreaterThan(0);
         
         // Check default date is today
         const today = new Date().toISOString().split('T')[0];

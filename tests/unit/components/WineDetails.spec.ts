@@ -25,7 +25,8 @@ import {
   Balance,
   RetroOlfactoryQuality,
   RetroOlfactoryPersistence,
-  EvolutionaryState
+  EvolutionaryState,
+  WineClassification
 } from '@/models/WineTastingSheet';
 
 describe('WineDetails.vue', () => {
@@ -34,7 +35,7 @@ describe('WineDetails.vue', () => {
     const sheet = createEmptyWineTastingSheet();
     sheet.denomination = 'Chianti Classico';
     sheet.producer = 'Antinori';
-    sheet.classification = 'DOCG';
+    sheet.classification = WineClassification.DOCG;
     sheet.vintage = 2018;
     sheet.alcoholContent = 13.5;
     sheet.temperature = 18;
