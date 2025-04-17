@@ -33,7 +33,7 @@
           <div class="wine-card-details">
             <p><strong>Producer:</strong> {{ sheet.producer }}</p>
             <p><strong>Vintage:</strong> {{ sheet.vintage }}</p>
-            <p><strong>Classification:</strong> {{ sheet.classification }}</p>
+            <p><strong>Classification:</strong> {{ WineClassification[sheet.classification] }}</p>
             <p><strong>Tasted on:</strong> {{ formatDate(sheet.date) }}</p>
           </div>
           <div class="wine-card-actions">
@@ -125,7 +125,7 @@
   
   <script setup lang="ts">
   import { ref, onMounted } from 'vue';
-  import { WineTastingSheet } from '../models/WineTastingSheet';
+  import { WineTastingSheet, WineClassification } from '../models/WineTastingSheet';
   import { dataService } from '../services/DataService';
   
   // State variables
