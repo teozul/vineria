@@ -24,11 +24,20 @@ module.exports = {
     '!src/router/index.ts',
     '!**/node_modules/**'
   ],
+  // coverageThreshold: {
+  //   global: {
+  //     branches: 50,
+  //     functions: 50,
+  //     lines: 50,
+  //     statements: 50
+  //   }
+  // },
   testMatch: [
     '**/tests/unit/**/*.spec.[jt]s?(x)',
     '**/__tests__/*.[jt]s?(x)'
   ],
   transformIgnorePatterns: [
     '/node_modules/(?!vue-router|@babel|uuid)'
-  ]
+  ],
+  setupFiles: ['<rootDir>/tests/unit/setup.ts']
 };

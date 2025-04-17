@@ -72,18 +72,17 @@ export class DataService {
   }
 
   // Download the JSON file
-  downloadJsonFile(filename: string = 'wine-tasting-sheets.json'): void {
-    this.exportToJson().then(jsonData => {
-      const blob = new Blob([jsonData], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      
-      a.href = url;
-      a.download = filename;
-      a.click();
-      
-      URL.revokeObjectURL(url);
-    });
+  async downloadJsonFile(filename: string = 'wine-tasting-sheets.json'): Promise<void> {
+    const jsonData = await this.exportToJson();
+    const blob = new Blob([jsonData], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    
+    a.href = url;
+    a.download = filename;
+    a.click();
+    
+    URL.revokeObjectURL(url);
   }
 
   // Helper method to handle file upload and import
