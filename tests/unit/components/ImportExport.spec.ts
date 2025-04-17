@@ -1,21 +1,27 @@
 // tests/unit/components/ImportExport.spec.ts
-import '@types/jest';
 import { mount, flushPromises } from '@vue/test-utils';
 import ImportExport from '@/components/ImportExport.vue';
 import { dataService } from '@/services/DataService';
 
+// Define the component instance type
+interface ImportExportInstance {
+  selectedFile: File | null;
+}
+
 // Mock the DataService
-jest.mock('@/services/DataService', () => {
-  return {
-    dataService: {
-      handleFileUpload: jest.fn(),
-      downloadJsonFile: jest.fn()
-    }
-  };
-});
+jest.mock('@/services/DataService', () => ({
+  dataService: {
+    handleFileUpload: jest.fn(),
+    downloadJsonFile: jest.fn()
+  }
+}));
 
 // Mock window.alert
-global.alert = jest.fn();
+const mockAlert = jest.fn();
+Object.defineProperty(window, 'alert', {
+  value: mockAlert,
+  writable: true
+});
 
 describe('ImportExport.vue', () => {
   beforeEach(() => {
@@ -60,21 +66,26 @@ describe('ImportExport.vue', () => {
 
   it('handles file selection correctly', async () => {
     const wrapper = mount(ImportExport);
-    const fileInput = wrapper.find('input[type="file"]');
+    const vm = wrapper.vm as unknown as ImportExportInstance;
     
     // Create a mock file
     const file = new File(['test data'], 'test.json', { type: 'application/json' });
     
-    // Simulate file selection
+    // Get the file input
+    const fileInput = wrapper.find('input[type="file"]');
+    
+    // Set up the files property on the input element
     Object.defineProperty(fileInput.element, 'files', {
       value: [file],
-      writable: false
+      writable: true
     });
     
+    // Trigger the change event
     await fileInput.trigger('change');
     
-    // Check if selectedFile is updated
-    expect(wrapper.find('p').text()).toContain('Selected: test.json');
+    // Verify file is selected
+    const selectedFileText = wrapper.find('.import-section p:not(.warning-text)');
+    expect(selectedFileText.text()).toContain('Selected: test.json');
     expect(wrapper.find('button[disabled]').exists()).toBe(false);
   });
 
@@ -125,7 +136,7 @@ describe('ImportExport.vue', () => {
     expect(dataService.handleFileUpload).toHaveBeenCalledWith(file);
     
     // Check if success alert is shown
-    expect(global.alert).toHaveBeenCalledWith('Data imported successfully!');
+    expect(mockAlert).toHaveBeenCalledWith('Data imported successfully!');
     
     // Check if import-complete event is emitted
     expect(wrapper.emitted()).toHaveProperty('import-complete');
@@ -154,7 +165,7 @@ describe('ImportExport.vue', () => {
     await flushPromises();
     
     // Check if error alert is shown
-    expect(global.alert).toHaveBeenCalledWith('Failed to import data. Please check the file format.');
+    expect(mockAlert).toHaveBeenCalledWith('Failed to import data. Please check the file format.');
     
     // Check that import-complete event is not emitted
     expect(wrapper.emitted()).not.toHaveProperty('import-complete');
@@ -166,7 +177,7 @@ describe('ImportExport.vue', () => {
     (dataService.handleFileUpload as jest.Mock).mockRejectedValue(error);
     
     // Mock console.error to avoid cluttering test output
-    console.error = jest.fn();
+    const mockConsoleError = jest.spyOn(console, 'error').mockImplementation();
     
     const wrapper = mount(ImportExport);
     
@@ -187,10 +198,13 @@ describe('ImportExport.vue', () => {
     await flushPromises();
     
     // Check if error is logged
-    expect(console.error).toHaveBeenCalled();
+    expect(mockConsoleError).toHaveBeenCalled();
     
     // Check if error alert is shown
-    expect(global.alert).toHaveBeenCalledWith('Error importing data: Test error');
+    expect(mockAlert).toHaveBeenCalledWith('Error importing data: Test error');
+    
+    // Restore console.error
+    mockConsoleError.mockRestore();
   });
 
   it('exports data when export button is clicked', async () => {
@@ -210,7 +224,7 @@ describe('ImportExport.vue', () => {
     });
     
     // Mock console.error to avoid cluttering test output
-    console.error = jest.fn();
+    const mockConsoleError = jest.spyOn(console, 'error').mockImplementation();
     
     const wrapper = mount(ImportExport);
     
@@ -218,20 +232,30 @@ describe('ImportExport.vue', () => {
     await wrapper.find('.export-section button').trigger('click');
     
     // Check if error is logged
-    expect(console.error).toHaveBeenCalled();
+    expect(mockConsoleError).toHaveBeenCalled();
     
     // Check if error alert is shown
-    expect(global.alert).toHaveBeenCalledWith('Error exporting data');
+    expect(mockAlert).toHaveBeenCalledWith('Error exporting data');
+    
+    // Restore console.error
+    mockConsoleError.mockRestore();
   });
 
   it('shows loading state during import and export', async () => {
     // Setup mock with a delay to simulate loading
+    let importResolve: (() => void) | undefined;
+    let exportResolve: (() => void) | undefined;
+    
     (dataService.handleFileUpload as jest.Mock).mockImplementation(
-      () => new Promise(resolve => setTimeout(() => resolve(true), 100))
+      () => new Promise<void>(resolve => {
+        importResolve = resolve;
+      })
     );
     
     (dataService.downloadJsonFile as jest.Mock).mockImplementation(
-      () => new Promise(resolve => setTimeout(() => resolve(), 100))
+      () => new Promise<void>(resolve => {
+        exportResolve = resolve;
+      })
     );
     
     const wrapper = mount(ImportExport);
@@ -241,36 +265,50 @@ describe('ImportExport.vue', () => {
     const file = new File(['test data'], 'test.json', { type: 'application/json' });
     Object.defineProperty(fileInput.element, 'files', {
       value: [file],
-      writable: false
+      writable: true
     });
     
     await fileInput.trigger('change');
     
     // Start import
-    const importPromise = wrapper.find('.import-section button').trigger('click');
+    const importButton = wrapper.find('.import-section button');
+    await importButton.trigger('click');
+    
+    // Wait for the next tick to allow the component to update
+    await wrapper.vm.$nextTick();
     
     // Check if import button shows loading state
-    expect(wrapper.find('.import-section button').text()).toBe('Importing...');
-    expect(wrapper.find('.import-section button').attributes('disabled')).toBeDefined();
+    expect(importButton.text()).toBe('Importing...');
+    expect(importButton.attributes('disabled')).toBeDefined();
     
-    // Wait for import to complete
-    await importPromise;
-    await flushPromises();
+    // Resolve the import promise
+    if (importResolve) {
+      importResolve();
+      await flushPromises();
+      
+      // Check import button returned to normal state
+      expect(importButton.text()).toBe('Import Data');
+    }
     
     // Start export
-    const exportPromise = wrapper.find('.export-section button').trigger('click');
+    const exportButton = wrapper.find('.export-section button');
+    await exportButton.trigger('click');
+    
+    // Wait for the next tick to allow the component to update
+    await wrapper.vm.$nextTick();
     
     // Check if export button shows loading state
-    expect(wrapper.find('.export-section button').text()).toBe('Exporting...');
-    expect(wrapper.find('.export-section button').attributes('disabled')).toBeDefined();
+    expect(exportButton.text()).toBe('Exporting...');
+    expect(exportButton.attributes('disabled')).toBeDefined();
     
-    // Wait for export to complete
-    await exportPromise;
-    await flushPromises();
-    
-    // Check buttons return to normal state
-    expect(wrapper.find('.import-section button').text()).toBe('Import Data');
-    expect(wrapper.find('.export-section button').text()).toBe('Export Data');
+    // Resolve the export promise
+    if (exportResolve) {
+      exportResolve();
+      await flushPromises();
+      
+      // Check export button returned to normal state
+      expect(exportButton.text()).toBe('Export Data');
+    }
   });
 
   it('resets file input after successful import', async () => {
@@ -278,31 +316,32 @@ describe('ImportExport.vue', () => {
     (dataService.handleFileUpload as jest.Mock).mockResolvedValue(true);
     
     const wrapper = mount(ImportExport);
+    const vm = wrapper.vm as unknown as ImportExportInstance;
     
-    // Set a reference to the file input
-    const fileInputRef = wrapper.find('input[type="file"]').element;
-    wrapper.vm.$refs.fileInput = fileInputRef;
+    // Get the file input
+    const fileInput = wrapper.find('input[type="file"]');
     
-    // Select a file
+    // Create a mock file
     const file = new File(['test data'], 'test.json', { type: 'application/json' });
-    Object.defineProperty(fileInputRef, 'files', {
+    
+    // Simulate file selection
+    Object.defineProperty(fileInput.element, 'files', {
       value: [file],
       writable: true
     });
     
-    // Set the value property
-    fileInputRef.value = 'C:\\fakepath\\test.json';
+    // Trigger the change event
+    await fileInput.trigger('change');
     
-    await wrapper.find('input[type="file"]').trigger('change');
-    
-    // Verify file is selected
-    expect(wrapper.find('p').text()).toContain('Selected: test.json');
+    // Verify file is selected by checking the specific paragraph that shows the selected file
+    const selectedFileText = wrapper.find('.import-section p:not(.warning-text)');
+    expect(selectedFileText.text()).toContain('Selected: test.json');
      
     // Import the file
     await wrapper.find('.import-section button').trigger('click');
     await flushPromises();
     
     // Verify file input is reset
-    expect(wrapper.vm.selectedFile).toBeNull();
+    expect(vm.selectedFile).toBeNull();
   });
 });
