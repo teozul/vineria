@@ -216,7 +216,7 @@ describe('WineDetails.vue', () => {
     });
 
     const considerations = wrapper.find('.consideration-text');
-    expect(considerations.text()).toBe('No final considerations provided.');
+    expect(considerations.text()).toBe('Nessuna considerazione finale.');
   });
 
   it('displays all gustatory examination subsections', () => {

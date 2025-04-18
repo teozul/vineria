@@ -14,7 +14,7 @@ export default defineComponent({
   name: 'WineForm',
   props: {
     wineSheet: {
-      type: Object as PropType<WineTastingSheet>,
+      type: Object as PropType<WineTastingSheet | null>,
       default: () => createEmptyWineTastingSheet()
     },
     isEdit: {
