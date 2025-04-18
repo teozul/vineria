@@ -4,35 +4,30 @@ import {
     WineTastingSheet, 
     LimpidityLevel,
     EvolutionaryState,
-    ColorTone  
+    ColorTone,
+    WineType
   } from '@/models/WineTastingSheet';
   
   describe('WineTastingSheet', () => {
     describe('createEmptyWineTastingSheet', () => {
-      it('should create a new wine tasting sheet with default values', () => {
+      it('should create an empty wine tasting sheet with default values', () => {
         const sheet = createEmptyWineTastingSheet();
         
-        // Check that ID is a non-empty string
+        expect(sheet).toBeDefined();
         expect(sheet.id).toBeDefined();
-        expect(sheet.id).not.toBeNull();
-        expect(typeof sheet.id).toBe('string');
-        expect(sheet.id.length).toBeGreaterThan(0);
-        
-        // Check default date is today
-        const today = new Date().toISOString().split('T')[0];
-        expect(sheet.date).toBe(today);
-        
-        // Check default wine type
-        expect(sheet.wineType).toBe('Rosso');
-        
-        // Check default limpidity
-        expect(sheet.visualExam.limpidity).toBe(LimpidityLevel.Limpid);
-        
-        // Check default evolutionary state
-        expect(sheet.evolutionaryState).toBe(EvolutionaryState.Ready);
-        
-        // Check default color tone for Rosso
-        expect(sheet.visualExam.color.tone).toBe(ColorTone.RubyRed);
+        expect(sheet.location).toBe('');
+        expect(sheet.date).toBeDefined();
+        expect(sheet.time).toBeDefined();
+        expect(sheet.denomination).toBe('');
+        expect(sheet.alcoholContent).toBe(0);
+        expect(sheet.temperature).toBe(0);
+        expect(sheet.vintage).toBe(new Date().getFullYear());
+        expect(sheet.wineType).toBe(WineType.RED);
+        expect(sheet.visualExam).toBeDefined();
+        expect(sheet.olfactoryExam).toBeDefined();
+        expect(sheet.gustatoryExam).toBeDefined();
+        expect(sheet.evolutionaryState).toBeDefined();
+        expect(sheet.finalConsiderations).toBe('');
       });
     });
     

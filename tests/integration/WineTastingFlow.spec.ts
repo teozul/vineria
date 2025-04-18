@@ -3,8 +3,9 @@
 import { mount, flushPromises, VueWrapper } from '@vue/test-utils';
 import { createRouter, createWebHistory, Router } from 'vue-router';
 import { dataService } from '@/services/DataService';
-import { createEmptyWineTastingSheet } from '@/models/WineTastingSheet';
+import { createEmptyWineTastingSheet, WineType } from '@/models/WineTastingSheet';
 import { ComponentPublicInstance, defineComponent } from 'vue';
+import App from '@/App.vue';
 
 // You would import your main views here
 // For this test, we'll mock them to avoid having to import the entire app
@@ -478,5 +479,29 @@ describe('Wine Tasting Flow', () => {
     // Should show data
     expect(wrapper.find('.sheet-details').exists()).toBe(true);
     expect(wrapper.find('.sheet-details h2').text()).toBe('Error Test');
+  });
+
+  it('should create a new wine tasting sheet', async () => {
+    const wrapper = mount(App);
+    
+    // Navigate to create form
+    await wrapper.find('button.create-new').trigger('click');
+    
+    // Fill in basic information
+    const sheet = createEmptyWineTastingSheet();
+    sheet.wineType = WineType.RED;
+    
+    await wrapper.find('#wineType').setValue(WineType.RED);
+    await wrapper.find('#producer').setValue('Test Producer');
+    await wrapper.find('#denomination').setValue('Test Wine');
+    await wrapper.find('#vintage').setValue('2020');
+    await wrapper.find('#alcoholContent').setValue('13.5');
+    await wrapper.find('#temperature').setValue('18');
+    
+    // Submit form
+    await wrapper.find('form').trigger('submit');
+    
+    // Verify the wine type is displayed correctly
+    expect(wrapper.find('.wine-type').text()).toBe('Rosso');
   });
 });

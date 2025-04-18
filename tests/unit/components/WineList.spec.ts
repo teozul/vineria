@@ -1,7 +1,7 @@
 // tests/unit/components/WineList.spec.ts
 import { mount } from '@vue/test-utils';
 import WineList from '@/components/WineList.vue';
-import { WineTastingSheet, createEmptyWineTastingSheet, WineClassification } from '@/models/WineTastingSheet';
+import { WineTastingSheet, createEmptyWineTastingSheet, WineClassification, WineType } from '@/models/WineTastingSheet';
 
 describe('WineList.vue', () => {
   // Helper function to create sample wine sheets
@@ -11,7 +11,7 @@ describe('WineList.vue', () => {
     sheet1.denomination = 'Chianti Classico';
     sheet1.producer = 'Producer 1';
     sheet1.vintage = 2018;
-    sheet1.wineType = 'Rosso';
+    sheet1.wineType = WineType.RED;
     sheet1.classification = WineClassification.DOCG;
     sheet1.date = '2023-01-01';
 
@@ -20,7 +20,7 @@ describe('WineList.vue', () => {
     sheet2.denomination = 'Vermentino';
     sheet2.producer = 'Producer 2';
     sheet2.vintage = 2020;
-    sheet2.wineType = 'Bianco';
+    sheet2.wineType = WineType.WHITE;
     sheet2.classification = WineClassification.DOC;
     sheet2.date = '2023-02-15';
 
@@ -29,7 +29,7 @@ describe('WineList.vue', () => {
     sheet3.denomination = 'Cerasuolo';
     sheet3.producer = 'Producer 3';
     sheet3.vintage = 2021;
-    sheet3.wineType = 'Rosé';
+    sheet3.wineType = WineType.ROSE;
     sheet3.classification = WineClassification.DOC;
     sheet3.date = '2023-03-20';
 

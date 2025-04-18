@@ -26,7 +26,8 @@ import {
   RetroOlfactoryQuality,
   RetroOlfactoryPersistence,
   EvolutionaryState,
-  WineClassification
+  WineClassification,
+  WineType
 } from '@/models/WineTastingSheet';
 
 describe('WineDetails.vue', () => {
@@ -42,7 +43,7 @@ describe('WineDetails.vue', () => {
     sheet.location = 'Tuscany';
     sheet.date = '2023-01-01';
     sheet.time = '14:30';
-    sheet.wineType = 'Rosso';
+    sheet.wineType = WineType.RED;
 
     // Visual examination
     sheet.visualExam = {
@@ -232,5 +233,19 @@ describe('WineDetails.vue', () => {
     expect(subsectionTitles[1].text()).toBe('Soft Elements');
     expect(subsectionTitles[2].text()).toBe('Hard Elements');
     expect(subsectionTitles[3].text()).toBe('Retro-Olfactory');
+  });
+
+  it('should display wine details correctly', () => {
+    const sheet = createEmptyWineTastingSheet();
+    sheet.wineType = WineType.RED;
+    
+    const wrapper = mount(WineDetails, {
+      props: {
+        wineSheet: sheet
+      }
+    });
+    
+    expect(wrapper.text()).toContain('Wine Details');
+    expect(wrapper.find('.wine-badge').text()).toBe('Rosso');
   });
 }); 

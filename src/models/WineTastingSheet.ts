@@ -1,6 +1,3 @@
-import {v4 as uuidv4} from 'uuid';
-// Wine Tasting Sheet TypeScript Interfaces and Classes
-
 // Enums for various categorical ratings
 export enum LimpidityLevel {
     Turbid = 'Torbido',
@@ -241,6 +238,18 @@ export const wineClassificationLabels = {
     [WineClassification.DOCG]: 'Denominazione di Origine Controllata e Garantita (DOCG)'
 };
 
+export enum WineType {
+    RED = 'RED',
+    WHITE = 'WHITE',
+    ROSE = 'ROSE'
+}
+
+export const wineTypeLabels = {
+    [WineType.RED]: 'Rosso',
+    [WineType.WHITE]: 'Bianco',
+    [WineType.ROSE]: 'Rosè', 
+};
+
 // Main Wine Tasting Sheet Interface
 export interface WineTastingSheet {
     id: string; // Unique identifier for each sheet
@@ -257,7 +266,7 @@ export interface WineTastingSheet {
     vintage: number;
     classification: WineClassification;
     producer: string;
-    wineType: 'Rosso' | 'Bianco' | 'Rosé';
+    wineType: WineType;
 
     // Examination fields
     visualExam: VisualExam;
@@ -285,7 +294,7 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
         vintage: new Date().getFullYear(),
         classification: WineClassification.IGT,
         producer: '',
-        wineType: 'Rosso',
+        wineType: WineType.RED,
         
         visualExam: {
             limpidity: LimpidityLevel.Limpid,

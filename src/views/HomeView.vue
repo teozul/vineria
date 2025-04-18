@@ -27,13 +27,15 @@
           <div class="wine-card-header">
             <h3>{{ sheet.denomination }}</h3>
             <span class="wine-type" :class="getWineTypeClass(sheet.wineType)">
-              {{ sheet.wineType }}
+              {{ wineTypeLabels[sheet.wineType] }}
             </span>
-          </div>
+          </div> 
           <div class="wine-card-details">
             <p><strong>Producer:</strong> {{ sheet.producer }}</p>
             <p><strong>Vintage:</strong> {{ sheet.vintage }}</p>
-            <p><strong>Classification:</strong> {{ WineClassification[sheet.classification] }}</p>
+            <p><strong>Classification:</strong> {{
+             wineClassificationLabels[sheet.classification] 
+             }}</p>
             <p><strong>Tasted on:</strong> {{ formatDate(sheet.date) }}</p>
           </div>
           <div class="wine-card-actions">
@@ -125,7 +127,7 @@
   
   <script setup lang="ts">
   import { ref, onMounted } from 'vue';
-  import { WineTastingSheet, WineClassification } from '../models/WineTastingSheet';
+  import { WineTastingSheet, wineClassificationLabels, WineType, wineTypeLabels } from '../models/WineTastingSheet';
   import { dataService } from '../services/DataService';
   
   // State variables
@@ -161,13 +163,13 @@
   };
   
   // Get CSS class based on wine type
-  const getWineTypeClass = (wineType: string): string => {
+  const getWineTypeClass = (wineType: WineType): string => {
     switch (wineType) {
-      case 'Rosso':
-        return 'wine-type-red';
-      case 'Bianco':
+      case WineType.RED:
+        return 'wine-type-red'; 
+      case WineType.WHITE:
         return 'wine-type-white';
-      case 'Rosé':
+      case WineType.ROSE:
         return 'wine-type-rose';
       default:
         return '';
@@ -328,8 +330,8 @@
   }
   
   .wine-type-red {
-    background-color: #f8d7da;
-    color: #721c24;
+    background-color: #ff0015;
+    color: #ffffff;
   }
   
   .wine-type-white {
