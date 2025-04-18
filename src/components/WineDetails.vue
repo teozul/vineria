@@ -186,7 +186,7 @@
             <div class="detail-item full-width">
               <span class="detail-label">Final Considerations</span>
               <span class="detail-value consideration-text">
-                {{ wineSheet.finalConsiderations || 'No final considerations provided.' }}
+                {{ wineSheet.finalConsiderations || 'Nessuna considerazione finale.' }}
               </span>
             </div>
           </div>
@@ -198,12 +198,9 @@
   <script setup lang="ts">
   import { WineTastingSheet } from '@/models/WineTastingSheet';
   
-  // Props
-  interface Props {
+  defineProps<{
     wineSheet: WineTastingSheet | null;
-  }
-  
-  const props = defineProps<Props>();
+  }>();
   
   // Format date for display
   const formatDate = (dateString: string): string => {
