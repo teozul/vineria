@@ -1,8 +1,6 @@
 import { mount } from '@vue/test-utils';
 import WineDetails from '@/components/WineDetails.vue';
-import {
-  createEmptyWineTastingSheet, WineType
-} from '@/models/WineTastingSheet';
+import { WineType } from '@/models/WineTastingSheet';
 import { createMockWineSheet } from '../../shared/canned/WhineTastingSheetCanned';
 
 describe('WineDetails.vue', () => {
@@ -144,7 +142,7 @@ describe('WineDetails.vue', () => {
   });
 
   it('should display wine details correctly', () => {
-    const sheet = createEmptyWineTastingSheet();
+    const sheet = createMockWineSheet();
     sheet.wineType = WineType.RED;
 
     const wrapper = mount(WineDetails, {

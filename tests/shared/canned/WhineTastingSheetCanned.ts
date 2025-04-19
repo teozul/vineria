@@ -2,20 +2,21 @@ import WineTastingSheet, { createEmptyWineTastingSheet, WineClassification, Wine
 
 
 export const createMockWineSheet = (): WineTastingSheet => {
-  const sheet = createEmptyWineTastingSheet();
-  sheet.denomination = 'Chianti Classico';
-  sheet.producer = 'Antinori';
-  sheet.classification = WineClassification.DOCG;
-  sheet.vintage = 2018;
-  sheet.alcoholContent = 13.5;
-  sheet.temperature = 18;
-  sheet.location = 'Toscana';
-  sheet.date = '2023-01-01';
-  sheet.time = '14:30';
-  sheet.wineType = WineType.RED;
+  const wineSheet = createEmptyWineTastingSheet();
+  wineSheet.id = "123"
+  wineSheet.denomination = 'Chianti Classico';
+  wineSheet.producer = 'Antinori';
+  wineSheet.classification = WineClassification.DOCG;
+  wineSheet.vintage = 2018;
+  wineSheet.alcoholContent = 13.5;
+  wineSheet.temperature = 18;
+  wineSheet.location = 'Toscana';
+  wineSheet.date = '2023-01-01';
+  wineSheet.time = '14:30';
+  wineSheet.wineType = WineType.RED;
 
   // Visual examination
-  sheet.visualExam = {
+  wineSheet.visualExam = {
     limpidity: LimpidityLevel.Limpid,
     transparency: TransparencyLevel.Transparent,
     color: {
@@ -30,7 +31,7 @@ export const createMockWineSheet = (): WineTastingSheet => {
   };
 
   // Olfactory examination
-  sheet.olfactoryExam = {
+  wineSheet.olfactoryExam = {
     intensity: OlfactoryIntensity.Intense,
     quality: {
       franchness: OlfactoryFranchness.Clear,
@@ -41,7 +42,7 @@ export const createMockWineSheet = (): WineTastingSheet => {
   };
 
   // Gustatory examination
-  sheet.gustatoryExam = {
+  wineSheet.gustatoryExam = {
     body: BodyLevel.Structured,
     balance: Balance.Harmonic,
     softElements: {
@@ -63,10 +64,10 @@ export const createMockWineSheet = (): WineTastingSheet => {
     }
   };
 
-  sheet.evolutionaryState = EvolutionaryState.Ready;
-  sheet.finalConsiderations = 'Proprio un signor vino.';
+  wineSheet.evolutionaryState = EvolutionaryState.Ready;
+  wineSheet.finalConsiderations = 'Proprio un signor vino.';
 
-  return sheet;
+  return wineSheet;
 };
 
 export const createMockWineSheets = (): WineTastingSheet[] => {
