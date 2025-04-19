@@ -5,10 +5,10 @@
       </div>
       
       <div v-else class="wine-details">
-        <div class="wine-badge" :class="getWineTypeClass(wineSheet.wineType)">
-          {{ wineSheet.wineType }}
+        <div class="wine-type" :class="getWineTypeClass(wineSheet.wineType)">
+          {{ wineTypeLabels[wineSheet.wineType] }}
         </div>
-        
+
         <!-- Basic Information Section -->
         <section class="detail-section">
           <h2 class="section-title">Basic Information</h2>
@@ -23,7 +23,7 @@
             </div>
             <div class="detail-item">
               <span class="detail-label">Classification</span>
-              <span class="detail-value">{{ wineSheet.classification }}</span>
+              <span class="detail-value">{{ wineClassificationLabels[wineSheet.classification] }}</span>
             </div>
             <div class="detail-item">
               <span class="detail-label">Vintage</span>
@@ -196,35 +196,14 @@
   </template>
   
   <script setup lang="ts">
-  import { WineTastingSheet } from '@/models/WineTastingSheet';
-  
+  import { WineTastingSheet, wineClassificationLabels, wineTypeLabels } from '@/models/WineTastingSheet';
+  import { getWineTypeClass } from '@/helpers/WineUtils';
+  import { formatDate } from '@/helpers/DateUtils' ;  
+
   defineProps<{
     wineSheet: WineTastingSheet | null;
   }>();
   
-  // Format date for display
-  const formatDate = (dateString: string): string => {
-    try {
-      const date = new Date(dateString);
-      return date.toLocaleDateString();
-    } catch (e) {
-      return dateString;
-    }
-  };
-  
-  // Get CSS class based on wine type
-  const getWineTypeClass = (wineType: string): string => {
-    switch (wineType) {
-      case 'Rosso':
-        return 'wine-badge-red';
-      case 'Bianco':
-        return 'wine-badge-white';
-      case 'Rosé':
-        return 'wine-badge-rose';
-      default:
-        return '';
-    }
-  };
   </script>
   
   <style scoped>
@@ -243,7 +222,7 @@
     padding-top: 1rem;
   }
   
-  .wine-badge {
+  .wine-type {
     position: absolute;
     top: 0;
     right: 0;
@@ -253,18 +232,18 @@
     font-size: 0.9rem;
   }
   
-  .wine-badge-red {
-    background-color: #f8d7da;
-    color: #721c24;
+  .wine-type-red {
+    background-color: #722F37;
+    color: #ffffff;
   }
   
-  .wine-badge-white {
+  .wine-type-white {
     background-color: #fff3cd;
     color: #856404;
   }
   
-  .wine-badge-rose {
-    background-color: #f5c2c7;
+  .wine-type-rose {
+    background-color: #f4c4bb;
     color: #58151c;
   }
   

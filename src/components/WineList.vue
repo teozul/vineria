@@ -32,9 +32,10 @@
   </template>
   
   <script setup lang="ts">
-  import { computed } from 'vue';
   import { WineTastingSheet, WineClassification } from '@/models/WineTastingSheet';
-  
+  import { getWineTypeClass } from '@/helpers/WineUtils';
+  import { formatDate } from '@/helpers/DateUtils' ;  
+
   // Props
   interface Props {
     sheets: WineTastingSheet[];
@@ -46,29 +47,6 @@
     loading: false
   });
   
-  // Format date for display
-  const formatDate = (dateString: string): string => {
-    try {
-      const date = new Date(dateString);
-      return date.toLocaleDateString();
-    } catch (e) {
-      return dateString;
-    }
-  };
-  
-  // Get CSS class based on wine type
-  const getWineTypeClass = (wineType: string): string => {
-    switch (wineType) {
-      case 'Rosso':
-        return 'wine-type-red';
-      case 'Bianco':
-        return 'wine-type-white';
-      case 'Rosé':
-        return 'wine-type-rose';
-      default:
-        return '';
-    }
-  };
   </script>
   
   <style scoped>

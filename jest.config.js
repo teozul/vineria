@@ -4,7 +4,7 @@ module.exports = {
   transform: {
     '^.+\\.vue$': '@vue/vue3-jest',
     '^.+\\.(ts|tsx)$': [
-      'ts-jest', 
+      'ts-jest',
       {
         tsconfig: 'tsconfig.json',
         useESM: true,
@@ -20,7 +20,7 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     'src/**/*.{ts,vue}',
-    '!src/main.ts', 
+    '!src/main.ts',
     '!src/router/index.ts',
     '!**/node_modules/**'
   ],

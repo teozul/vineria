@@ -26,7 +26,7 @@
         <div v-for="sheet in wineSheets" :key="sheet.id" class="wine-card card">
           <div class="wine-card-header">
             <h3>{{ sheet.denomination }}</h3>
-            <span class="wine-type" :class="getWineTypeClass(sheet.wineType)">
+            <span class="wine-type" :class="getWineTypeClass(sheet.wineType)"> 
               {{ wineTypeLabels[sheet.wineType] }}
             </span>
           </div> 
@@ -127,9 +127,10 @@
   
   <script setup lang="ts">
   import { ref, onMounted } from 'vue';
-  import { WineTastingSheet, wineClassificationLabels, WineType, wineTypeLabels } from '../models/WineTastingSheet';
+  import { WineTastingSheet, wineClassificationLabels,  wineTypeLabels } from '../models/WineTastingSheet';
   import { dataService } from '../services/DataService';
-  
+  import { getWineTypeClass } from '@/helpers/WineUtils';
+  import {formatDate} from '@/helpers/DateUtils';  
   // State variables
   const wineSheets = ref<WineTastingSheet[]>([]);
   const loading = ref(true);
@@ -151,30 +152,6 @@
       loading.value = false;
     }
   });
-  
-  // Format date for display
-  const formatDate = (dateString: string): string => {
-    try {
-      const date = new Date(dateString);
-      return date.toLocaleDateString();
-    } catch (e) {
-      return dateString;
-    }
-  };
-  
-  // Get CSS class based on wine type
-  const getWineTypeClass = (wineType: WineType): string => {
-    switch (wineType) {
-      case WineType.RED:
-        return 'wine-type-red'; 
-      case WineType.WHITE:
-        return 'wine-type-white';
-      case WineType.ROSE:
-        return 'wine-type-rose';
-      default:
-        return '';
-    }
-  };
   
   // Open import/export modal
   const openImportExport = () => {
@@ -330,7 +307,7 @@
   }
   
   .wine-type-red {
-    background-color: #ff0015;
+    background-color: #722F37;
     color: #ffffff;
   }
   
@@ -340,7 +317,7 @@
   }
   
   .wine-type-rose {
-    background-color: #f5c2c7;
+    background-color: #f4c4bb;
     color: #58151c;
   }
   
