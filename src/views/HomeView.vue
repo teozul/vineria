@@ -10,47 +10,6 @@
       </div>
     </div>
 
-    <div v-if="loading" class="loading-indicator">
-      <p>Loading wine tasting sheets...</p>
-    </div>
-
-    <div v-else-if="wineSheets.length === 0" class="empty-state">
-      <div class="card">
-        <h3>No Wine Tasting Sheets Yet</h3>
-        <p>Start by creating your first wine tasting sheet!</p>
-        <router-link to="/create" class="btn">Create New</router-link>
-      </div>
-    </div>
-
-    <div v-else class="wine-list">
-      <div v-for="sheet in wineSheets" :key="sheet.id" class="wine-card card">
-        <div class="wine-card-header">
-          <h3>{{ sheet.denomination }}</h3>
-          <span class="wine-type" :class="getWineTypeClass(sheet.wineType)">
-            {{ wineTypeLabels[sheet.wineType] }}
-          </span>
-        </div>
-        <div class="wine-card-details">
-          <p><strong>Producer:</strong> {{ sheet.producer }}</p>
-          <p><strong>Vintage:</strong> {{ sheet.vintage }}</p>
-          <p><strong>Classification:</strong> {{
-            wineClassificationLabels[sheet.classification]
-          }}</p>
-          <p><strong>Tasted on:</strong> {{ formatDate(sheet.date) }}</p>
-        </div>
-        <div class="wine-card-actions">
-          <router-link :to="`/detail/${sheet.id}`" class="btn btn-sm">
-            View Details
-          </router-link>
-          <router-link :to="`/edit/${sheet.id}`" class="btn btn-sm btn-secondary">
-            Edit
-          </router-link>
-          <button @click="confirmDelete(sheet)" class="btn btn-sm btn-danger">
-            Delete
-          </button>
-        </div>
-      </div>
-    </div>
 
     <!-- Import/Export Modal -->
     <div v-if="showImportExport" class="modal">
@@ -85,66 +44,22 @@
         </div>
       </div>
     </div>
-
-  </div>
-  <!-- Delete Confirmation Modal -->
-  <div v-if="showDeleteConfirm" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Confirm Deletion</h2>
-        <button class="modal-close" @click="cancelDelete">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p>
-          Are you sure you want to delete the tasting sheet for
-          <strong>{{ sheetToDelete?.denomination }}</strong> by
-          <strong>{{ sheetToDelete?.producer }}</strong>?
-        </p>
-        <p class="warning-text">This action cannot be undone.</p>
-        <div class="modal-actions">
-          <button @click="cancelDelete" class="btn btn-secondary">
-            Cancel
-          </button>
-          <button @click="deleteSheet" class="btn btn-danger">
-            Delete
-          </button>
-        </div>
-      </div>
-    </div>
   </div>
 
-  <!--<WineCard :wine-sheet="wineSheets[0]" @delete="deleteSingleSheet" />-->
+  <ShowWineCardsView />
 
 </template>
 
 <script setup lang="ts">
-import WineCard from '@/components/WineCard.vue'
-import { ref, onMounted } from 'vue';
-import { WineTastingSheet, wineClassificationLabels, wineTypeLabels } from '../models/WineTastingSheet';
+import { ref } from 'vue';
 import { dataService } from '../services/DataService';
-import { getWineTypeClass } from '@/helpers/WineUtils';
-import { formatDate } from '@/helpers/DateUtils';
+import ShowWineCardsView from './ShowWineCardsView.vue';
 // State variables
-const wineSheets = ref<WineTastingSheet[]>([]);
-const loading = ref(true);
 const showImportExport = ref(false);
-const showDeleteConfirm = ref(false);
-const sheetToDelete = ref<WineTastingSheet | null>(null);
 const selectedFile = ref<File | null>(null);
 const importing = ref(false);
 const exporting = ref(false);
 const fileInput = ref<HTMLInputElement | null>(null);
-
-// Load wine sheets on component mount
-onMounted(async () => {
-  try {
-    wineSheets.value = await dataService.getAllSheets();
-  } catch (error) {
-    console.error('Error loading wine sheets:', error);
-  } finally {
-    loading.value = false;
-  }
-});
 
 // Open import/export modal
 function openImportExport() {
@@ -163,19 +78,21 @@ function handleFileSelected(event: Event) {
 
 // Import data from JSON file
 async function importData() {
-  if (!selectedFile.value) return;
+  if (!selectedFile.value)
+    return;
 
   importing.value = true;
   try {
     const success = await dataService.handleFileUpload(selectedFile.value);
     if (success) {
-      wineSheets.value = await dataService.getAllSheets();
       showImportExport.value = false;
       selectedFile.value = null;
       if (fileInput.value) {
         fileInput.value.value = '';
       }
+      window.location.reload();
       alert('Data imported successfully!');
+
     } else {
       alert('Failed to import data. Please check the file format.');
     }
@@ -200,58 +117,7 @@ async function exportData() {
     showImportExport.value = false;
   }
 }
-// Confirm sheet deletion
-const confirmDelete = (sheet: WineTastingSheet) => {
-  sheetToDelete.value = sheet;
-  showDeleteConfirm.value = true;
-};
 
-// Cancel deletion
-const cancelDelete = () => {
-  sheetToDelete.value = null;
-  showDeleteConfirm.value = false;
-};
-
-
-// Delete the sheet
-async function deleteSheet() {
-  if (!sheetToDelete.value) return;
-
-  try {
-    const success = await dataService.deleteSheet(sheetToDelete.value.id);
-    if (success) {
-      wineSheets.value = wineSheets.value.filter(
-        sheet => sheet.id !== sheetToDelete.value?.id
-      );
-      showDeleteConfirm.value = false;
-      sheetToDelete.value = null;
-    } else {
-      alert('Failed to delete wine tasting sheet');
-    }
-  } catch (error) {
-    console.error('Delete error:', error);
-    alert('Error deleting wine tasting sheet');
-  }
-}
-
-// Delete the sheet
-const deleteSingleSheet = async (wineSheetId: string) => {
-  try {
-    const success = await dataService.deleteSheet(wineSheetId);
-    if (success) {
-      wineSheets.value = wineSheets.value.filter(
-        sheet => sheet.id !== sheetToDelete.value?.id
-      );
-      showDeleteConfirm.value = false;
-      sheetToDelete.value = null;
-    } else {
-      alert('Failed to delete wine tasting sheet');
-    }
-  } catch (error) {
-    console.error('Delete error:', error);
-    alert('Error deleting wine tasting sheet');
-  }
-};
 </script>
 
 <style scoped>
