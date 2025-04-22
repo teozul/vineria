@@ -2,6 +2,8 @@ import { mount } from '@vue/test-utils';
 import WineCard from '@/components/WineCard.vue';
 import { dataService } from '@/services/DataService';
 import ShowWineCardsView from '@/views/ShowWineCardsView.vue';
+import { createMockWineSheets } from '../../shared/canned/WhineTastingSheetCanned';
+
 
 // Mock the dataService
 jest.mock('@/services/DataService', () => ({
@@ -12,10 +14,7 @@ jest.mock('@/services/DataService', () => ({
 }));
 
 describe('WineList.vue', () => {
-    const mockWineSheets = [
-        { id: '1', name: 'Wine 1' },
-        { id: '2', name: 'Wine 2' }
-    ];
+    const mockWineSheets = createMockWineSheets()
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -26,7 +25,16 @@ describe('WineList.vue', () => {
         (dataService.getAllSheets as jest.Mock).mockResolvedValue(mockWineSheets);
 
         // Mount the component
-        const wrapper = mount(ShowWineCardsView);
+        const wrapper = mount(ShowWineCardsView, {
+            global: {
+                components: {
+                    RouterLink: {
+                        props: ['to'],
+                        template: '<a :href="to"><slot></slot></a>',
+                    },
+                },
+            },
+        });
 
         // Wait for the onMounted hook's async call to complete
         await jest.runAllTimers();
@@ -49,7 +57,16 @@ describe('WineList.vue', () => {
     it('shows empty state when no wine sheets exist', async () => {
         (dataService.getAllSheets as jest.Mock).mockResolvedValue([]);
 
-        const wrapper = mount(ShowWineCardsView);
+        const wrapper = mount(ShowWineCardsView, {
+            global: {
+                components: {
+                    RouterLink: {
+                        props: ['to'],
+                        template: '<a :href="to"><slot></slot></a>',
+                    },
+                },
+            },
+        });
         await jest.runAllTimers();
         await wrapper.vm.$nextTick();
         await new Promise(resolve => setTimeout(resolve, 0));
@@ -62,7 +79,16 @@ describe('WineList.vue', () => {
         (dataService.getAllSheets as jest.Mock).mockResolvedValue([...mockWineSheets]);
         (dataService.deleteSheet as jest.Mock).mockResolvedValue(true);
 
-        const wrapper = mount(ShowWineCardsView);
+        const wrapper = mount(ShowWineCardsView, {
+            global: {
+                components: {
+                    RouterLink: {
+                        props: ['to'],
+                        template: '<a :href="to"><slot></slot></a>',
+                    },
+                },
+            },
+        });
         await jest.runAllTimers();
         await wrapper.vm.$nextTick();
         await new Promise(resolve => setTimeout(resolve, 0));
