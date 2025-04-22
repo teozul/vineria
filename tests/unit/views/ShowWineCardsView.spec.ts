@@ -36,8 +36,6 @@ describe('WineList.vue', () => {
             },
         });
 
-        // Wait for the onMounted hook's async call to complete
-        await jest.runAllTimers();
         await wrapper.vm.$nextTick();
         // For more reliable results, await a small delay
         await new Promise(resolve => setTimeout(resolve, 0));
@@ -76,7 +74,6 @@ describe('WineList.vue', () => {
                 },
             },
         });
-        await jest.runAllTimers();
         await wrapper.vm.$nextTick();
         await new Promise(resolve => setTimeout(resolve, 0));
 
@@ -98,7 +95,6 @@ describe('WineList.vue', () => {
                 },
             },
         });
-        await jest.runAllTimers();
         await wrapper.vm.$nextTick();
         await new Promise(resolve => setTimeout(resolve, 0));
 
