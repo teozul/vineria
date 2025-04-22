@@ -49,7 +49,16 @@ describe('WineList.vue', () => {
 
     it('shows loading state initially', () => {
         (dataService.getAllSheets as jest.Mock).mockResolvedValue([]);
-        const wrapper = mount(ShowWineCardsView);
+        const wrapper = mount(ShowWineCardsView, {
+            global: {
+                components: {
+                    RouterLink: {
+                        props: ['to'],
+                        template: '<a :href="to"><slot></slot></a>',
+                    },
+                },
+            }
+        });
 
         expect(wrapper.find('.loading-indicator').exists()).toBe(true);
     });

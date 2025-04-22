@@ -28,6 +28,14 @@ describe('WineCard.vue', () => {
             props: {
                 wineSheet: null,
             },
+            global: {
+                components: {
+                    RouterLink: {
+                        props: ['to'],
+                        template: '<a :href="to"><slot></slot></a>',
+                    },
+                },
+            },
         });
         expect(wrapperWithoutData.find('.no-data').exists()).toBe(true);
         expect(wrapperWithoutData.find('.no-data p').text()).toBe('No wine tasting sheet data available.');
