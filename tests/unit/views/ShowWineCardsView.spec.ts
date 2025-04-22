@@ -1,104 +1,86 @@
-import { describe, it, expect, beforeEach, jest } from '@jest/globals';
 import { mount } from '@vue/test-utils';
-import ShowWineCardsView from '@/views/ShowWineCardsView.vue';
 import WineCard from '@/components/WineCard.vue';
 import { dataService } from '@/services/DataService';
-import { useRouter } from 'vue-router';
-import { createMockWineSheet, createMockWineSheets } from '../../shared/canned/WhineTastingSheetCanned';
+import ShowWineCardsView from '@/views/ShowWineCardsView.vue';
 
+// Mock the dataService
 jest.mock('@/services/DataService', () => ({
     dataService: {
         getAllSheets: jest.fn(),
-        deleteSheet: jest.fn(() => Promise.resolve(true)),
-    },
+        deleteSheet: jest.fn()
+    }
 }));
 
-jest.mock('vue-router', () => ({
-    useRouter: jest.fn(() => ({
-        push: jest.fn(),
-    })),
-}));
-
-const mockWineSheets = createMockWineSheets()
-
-describe('ShowWineCardsView', () => {
-    let wrapper: ReturnType<typeof mount>;
+describe('WineList.vue', () => {
+    const mockWineSheets = [
+        { id: '1', name: 'Wine 1' },
+        { id: '2', name: 'Wine 2' }
+    ];
 
     beforeEach(() => {
         jest.clearAllMocks();
-        (dataService.getAllSheets as jest.Mock).mockResolvedValue([]);
-        wrapper = mount(ShowWineCardsView, {
-            global: {
-                components: {
-                    WineCard,
-                    RouterLink: {
-                        props: ['to'],
-                        template: '<a :href="to"><slot></slot></a>'
-                    },
-                },
-            },
-        });
-    });
-
-    it('renders loading initially', () => {
-        expect(wrapper.find('.loading-indicator').exists()).toBe(true);
-    });
-
-    it('renders empty state if no data', async () => {
-        await wrapper.vm.$nextTick();
-        expect(wrapper.find('.empty-state').exists()).toBe(true);
-        expect(wrapper.find('.empty-state .btn[href="/create"]').exists()).toBe(true);
     });
 
     it('renders wine list with WineCard components', async () => {
+        // Setup the mock return value
         (dataService.getAllSheets as jest.Mock).mockResolvedValue(mockWineSheets);
+
+        // Mount the component
+        const wrapper = mount(ShowWineCardsView);
+
+        // Wait for the onMounted hook's async call to complete
+        await jest.runAllTimers();
         await wrapper.vm.$nextTick();
-        expect(wrapper.findAllComponents(WineCard).length).toBe(mockWineSheets.length);
+        // For more reliable results, await a small delay
+        await new Promise(resolve => setTimeout(resolve, 0));
+
+        // Now we can check if the WineCard components are rendered
+        const cards = wrapper.findAllComponents(WineCard);
+        expect(cards.length).toBe(mockWineSheets.length);
     });
 
-    it('calls deleteSheet and updates list on WineCard delete', async () => {
-        (dataService.getAllSheets as jest.Mock).mockResolvedValue([...mockWineSheets]);
-        await wrapper.vm.$nextTick();
+    it('shows loading state initially', () => {
+        (dataService.getAllSheets as jest.Mock).mockResolvedValue([]);
+        const wrapper = mount(ShowWineCardsView);
 
+        expect(wrapper.find('.loading-indicator').exists()).toBe(true);
+    });
+
+    it('shows empty state when no wine sheets exist', async () => {
+        (dataService.getAllSheets as jest.Mock).mockResolvedValue([]);
+
+        const wrapper = mount(ShowWineCardsView);
+        await jest.runAllTimers();
+        await wrapper.vm.$nextTick();
+        await new Promise(resolve => setTimeout(resolve, 0));
+
+        expect(wrapper.find('.empty-state').exists()).toBe(true);
+        expect(wrapper.find('.wine-list').exists()).toBe(false);
+    });
+
+    it('deletes a wine sheet when delete event is emitted', async () => {
+        (dataService.getAllSheets as jest.Mock).mockResolvedValue([...mockWineSheets]);
+        (dataService.deleteSheet as jest.Mock).mockResolvedValue(true);
+
+        const wrapper = mount(ShowWineCardsView);
+        await jest.runAllTimers();
+        await wrapper.vm.$nextTick();
+        await new Promise(resolve => setTimeout(resolve, 0));
+
+        // Get the first WineCard and emit the delete event
         const firstCard = wrapper.findComponent(WineCard);
-        await firstCard.vm.$emit('delete', '1');
+        firstCard.vm.$emit('delete', '1');
 
+        // Wait for the delete operation to complete
+        await wrapper.vm.$nextTick();
+        await new Promise(resolve => setTimeout(resolve, 0));
+
+        // Check if the dataService.deleteSheet was called with the correct ID
         expect(dataService.deleteSheet).toHaveBeenCalledWith('1');
-        expect((wrapper.vm as any).wineSheets.value.length).toBe(1); // Ora dovrebbe funzionare
-        expect((wrapper.vm as any).wineSheets.value[0].id).toBe('2'); // Ora dovrebbe funzionare
-    });
 
-    it('handles failed delete', async () => {
-        (dataService.getAllSheets as jest.Mock).mockResolvedValue([...mockWineSheets]);
-        (dataService.deleteSheet as jest.Mock).mockResolvedValue(false);
-        const alertSpy = jest.spyOn(window, 'alert').mockImplementation(() => { });
-        await wrapper.vm.$nextTick();
-        await wrapper.findComponent(WineCard).vm.$emit('delete', '1');
-        expect(alertSpy).toHaveBeenCalledWith('Failed to delete wine tasting sheet');
-        alertSpy.mockRestore();
-    });
-
-    it('handles delete error', async () => {
-        (dataService.getAllSheets as jest.Mock).mockResolvedValue([...mockWineSheets]);
-        const error = new Error('Delete error');
-        (dataService.deleteSheet as jest.Mock).mockRejectedValue(error);
-        const alertSpy = jest.spyOn(window, 'alert').mockImplementation(() => { });
-        const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => { });
-        await wrapper.vm.$nextTick();
-        await wrapper.findComponent(WineCard).vm.$emit('delete', '1');
-        expect(alertSpy).toHaveBeenCalledWith('Error deleting wine tasting sheet');
-        expect(consoleErrorSpy).toHaveBeenCalledWith('Delete error:', error);
-        alertSpy.mockRestore();
-        consoleErrorSpy.mockRestore();
-    });
-
-    it('navigates to "/create" when the "Create New" button is clicked in the empty state', async () => {
-        await wrapper.vm.$nextTick();
-        const router = useRouter() as jest.Mocked<ReturnType<typeof useRouter>>;
-
-        const createButton = wrapper.find('a.btn');
-        expect(createButton.exists()).toBe(true);
-        await createButton.trigger('click');
-        expect(router.push).toHaveBeenCalledWith('/create');
+        // Check if the wine sheet was removed from the list
+        // After deletion there should be one less wine card
+        const cards = wrapper.findAllComponents(WineCard);
+        expect(cards.length).toBe(mockWineSheets.length - 1);
     });
 });

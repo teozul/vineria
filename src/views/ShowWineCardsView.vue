@@ -47,8 +47,6 @@ const deleteSingleSheet = async (wineSheetId: string) => {
             wineSheets.value = wineSheets.value.filter(
                 sheet => sheet.id !== wineSheetId
             );
-            console.log("cancello" + wineSheetId)
-            console.log(wineSheets.value)
             showDeleteConfirm.value = false;
         } else {
             alert('Failed to delete wine tasting sheet');
