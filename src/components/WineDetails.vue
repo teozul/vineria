@@ -119,11 +119,11 @@
         <div class="detail-grid">
           <div class="detail-item">
             <span class="detail-label">Body</span>
-            <span class="detail-value">{{ wineSheet.gustatoryExam.body }}</span>
+            <span class="detail-value">{{ bodyLevelLabels[wineSheet.gustatoryExam.body] }}</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Balance</span>
-            <span class="detail-value">{{ wineSheet.gustatoryExam.balance }}</span>
+            <span class="detail-value">{{ balanceLabels[wineSheet.gustatoryExam.balance] }}</span>
           </div>
         </div>
 
@@ -131,15 +131,15 @@
         <div class="detail-grid">
           <div class="detail-item">
             <span class="detail-label">Alcohol Level</span>
-            <span class="detail-value">{{ wineSheet.gustatoryExam.softElements.alcoholLevel }}</span>
+            <span class="detail-value">{{ alcoholLevelLabels[wineSheet.gustatoryExam.softElements.alcoholLevel] }}</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Softness</span>
-            <span class="detail-value">{{ wineSheet.gustatoryExam.softElements.softness }}</span>
+            <span class="detail-value">{{ softnessLevelLabels[wineSheet.gustatoryExam.softElements.softness] }}</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Sugars</span>
-            <span class="detail-value">{{ wineSheet.gustatoryExam.softElements.sugars }}</span>
+            <span class="detail-value">{{ sugarLevelLabels[wineSheet.gustatoryExam.softElements.sugars] }}</span>
           </div>
         </div>
 
@@ -147,15 +147,15 @@
         <div class="detail-grid">
           <div class="detail-item">
             <span class="detail-label">Acidity</span>
-            <span class="detail-value">{{ wineSheet.gustatoryExam.hardElements.acidity }}</span>
+            <span class="detail-value">{{ acidityLevelLabels[wineSheet.gustatoryExam.hardElements.acidity] }}</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Salinity</span>
-            <span class="detail-value">{{ wineSheet.gustatoryExam.hardElements.salinity }}</span>
+            <span class="detail-value">{{ salinityLevelLabels[wineSheet.gustatoryExam.hardElements.salinity] }}</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Tannins</span>
-            <span class="detail-value">{{ wineSheet.gustatoryExam.hardElements.tannins }}</span>
+            <span class="detail-value">{{ tanninLevelLabels[wineSheet.gustatoryExam.hardElements.tannins] }}</span>
           </div>
         </div>
 
@@ -168,11 +168,11 @@
           </div>
           <div class="detail-item">
             <span class="detail-label">Quality</span>
-            <span class="detail-value">{{ wineSheet.gustatoryExam.retroOlfactory.quality }}</span>
+            <span class="detail-value">{{ retroOlfactoryQualityLabels[wineSheet.gustatoryExam.retroOlfactory.quality] }}</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Mouth Aroma Persistence</span>
-            <span class="detail-value">{{ wineSheet.gustatoryExam.retroOlfactory.mouthAroma.persistence }}</span>
+            <span class="detail-value">{{ retroOlfactoryPersistenceLabels[wineSheet.gustatoryExam.retroOlfactory.mouthAroma.persistence] }}</span>
           </div>
         </div>
       </section>
@@ -202,9 +202,9 @@ import {
   WineTastingSheet, createEmptyWineTastingSheet,
   LimpidityLevel, TransparencyLevel, ColorTone, ColorIntensity, FluidityLevel,
   EffervescenceGrain, EffervescencePersistence, OlfactoryIntensity,
-  OlfactoryFranchness, OlfactoryFineness, AromaType, OlfactoryComplexity,
+  OlfactoryFranchness, OlfactoryFineness, AromaType, OlfactoryComplexity,retroOlfactoryPersistenceLabels,
   BodyLevel, AlcoholLevel, SoftnessLevel, SugarLevel, AcidityLevel, aromaTypeLabels, olfactoryComplexityLabels,
-  SalinityLevel, TanninLevel, Balance, RetroOlfactoryQuality,
+  SalinityLevel, TanninLevel, Balance, RetroOlfactoryQuality,alcoholLevelLabels,bodyLevelLabels,
   RetroOlfactoryPersistence, EvolutionaryState, WineClassification, olfactoryIntensityLabels,
   wineClassificationLabels, evolutionaryStateLabels, WineType, wineTypeLabels, olfactoryFranchnessLabels, olfactoryFinenessLabels,
   limpidityLevelLabels, transparencyLevelLabels, fluidityLevelLabels, effervescenceGrainLabels, effervescencePersistenceLabels,

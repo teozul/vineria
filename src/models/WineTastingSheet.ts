@@ -191,132 +191,147 @@ export const olfactoryComplexityLabels = {
 };
 
 export enum BodyLevel {
-    Light = 'Leggero',
-    Body = 'Di corpo',
-    Structured = 'Strutturato',
-    Robust = 'Robusto'
+    LIGHT = 'LIGHT',
+    BODY = 'BODY',
+    STRUCTURED = 'STRUCTURED',
+    ROBUST = 'ROBUST'
 }
 
+export const bodyLevelLabels = {
+    [BodyLevel.LIGHT]: 'Leggero',
+    [BodyLevel.BODY]: 'Di corpo',
+    [BodyLevel.STRUCTURED]: 'Strutturato',
+    [BodyLevel.ROBUST]: 'Robusto'
+};
+
 export enum AlcoholLevel {
-    Weak = 'Debole',
-    Light = 'Leggero',
-    Warm = 'Caldo',
-    VeryWarm = 'Molto caldo',
-    Alcoholic = 'Alcolico'
+    WEAK = 'WEAK',
+    LIGHT = 'LIGHT',
+    WARM = 'WARM',
+    VERYWARM = 'VERYWARM',
+    ALCOHOLIC = 'ALCOHOLIC'
+}
+
+export const alcoholLevelLabels = {
+    [AlcoholLevel.WEAK]: 'Debole',
+    [AlcoholLevel.LIGHT]: 'Leggero',
+    [AlcoholLevel.WARM]: 'Caldo',
+    [AlcoholLevel.VERYWARM]: 'Molto caldo',
+    [AlcoholLevel.ALCOHOLIC]: 'Alcolico'
 }
 
 export enum SoftnessLevel {
-    LittleSoft = 'Poco morbido',
-    Soft = 'Morbido',
-    Pasty = 'Pastoso',
-    Fatty = 'Grasso'
+    LITTLE_SOFT = 'LITTLE_SOFT',
+    SOFT = 'SOFT',
+    PASTY = 'PASTY',
+    FATTY = 'FATTY'
 }
 
 export const softnessLevelLabels = {
-    [SoftnessLevel.LittleSoft]: 'Poco morbido',
-    [SoftnessLevel.Soft]: 'Morbido',
-    [SoftnessLevel.Pasty]: 'Pastoso',
-    [SoftnessLevel.Fatty]: 'Grasso'
+    [SoftnessLevel.LITTLE_SOFT]: 'Poco morbido',
+    [SoftnessLevel.SOFT]: 'Morbido',
+    [SoftnessLevel.PASTY]: 'Pastoso',
+    [SoftnessLevel.FATTY]: 'Grasso'
 };
 
 export enum SugarLevel {
-    Dry = 'Secco',
-    OffDry = 'Abboccato',
-    Sweet = 'Amabile',
-    VerySweet = 'Dolce',
-    ExtremelySweet = 'Molto dolce'
+    DRY = 'DRY',
+    OFF_DRY = 'OFF_DRY',
+    SWEET = 'SWEET',
+    VERY_SWEET = 'VERY_SWEET',
+    EXTREMELY_SWEET = 'EXTREMELY_SWEET'
 }
 
 export const sugarLevelLabels = {
-    [SugarLevel.Dry]: 'Secco',
-    [SugarLevel.OffDry]: 'Abboccato',
-    [SugarLevel.Sweet]: 'Amabile',
-    [SugarLevel.VerySweet]: 'Dolce',
-    [SugarLevel.ExtremelySweet]: 'Molto dolce'
+    [SugarLevel.DRY]: 'Secco',
+    [SugarLevel.OFF_DRY]: 'Abboccato',
+    [SugarLevel.SWEET]: 'Amabile',
+    [SugarLevel.VERY_SWEET]: 'Dolce',
+    [SugarLevel.EXTREMELY_SWEET]: 'Molto dolce'
 };
 
 export enum AcidityLevel {
-    Scarce = 'Scarno',
-    Fresh = 'Fresco',
-    VividFresh = 'Fresco vivo',
-    Unripe = 'Acerbo'
+    SCARCE = 'SCARCE',
+    FRESH = 'FRESH',
+    VIVID_FRESH = 'VIVID_FRESH',
+    UNRIPE = 'UNRIPE'
 }
 
 export const acidityLevelLabels = {
-    [AcidityLevel.Scarce]: 'Scarno',
-    [AcidityLevel.Fresh]: 'Fresco',
-    [AcidityLevel.VividFresh]: 'Fresco vivo',
-    [AcidityLevel.Unripe]: 'Acerbo'
+    [AcidityLevel.SCARCE]: 'Scarno',
+    [AcidityLevel.FRESH]: 'Fresco',
+    [AcidityLevel.VIVID_FRESH]: 'Fresco vivo',
+    [AcidityLevel.UNRIPE]: 'Acerbo'
 };
 
 export enum SalinityLevel {
-    NotPerceptible = 'Non percettibile',
-    SlightlySaline = 'Leggerm. sapido',
-    Saline = 'Sapido',
-    VerySaline = 'Molto sapido'
+    NOT_PERCEPTIBLE = 'NOT_PERCEPTIBLE',
+    SLIGHTLY_SALINE = 'SLIGHTLY_SALINE',
+    SALINE = 'SALINE',
+    VERY_SALINE = 'VERY_SALINE'
 }
 
 export const salinityLevelLabels = {
-    [SalinityLevel.NotPerceptible]: 'Non percettibile',
-    [SalinityLevel.SlightlySaline]: 'Leggerm. sapido',
-    [SalinityLevel.Saline]: 'Sapido',
-    [SalinityLevel.VerySaline]: 'Molto sapido'
+    [SalinityLevel.NOT_PERCEPTIBLE]: 'Non percettibile',
+    [SalinityLevel.SLIGHTLY_SALINE]: 'Leggerm. sapido',
+    [SalinityLevel.SALINE]: 'Sapido',
+    [SalinityLevel.VERY_SALINE]: 'Molto sapido'
 };
 
 export enum TanninLevel {
-    LowTannic = 'Poco tannico',
-    JustTannic = 'Giusto tannico',
-    Tannic = 'Tannico',
-    HighlyTannic = 'Allappante'
+    LOW_TANNIC = 'LOW_TANNIC',
+    JUST_TANNIC = 'JUST_TANNIC',
+    TANNIC = 'TANNIC',
+    HIGHLY_TANNIC = 'HIGHLY_TANNIC'
 }
 
 export const tanninLevelLabels = {
-    [TanninLevel.LowTannic]: 'Poco tannico',
-    [TanninLevel.JustTannic]: 'Giusto tannico',
-    [TanninLevel.Tannic]: 'Tannico',
-    [TanninLevel.HighlyTannic]: 'Allappante'
+    [TanninLevel.LOW_TANNIC]: 'Poco tannico',
+    [TanninLevel.JUST_TANNIC]: 'Giusto tannico',
+    [TanninLevel.TANNIC]: 'Tannico',
+    [TanninLevel.HIGHLY_TANNIC]: 'Allappante'
 };
 
 export enum Balance {
-    Disharmonic = 'Disarmonico',
-    SlightlyDisharmonic = 'Leggerm. disarmonico',
-    Balanced = 'Equilibrato',
-    Harmonic = 'Armonico'
+    DISHARMONIC = 'DISHARMONIC',
+    SLIGHTLY_DISHARMONIC = 'SLIGHTLY_DISHARMONIC',
+    BALANCED = 'BALANCED',
+    HARMONIC = 'HARMONIC'
 }
 
 export const balanceLabels = {
-    [Balance.Disharmonic]: 'Disarmonico',
-    [Balance.SlightlyDisharmonic]: 'Leggerm. disarmonico',
-    [Balance.Balanced]: 'Equilibrato',
-    [Balance.Harmonic]: 'Armonico'
+    [Balance.DISHARMONIC]: 'Disarmonico',
+    [Balance.SLIGHTLY_DISHARMONIC]: 'Leggerm. disarmonico',
+    [Balance.BALANCED]: 'Equilibrato',
+    [Balance.HARMONIC]: 'Armonico'
 };
 
 export enum RetroOlfactoryQuality {
-    Common = 'Comune',
-    SlightlyFine = 'Poco fine',
-    SomewhatFine = 'Abbastanza fine',
-    Fine = 'Fine',
-    Excellent = 'Eccellente'
+    COMMON = 'COMMON',
+    SLIGHTLY_FINE = 'SLIGHTLY_FINE',
+    SOMEWHAT_FINE = 'SOMEWHAT_FINE',
+    FINE = 'FINE',
+    EXCELLENT = 'EXCELLENT'
 }
 
 export const retroOlfactoryQualityLabels = {
-    [RetroOlfactoryQuality.Common]: 'Comune',
-    [RetroOlfactoryQuality.SlightlyFine]: 'Poco fine',
-    [RetroOlfactoryQuality.SomewhatFine]: 'Abbastanza fine',
-    [RetroOlfactoryQuality.Fine]: 'Fine',
-    [RetroOlfactoryQuality.Excellent]: 'Eccellente'
+    [RetroOlfactoryQuality.COMMON]: 'Comune',
+    [RetroOlfactoryQuality.SLIGHTLY_FINE]: 'Poco fine',
+    [RetroOlfactoryQuality.SOMEWHAT_FINE]: 'Abbastanza fine',
+    [RetroOlfactoryQuality.FINE]: 'Fine',
+    [RetroOlfactoryQuality.EXCELLENT]: 'Eccellente'
 };
 
 export enum RetroOlfactoryPersistence {
-    LowPersistent = 'Poco persistente',
-    Persistent = 'Persistente',
-    VeryPersistent = 'Molto persistente'
+    LOW_PERSISTENT = 'LOW_PERSISTENT',
+    PERSISTENT = 'PERSISTENT',
+    VERY_PERSISTENT = 'VERY_PERSISTENT'
 }
 
 export const retroOlfactoryPersistenceLabels = {
-    [RetroOlfactoryPersistence.LowPersistent]: 'Poco persistente',
-    [RetroOlfactoryPersistence.Persistent]: 'Persistente',
-    [RetroOlfactoryPersistence.VeryPersistent]: 'Molto persistente'
+    [RetroOlfactoryPersistence.LOW_PERSISTENT]: 'Poco persistente',
+    [RetroOlfactoryPersistence.PERSISTENT]: 'Persistente',
+    [RetroOlfactoryPersistence.VERY_PERSISTENT]: 'Molto persistente'
 };
 
 export enum EvolutionaryState {
@@ -473,23 +488,23 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
         },
 
         gustatoryExam: {
-            body: BodyLevel.Body,
+            body: BodyLevel.LIGHT,
             softElements: {
-                alcoholLevel: AlcoholLevel.Warm,
-                softness: SoftnessLevel.Soft,
-                sugars: SugarLevel.Dry
+                alcoholLevel: AlcoholLevel.WARM,
+                softness: SoftnessLevel.SOFT,
+                sugars: SugarLevel.DRY
             },
             hardElements: {
-                acidity: AcidityLevel.Fresh,
-                salinity: SalinityLevel.SlightlySaline,
-                tannins: TanninLevel.JustTannic
+                acidity: AcidityLevel.FRESH,
+                salinity: SalinityLevel.SLIGHTLY_SALINE,
+                tannins: TanninLevel.JUST_TANNIC
             },
-            balance: Balance.Balanced,
+            balance: Balance.BALANCED,
             retroOlfactory: {
                 intensity: OlfactoryIntensity.INTENSE,
-                quality: RetroOlfactoryQuality.Fine,
+                quality: RetroOlfactoryQuality.FINE,
                 mouthAroma: {
-                    persistence: RetroOlfactoryPersistence.Persistent
+                    persistence: RetroOlfactoryPersistence.PERSISTENT
                 }
             }
         },

@@ -255,7 +255,7 @@
         <label for="body" class="form-label">Body</label>
         <select id="body" v-model="localWineSheet.gustatoryExam.body" class="form-control" required>
           <option v-for="(value, key) in bodyLevelOptions" :key="key" :value="value">
-            {{ value }}
+            {{ bodyLevelLabels[value] }}
           </option>
         </select>
       </div>
@@ -268,7 +268,7 @@
             <select id="alcoholLevel" v-model="localWineSheet.gustatoryExam.softElements.alcoholLevel"
               class="form-control" required>
               <option v-for="(value, key) in alcoholLevelOptions" :key="key" :value="value">
-                {{ value }}
+                {{ alcoholLevelLabels[value] }}
               </option>
             </select>
           </div>
@@ -279,7 +279,7 @@
             <select id="softness" v-model="localWineSheet.gustatoryExam.softElements.softness" class="form-control"
               required>
               <option v-for="(value, key) in softnessLevelOptions" :key="key" :value="value">
-                {{ value }}
+                {{ softnessLevelLabels[value] }}
               </option>
             </select>
           </div>
@@ -290,7 +290,7 @@
             <select id="sugars" v-model="localWineSheet.gustatoryExam.softElements.sugars" class="form-control"
               required>
               <option v-for="(value, key) in sugarLevelOptions" :key="key" :value="value">
-                {{ value }}
+                {{ sugarLevelLabels[value] }}
               </option>
             </select>
           </div>
@@ -305,7 +305,7 @@
             <select id="acidity" v-model="localWineSheet.gustatoryExam.hardElements.acidity" class="form-control"
               required>
               <option v-for="(value, key) in acidityLevelOptions" :key="key" :value="value">
-                {{ value }}
+                {{ acidityLevelLabels[value] }}
               </option>
             </select>
           </div>
@@ -316,7 +316,7 @@
             <select id="salinity" v-model="localWineSheet.gustatoryExam.hardElements.salinity" class="form-control"
               required>
               <option v-for="(value, key) in salinityLevelOptions" :key="key" :value="value">
-                {{ value }}
+                {{ salinityLevelLabels[value] }}
               </option>
             </select>
           </div>
@@ -327,7 +327,7 @@
             <select id="tannins" v-model="localWineSheet.gustatoryExam.hardElements.tannins" class="form-control"
               required>
               <option v-for="(value, key) in tanninLevelOptions" :key="key" :value="value">
-                {{ value }}
+                {{ tanninLevelLabels[value] }}
               </option>
             </select>
           </div>
@@ -338,7 +338,7 @@
         <label for="balance" class="form-label">Balance</label>
         <select id="balance" v-model="localWineSheet.gustatoryExam.balance" class="form-control" required>
           <option v-for="(value, key) in balanceOptions" :key="key" :value="value">
-            {{ value }}
+            {{ balanceLabels[value] }}
           </option>
         </select>
       </div>
@@ -362,7 +362,7 @@
             <select id="retroQuality" v-model="localWineSheet.gustatoryExam.retroOlfactory.quality" class="form-control"
               required>
               <option v-for="(value, key) in retroOlfactoryQualityOptions" :key="key" :value="value">
-                {{ value }}
+                {{ retroOlfactoryQualityLabels[value] }}
               </option>
             </select>
           </div>
@@ -373,7 +373,7 @@
             <select id="retroPersistence" v-model="localWineSheet.gustatoryExam.retroOlfactory.mouthAroma.persistence"
               class="form-control" required>
               <option v-for="(value, key) in retroOlfactoryPersistenceOptions" :key="key" :value="value">
-                {{ value }}
+                {{ retroOlfactoryPersistenceLabels[value] }}
               </option>
             </select>
           </div>

@@ -43,23 +43,23 @@ export const createMockWineSheet = (): WineTastingSheet => {
 
   // Gustatory examination
   wineSheet.gustatoryExam = {
-    body: BodyLevel.Structured,
-    balance: Balance.Harmonic,
+    body: BodyLevel.STRUCTURED,
+    balance: Balance.HARMONIC,
     softElements: {
-      alcoholLevel: AlcoholLevel.Warm,
-      softness: SoftnessLevel.Soft,
-      sugars: SugarLevel.Dry
+      alcoholLevel: AlcoholLevel.WARM,
+      softness: SoftnessLevel.SOFT,
+      sugars: SugarLevel.DRY
     },
     hardElements: {
-      acidity: AcidityLevel.Fresh,
-      salinity: SalinityLevel.SlightlySaline,
-      tannins: TanninLevel.Tannic
+      acidity: AcidityLevel.FRESH,
+      salinity: SalinityLevel.SLIGHTLY_SALINE,
+      tannins: TanninLevel.TANNIC
     },
     retroOlfactory: {
       intensity: OlfactoryIntensity.INTENSE,
-      quality: RetroOlfactoryQuality.Fine,
+      quality: RetroOlfactoryQuality.FINE,
       mouthAroma: {
-        persistence: RetroOlfactoryPersistence.Persistent
+        persistence: RetroOlfactoryPersistence.PERSISTENT
       }
     }
   };
