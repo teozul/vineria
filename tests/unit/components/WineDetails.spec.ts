@@ -87,7 +87,7 @@ describe('WineDetails.vue', () => {
     expect(wrapper.findAll('.section-title')[1].text()).toBe('Visual Examination');
     expect(wrapper.findAll('.section-title')[2].text()).toBe('Olfactory Examination');
     expect(wrapper.findAll('.section-title')[3].text()).toBe('Gustatory Examination');
-    expect(wrapper.findAll('.section-title')[4].text()).toBe('Final Evaluation');
+    expect(wrapper.findAll('.section-title')[4].text()).toBe('Valutazione finale');
 
     // Check some key values
     expect(wrapper.text()).toContain('Chianti Classico');
