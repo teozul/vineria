@@ -178,14 +178,14 @@
 
       <!-- Final Evaluation Section -->
       <section class="detail-section">
-        <h2 class="section-title">Final Evaluation</h2>
+        <h2 class="section-title">{{Labels.finalEvaluation}}</h2>
         <div class="detail-grid">
           <div class="detail-item">
-            <span class="detail-label">Evolutionary State</span>
+            <span class="detail-label">{{ Labels.evolutionaryState }}</span>
             <span class="detail-value">{{ wineSheet.evolutionaryState }}</span>
           </div>
           <div class="detail-item full-width">
-            <span class="detail-label">Final Considerations</span>
+            <span class="detail-label">{{ Labels.finalConsiderations }}</span>
             <span class="detail-value consideration-text">
               {{ wineSheet.finalConsiderations || 'Nessuna considerazione finale.' }}
             </span>
@@ -200,6 +200,7 @@
 import { WineTastingSheet, wineClassificationLabels, wineTypeLabels } from '@/models/WineTastingSheet';
 import { getWineTypeClass } from '@/helpers/WineUtils';
 import { formatDate } from '@/helpers/DateUtils';
+import { Labels } from '@/helpers/Labels';
 
 defineProps<{
   wineSheet: WineTastingSheet | null;

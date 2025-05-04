@@ -170,13 +170,22 @@ export enum RetroOlfactoryPersistence {
     VeryPersistent = 'Molto persistente'
 }
 
+
+
 export enum EvolutionaryState {
-    Young = 'Giovane',
-    Ready = 'Pronto',
-    Mature = 'Maturo',
-    Evolved = 'Evoluto',
-    Passed = 'Passato'
+    YOUNG = 'YOUNG',
+    READY = 'READY',
+    MATURE = 'MATURE',
+    EVOLVED = 'EVOLVED',
+    PASSED = 'PASSED'
 }
+export const evolutionaryStateLabels = {
+    [EvolutionaryState.YOUNG]: 'Giovane',
+    [EvolutionaryState.READY]: 'Pronto',
+    [EvolutionaryState.MATURE]: 'Maturo',
+    [EvolutionaryState.EVOLVED]: 'Evoluto',
+    [EvolutionaryState.PASSED]: 'Passato'
+};
 
 export interface VisualExam {
     limpidity: LimpidityLevel;
@@ -225,7 +234,7 @@ export interface GustatoryExam {
 }
 
 export enum WineClassification {
-    NONE= "NONE",
+    NONE = "NONE",
     IGT = 'IGT',
     DOC = 'DOC',
     DOCG = 'DOCG'
@@ -338,7 +347,7 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
             }
         },
         
-        evolutionaryState: EvolutionaryState.Ready,
+        evolutionaryState: EvolutionaryState.READY,
         finalConsiderations: ''
     };
 }

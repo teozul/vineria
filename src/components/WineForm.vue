@@ -554,9 +554,9 @@
 
     <!-- Evolutionary State and Final Considerations -->
     <div class="form-section">
-      <h2 class="form-section-title">Final Evaluation</h2>
+      <h2 class="form-section-title">{{Labels.finalEvaluation}}</h2>
       <div class="form-group">
-        <label for="evolutionaryState" class="form-label">Evolutionary State</label>
+        <label for="evolutionaryState" class="form-label">{{ Labels.evolutionaryState }}</label>
         <select 
           id="evolutionaryState" 
           v-model="localWineSheet.evolutionaryState" 
@@ -564,13 +564,13 @@
           required
         >
           <option v-for="(value, key) in evolutionaryStateOptions" :key="key" :value="value">
-            {{ value }}
+            {{ evolutionaryStateLabels[value] }}
           </option>
         </select>
       </div>
 
       <div class="form-group">
-        <label for="finalConsiderations" class="form-label">Final Considerations</label>
+        <label for="finalConsiderations" class="form-label">{{ Labels.finalConsiderations }}</label>
         <textarea 
           id="finalConsiderations" 
           v-model="localWineSheet.finalConsiderations" 

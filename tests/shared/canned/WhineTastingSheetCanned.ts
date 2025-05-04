@@ -64,7 +64,7 @@ export const createMockWineSheet = (): WineTastingSheet => {
     }
   };
 
-  wineSheet.evolutionaryState = EvolutionaryState.Ready;
+  wineSheet.evolutionaryState = EvolutionaryState.READY;
   wineSheet.finalConsiderations = 'Proprio un signor vino.';
 
   return wineSheet;
