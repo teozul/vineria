@@ -54,16 +54,15 @@
         <div class="detail-grid">
           <div class="detail-item">
             <span class="detail-label">Limpidity</span>
-            <span class="detail-value">{{ wineSheet.visualExam.limpidity }}</span>
+            <span class="detail-value">{{ limpidityLevelLabels[wineSheet.visualExam.limpidity] }}</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Transparency</span>
-            <span class="detail-value">{{ wineSheet.visualExam.transparency }}</span>
+            <span class="detail-value">{{ transparencyLevelLabels[wineSheet.visualExam.transparency] }}</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Color</span>
-            <span class="detail-value">{{ wineSheet.visualExam.color.tone }} ({{ wineSheet.visualExam.color.intensity
-              }})</span>
+            <span class="detail-value">{{ colorToneLabels[wineSheet.visualExam.color.tone] }} ({{ colorIntensityLabels[wineSheet.visualExam.color.intensity] }})</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Fluidity</span>
@@ -178,14 +177,14 @@
 
       <!-- Final Evaluation Section -->
       <section class="detail-section">
-        <h2 class="section-title">Final Evaluation</h2>
+        <h2 class="section-title">{{ Labels.finalEvaluation }}</h2>
         <div class="detail-grid">
           <div class="detail-item">
-            <span class="detail-label">Evolutionary State</span>
+            <span class="detail-label">{{ Labels.evolutionaryState }}</span>
             <span class="detail-value">{{ wineSheet.evolutionaryState }}</span>
           </div>
           <div class="detail-item full-width">
-            <span class="detail-label">Final Considerations</span>
+            <span class="detail-label">{{ Labels.finalConsiderations }}</span>
             <span class="detail-value consideration-text">
               {{ wineSheet.finalConsiderations || 'Nessuna considerazione finale.' }}
             </span>
@@ -197,9 +196,23 @@
 </template>
 
 <script setup lang="ts">
-import { WineTastingSheet, wineClassificationLabels, wineTypeLabels } from '@/models/WineTastingSheet';
+import {
+  WineTastingSheet, createEmptyWineTastingSheet,
+  LimpidityLevel, TransparencyLevel, ColorTone, ColorIntensity, FluidityLevel,
+  EffervescenceGrain, EffervescencePersistence, OlfactoryIntensity,
+  OlfactoryFranchness, OlfactoryFineness, AromaType, OlfactoryComplexity,
+  BodyLevel, AlcoholLevel, SoftnessLevel, SugarLevel, AcidityLevel,
+  SalinityLevel, TanninLevel, Balance, RetroOlfactoryQuality,
+  RetroOlfactoryPersistence, EvolutionaryState, WineClassification,
+  wineClassificationLabels, evolutionaryStateLabels, WineType, wineTypeLabels,
+  limpidityLevelLabels, transparencyLevelLabels, fluidityLevelLabels,
+  colorToneLabels, colorIntensityLabels, softnessLevelLabels, sugarLevelLabels,
+  acidityLevelLabels, salinityLevelLabels, tanninLevelLabels, balanceLabels,
+  retroOlfactoryQualityLabels
+} from '@/models/WineTastingSheet';
 import { getWineTypeClass } from '@/helpers/WineUtils';
 import { formatDate } from '@/helpers/DateUtils';
+import { Labels } from '@/helpers/Labels';
 
 defineProps<{
   wineSheet: WineTastingSheet | null;

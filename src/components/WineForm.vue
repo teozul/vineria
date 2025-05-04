@@ -169,7 +169,7 @@
               required
             >
               <option v-for="(value, key) in limpidityOptions" :key="key" :value="value">
-                {{ value }}
+                {{ limpidityLevelLabels[value] }}
               </option>
             </select>
           </div>
@@ -184,7 +184,7 @@
               required
             >
               <option v-for="(value, key) in transparencyOptions" :key="key" :value="value">
-                {{ value }}
+                {{ transparencyLevelLabels[value] }}
               </option>
             </select>
           </div>
@@ -202,7 +202,7 @@
               required
             >
               <option v-for="(value, key) in getColorToneOptions()" :key="key" :value="value">
-                {{ value }}
+                {{ colorToneLabels[value] }}
               </option>
             </select>
           </div>
@@ -554,9 +554,9 @@
 
     <!-- Evolutionary State and Final Considerations -->
     <div class="form-section">
-      <h2 class="form-section-title">Final Evaluation</h2>
+      <h2 class="form-section-title">{{Labels.finalEvaluation}}</h2>
       <div class="form-group">
-        <label for="evolutionaryState" class="form-label">Evolutionary State</label>
+        <label for="evolutionaryState" class="form-label">{{ Labels.evolutionaryState }}</label>
         <select 
           id="evolutionaryState" 
           v-model="localWineSheet.evolutionaryState" 
@@ -564,13 +564,13 @@
           required
         >
           <option v-for="(value, key) in evolutionaryStateOptions" :key="key" :value="value">
-            {{ value }}
+            {{ evolutionaryStateLabels[value] }}
           </option>
         </select>
       </div>
 
       <div class="form-group">
-        <label for="finalConsiderations" class="form-label">Final Considerations</label>
+        <label for="finalConsiderations" class="form-label">{{ Labels.finalConsiderations }}</label>
         <textarea 
           id="finalConsiderations" 
           v-model="localWineSheet.finalConsiderations" 

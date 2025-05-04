@@ -1,36 +1,63 @@
-// Enums for various categorical ratings
 export enum LimpidityLevel {
-    Turbid = 'Torbido',
-    Veiled = 'Velato',
-    Limpid = 'Limpido',
-    Crystal = 'Cristallino',
-    Brilliant = 'Brillante'
+    TURBID = 'TURBID',
+    VEILED = 'VEILED',
+    LIMPID = 'LIMPID',
+    CRYSTAL = 'CRYSTAL',
+    BRILLIANT = 'BRILLIANT'
 }
 
+export const limpidityLevelLabels = {
+    [LimpidityLevel.TURBID]: 'Turbido',
+    [LimpidityLevel.VEILED]: 'Velato', 
+    [LimpidityLevel.LIMPID]: 'Limpido',
+    [LimpidityLevel.CRYSTAL]: 'Cristallino',
+    [LimpidityLevel.BRILLIANT]: 'Brillante'
+};
+
 export enum TransparencyLevel {
-    Impenetrable = 'Impenetrabile',
-    LowTransparent = 'Poco trasparente',
-    Transparent = 'Trasparente'
+    IMPENETRABLE = 'IMPENETRABLE',
+    LOW_TRANSPARENT = 'LOW_TRANSPARENT',
+    TRANSPARENT = 'TRANSPARENT'
 }
+
+export const transparencyLevelLabels = {
+    [TransparencyLevel.IMPENETRABLE]: 'Impenetrabile',
+    [TransparencyLevel.LOW_TRANSPARENT]: 'Poco trasparente',
+    [TransparencyLevel.TRANSPARENT]: 'Trasparente'
+};
 
 export enum ColorTone {
     // White wine tones
-    GreenishYellow = 'Giallo verdolino',
-    StrawYellow = 'Giallo paglierino',
-    GoldenYellow = 'Giallo dorato',
-    AmberYellow = 'Giallo ambrato',
+    GREENISH_YELLOW = 'GREENISH_YELLOW',
+    STRAW_YELLOW = 'STRAW_YELLOW',
+    GOLDEN_YELLOW = 'GOLDEN_YELLOW',
+    AMBER_YELLOW = 'AMBER_YELLOW',
     
     // Rose wine tones
-    LightPink = 'Rosa tenue',
-    CherryPink = 'Rosa cerasuolo',
-    ClaretPink = 'Rosa chiaretto',
+    LIGHT_PINK = 'LIGHT_PINK',
+    CHERRY_PINK = 'CHERRY_PINK',
+    CLARET_PINK = 'CLARET_PINK',
     
     // Red wine tones
-    PurpleRed = 'Rosso porpora',
-    RubyRed = 'Rosso rubino',
-    GranatRed = 'Rosso granato',
-    OrangeRed = 'Rosso aranciato'
+    PURPLE_RED = 'PURPLE_RED',
+    RUBY_RED = 'RUBY_RED',
+    GRANAT_RED = 'GRANAT_RED',
+    ORANGE_RED = 'ORANGE_RED'
 }
+
+export const colorToneLabels = {
+    [ColorTone.GREENISH_YELLOW]: 'Giallo verdolino',
+    [ColorTone.STRAW_YELLOW]: 'Giallo paglierino',
+    [ColorTone.GOLDEN_YELLOW]: 'Giallo dorato',
+    [ColorTone.AMBER_YELLOW]: 'Giallo ambrato',
+    [ColorTone.LIGHT_PINK]: 'Rosa tenue',
+    [ColorTone.CHERRY_PINK]: 'Rosa cerasuolo',
+    [ColorTone.CLARET_PINK]: 'Rosa chiaretto',
+    [ColorTone.PURPLE_RED]: 'Rosso porpora',
+    [ColorTone.RUBY_RED]: 'Rosso rubino',
+    [ColorTone.GRANAT_RED]: 'Rosso granato',
+    [ColorTone.ORANGE_RED]: 'Rosso aranciato'
+};
 
 export enum ColorIntensity {
     Light = 'Tenue',
@@ -171,12 +198,19 @@ export enum RetroOlfactoryPersistence {
 }
 
 export enum EvolutionaryState {
-    Young = 'Giovane',
-    Ready = 'Pronto',
-    Mature = 'Maturo',
-    Evolved = 'Evoluto',
-    Passed = 'Passato'
+    YOUNG = 'YOUNG',
+    READY = 'READY',
+    MATURE = 'MATURE',
+    EVOLVED = 'EVOLVED',
+    PASSED = 'PASSED'
 }
+export const evolutionaryStateLabels = {
+    [EvolutionaryState.YOUNG]: 'Giovane',
+    [EvolutionaryState.READY]: 'Pronto',
+    [EvolutionaryState.MATURE]: 'Maturo',
+    [EvolutionaryState.EVOLVED]: 'Evoluto',
+    [EvolutionaryState.PASSED]: 'Passato'
+};
 
 export interface VisualExam {
     limpidity: LimpidityLevel;
@@ -225,7 +259,7 @@ export interface GustatoryExam {
 }
 
 export enum WineClassification {
-    NONE= "NONE",
+    NONE = "NONE",
     IGT = 'IGT',
     DOC = 'DOC',
     DOCG = 'DOCG'
@@ -292,15 +326,15 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
         alcoholContent: 0, 
         temperature: 0,
         vintage: new Date().getFullYear(),
-        classification: WineClassification.IGT,
+        classification: WineClassification.NONE,
         producer: '',
         wineType: WineType.RED,
         
         visualExam: {
-            limpidity: LimpidityLevel.Limpid,
-            transparency: TransparencyLevel.Transparent, 
+            limpidity: LimpidityLevel.LIMPID,
+            transparency: TransparencyLevel.TRANSPARENT, 
             color: {
-                tone: ColorTone.RubyRed,
+                tone: ColorTone.RUBY_RED,
                 intensity: ColorIntensity.Intense
             },
             fluidity: FluidityLevel.NotDense
@@ -338,9 +372,76 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
             }
         },
         
-        evolutionaryState: EvolutionaryState.Ready,
+        evolutionaryState: EvolutionaryState.READY,
         finalConsiderations: ''
     };
 }
+
+//Translations
+
+export const colorIntensityLabels = {
+    [ColorIntensity.Light]: 'Tenue',
+    [ColorIntensity.SlightlyIntense]: 'Poco intenso',
+    [ColorIntensity.Intense]: 'Intenso',
+    [ColorIntensity.VeryIntense]: 'Molto intenso'
+};
+
+export const fluidityLevelLabels = {
+    [FluidityLevel.Fluid]: 'Scorrevole',
+    [FluidityLevel.NotDense]: 'Poco denso',
+    [FluidityLevel.Dense]: 'Denso',
+    [FluidityLevel.VeryDense]: 'Molto denso'
+};
+
+export const softnessLevelLabels = {
+    [SoftnessLevel.LittleSoft]: 'Poco morbido',
+    [SoftnessLevel.Soft]: 'Morbido',
+    [SoftnessLevel.Pasty]: 'Pastoso',
+    [SoftnessLevel.Fatty]: 'Grasso'
+};
+
+export const sugarLevelLabels = {
+    [SugarLevel.Dry]: 'Secco',
+    [SugarLevel.OffDry]: 'Abboccato',
+    [SugarLevel.Sweet]: 'Amabile',
+    [SugarLevel.VerySweet]: 'Dolce',
+    [SugarLevel.ExtremelySweet]: 'Molto dolce'
+};
+
+export const acidityLevelLabels = {
+    [AcidityLevel.Scarce]: 'Scarno',
+    [AcidityLevel.Fresh]: 'Fresco',
+    [AcidityLevel.VividFresh]: 'Fresco vivo',
+    [AcidityLevel.Unripe]: 'Acerbo'
+};
+
+export const salinityLevelLabels = {
+    [SalinityLevel.NotPerceptible]: 'Non percettibile',
+    [SalinityLevel.SlightlySaline]: 'Leggerm. sapido',
+    [SalinityLevel.Saline]: 'Sapido',
+    [SalinityLevel.VerySaline]: 'Molto sapido'
+};
+
+export const tanninLevelLabels = {
+    [TanninLevel.LowTannic]: 'Poco tannico',
+    [TanninLevel.JustTannic]: 'Giusto tannico',
+    [TanninLevel.Tannic]: 'Tannico',
+    [TanninLevel.HighlyTannic]: 'Allappante'
+};
+
+export const balanceLabels = {
+    [Balance.Disharmonic]: 'Disarmonico',
+    [Balance.SlightlyDisharmonic]: 'Leggerm. disarmonico',
+    [Balance.Balanced]: 'Equilibrato',
+    [Balance.Harmonic]: 'Armonico'
+};
+
+export const retroOlfactoryQualityLabels = {
+    [RetroOlfactoryQuality.Common]: 'Comune',
+    [RetroOlfactoryQuality.SlightlyFine]: 'Poco fine',
+    [RetroOlfactoryQuality.SomewhatFine]: 'Abbastanza fine',
+    [RetroOlfactoryQuality.Fine]: 'Fine',
+    [RetroOlfactoryQuality.Excellent]: 'Eccellente'
+};
 
 export default WineTastingSheet;

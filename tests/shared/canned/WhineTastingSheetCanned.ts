@@ -17,10 +17,10 @@ export const createMockWineSheet = (): WineTastingSheet => {
 
   // Visual examination
   wineSheet.visualExam = {
-    limpidity: LimpidityLevel.Limpid,
-    transparency: TransparencyLevel.Transparent,
+    limpidity: LimpidityLevel.LIMPID,
+    transparency: TransparencyLevel.TRANSPARENT,
     color: {
-      tone: ColorTone.RubyRed,
+      tone: ColorTone.RUBY_RED,
       intensity: ColorIntensity.Intense
     },
     fluidity: FluidityLevel.Fluid,
@@ -64,7 +64,7 @@ export const createMockWineSheet = (): WineTastingSheet => {
     }
   };
 
-  wineSheet.evolutionaryState = EvolutionaryState.Ready;
+  wineSheet.evolutionaryState = EvolutionaryState.READY;
   wineSheet.finalConsiderations = 'Proprio un signor vino.';
 
   return wineSheet;
