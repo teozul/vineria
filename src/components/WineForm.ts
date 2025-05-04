@@ -18,7 +18,7 @@ import {
   acidityLevelLabels,
   salinityLevelLabels,
   tanninLevelLabels,
-  balanceLabels,
+  balanceLabels,effervescencePersistenceLabels,
   retroOlfactoryQualityLabels
 } from '@/models/WineTastingSheet';
 import { Labels } from '@/helpers/Labels';
@@ -58,7 +58,7 @@ export default defineComponent({
     );
 
     const effervescencePersistence = ref<EffervescencePersistence>(
-      localWineSheet.visualExam.effervescence?.persistence || EffervescencePersistence.Persistent
+      localWineSheet.visualExam.effervescence?.persistence || EffervescencePersistence.PERSISTENT
     );
 
     // Handle aroma types as a separate array for checkboxes
@@ -284,7 +284,7 @@ export default defineComponent({
       salinityLevelLabels,
       tanninLevelLabels,
       balanceLabels,
-      retroOlfactoryQualityLabels,effervescenceGrainLabels
+      retroOlfactoryQualityLabels,effervescenceGrainLabels,effervescencePersistenceLabels
     };
   }
 });

@@ -251,7 +251,7 @@
               class="form-control"
             >
               <option v-for="(value, key) in effervescenceGrainOptions" :key="key" :value="value">
-                {{ value }}
+                {{ effervescenceGrainLabels[value] }}
               </option>
             </select>
           </div>
@@ -265,7 +265,7 @@
               class="form-control"
             >
               <option v-for="(value, key) in effervescencePersistenceOptions" :key="key" :value="value">
-                {{ value }}
+                {{ effervescencePersistenceLabels[value] }}
               </option>
             </select>
           </div>

@@ -71,8 +71,8 @@
           <div v-if="wineSheet.visualExam.effervescence" class="detail-item">
             <span class="detail-label">Effervescence</span>
             <span class="detail-value">
-              {{ wineSheet.visualExam.effervescence.grain }},
-              {{ wineSheet.visualExam.effervescence.persistence }}
+              {{ effervescenceGrainLabels[wineSheet.visualExam.effervescence.grain] }},
+              {{ effervescencePersistenceLabels[wineSheet.visualExam.effervescence.persistence] }}
             </span>
           </div>
         </div>
@@ -205,7 +205,7 @@ import {
   SalinityLevel, TanninLevel, Balance, RetroOlfactoryQuality,
   RetroOlfactoryPersistence, EvolutionaryState, WineClassification,
   wineClassificationLabels, evolutionaryStateLabels, WineType, wineTypeLabels,
-  limpidityLevelLabels, transparencyLevelLabels, fluidityLevelLabels,effervescenceGrainLabels,
+  limpidityLevelLabels, transparencyLevelLabels, fluidityLevelLabels,effervescenceGrainLabels,effervescencePersistenceLabels,
   colorToneLabels, colorIntensityLabels, softnessLevelLabels, sugarLevelLabels,
   acidityLevelLabels, salinityLevelLabels, tanninLevelLabels, balanceLabels,
   retroOlfactoryQualityLabels

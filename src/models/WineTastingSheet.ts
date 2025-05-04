@@ -8,7 +8,7 @@ export enum LimpidityLevel {
 
 export const limpidityLevelLabels = {
     [LimpidityLevel.TURBID]: 'Turbido',
-    [LimpidityLevel.VEILED]: 'Velato', 
+    [LimpidityLevel.VEILED]: 'Velato',
     [LimpidityLevel.LIMPID]: 'Limpido',
     [LimpidityLevel.CRYSTAL]: 'Cristallino',
     [LimpidityLevel.BRILLIANT]: 'Brillante'
@@ -32,12 +32,12 @@ export enum ColorTone {
     STRAW_YELLOW = 'STRAW_YELLOW',
     GOLDEN_YELLOW = 'GOLDEN_YELLOW',
     AMBER_YELLOW = 'AMBER_YELLOW',
-    
+
     // Rose wine tones
     LIGHT_PINK = 'LIGHT_PINK',
     CHERRY_PINK = 'CHERRY_PINK',
     CLARET_PINK = 'CLARET_PINK',
-    
+
     // Red wine tones
     PURPLE_RED = 'PURPLE_RED',
     RUBY_RED = 'RUBY_RED',
@@ -100,10 +100,16 @@ export const effervescenceGrainLabels = {
 };
 
 export enum EffervescencePersistence {
-    Evanescent = 'Evanescente',
-    Persistent = 'Persistente',
-    VeryPersistent = 'Molto persistente'
+    EVANESCENT = 'EVANESCENT',
+    PERSISTENT = 'PERSISTENT',
+    VERY_PERSISTENT = 'VERY_PERSISTENT'
 }
+
+export const effervescencePersistenceLabels = {
+    [EffervescencePersistence.EVANESCENT]: 'Evanescente',
+    [EffervescencePersistence.PERSISTENT]: 'Persistente',
+    [EffervescencePersistence.VERY_PERSISTENT]: 'Molto persistente'
+};
 
 export enum OlfactoryIntensity {
     Light = 'Tenue',
@@ -283,7 +289,7 @@ export enum WineClassification {
     IGT = 'IGT',
     DOC = 'DOC',
     DOCG = 'DOCG'
-} 
+}
 
 export const wineClassificationLabels = {
     [WineClassification.NONE]: 'Nessuna classificazione',
@@ -301,13 +307,13 @@ export enum WineType {
 export const wineTypeLabels = {
     [WineType.RED]: 'Rosso',
     [WineType.WHITE]: 'Bianco',
-    [WineType.ROSE]: 'Rosè', 
+    [WineType.ROSE]: 'Rosè',
 };
 
 // Main Wine Tasting Sheet Interface
 export interface WineTastingSheet {
     id: string; // Unique identifier for each sheet
-    
+
     // Basic Wine Information
     location: string;
     date: string; // ISO format date string
@@ -341,25 +347,25 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
         location: '',
         date: new Date().toISOString().split('T')[0],
         time: new Date().toTimeString().split(' ')[0].substring(0, 5),
-        
+
         denomination: '',
-        alcoholContent: 0, 
+        alcoholContent: 0,
         temperature: 0,
         vintage: new Date().getFullYear(),
         classification: WineClassification.NONE,
         producer: '',
         wineType: WineType.RED,
-        
+
         visualExam: {
             limpidity: LimpidityLevel.LIMPID,
-            transparency: TransparencyLevel.TRANSPARENT, 
+            transparency: TransparencyLevel.TRANSPARENT,
             color: {
                 tone: ColorTone.RUBY_RED,
                 intensity: ColorIntensity.INTENSE
             },
             fluidity: FluidityLevel.NOT_DENSE
         },
-        
+
         olfactoryExam: {
             intensity: OlfactoryIntensity.Intense,
             quality: {
@@ -369,7 +375,7 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
             aromaTypes: [AromaType.Fruity],
             complexity: OlfactoryComplexity.MediumComplex
         },
-        
+
         gustatoryExam: {
             body: BodyLevel.Body,
             softElements: {
@@ -391,7 +397,7 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
                 }
             }
         },
-        
+
         evolutionaryState: EvolutionaryState.READY,
         finalConsiderations: ''
     };
