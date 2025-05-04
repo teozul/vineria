@@ -126,15 +126,15 @@ export const olfactoryIntensityLabels = {
 };
 
 export enum OlfactoryFranchness {
-    NotClear = 'Poco schietto',
-    Sufficient = 'Sufficiente',
-    Clear = 'Schietto'
+    NOT_CLEAR = 'NOT_CLEAR',
+    SUFFICIENT = 'SUFFICIENT',
+    CLEAR = 'CLEAR'
 }
 
 export const olfactoryFranchnessLabels = {
-    [OlfactoryFranchness.NotClear]: 'Poco schietto',
-    [OlfactoryFranchness.Sufficient]: 'Sufficiente',
-    [OlfactoryFranchness.Clear]: 'Schietto'
+    [OlfactoryFranchness.NOT_CLEAR]: 'Poco schietto',
+    [OlfactoryFranchness.SUFFICIENT]: 'Sufficiente',
+    [OlfactoryFranchness.CLEAR]: 'Schietto'
 };
 
 export enum OlfactoryFineness {
@@ -459,7 +459,7 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
         olfactoryExam: {
             intensity: OlfactoryIntensity.INTENSE,
             quality: {
-                franchness: OlfactoryFranchness.Clear,
+                franchness: OlfactoryFranchness.CLEAR,
                 fineness: OlfactoryFineness.Fine
             },
             aromaTypes: [AromaType.Fruity],

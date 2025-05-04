@@ -84,13 +84,13 @@
         <div class="detail-grid">
           <div class="detail-item">
             <span class="detail-label">Intensity</span>
-            <span class="detail-value">{{ wineSheet.olfactoryExam.intensity }}</span>
+            <span class="detail-value">{{ olfactoryIntensityLabels[wineSheet.olfactoryExam.intensity] }}</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Quality</span>
             <span class="detail-value">
-              Franchness: {{ wineSheet.olfactoryExam.quality.franchness }},
-              Fineness: {{ wineSheet.olfactoryExam.quality.fineness }}
+              Franchness: {{ olfactoryFranchnessLabels[wineSheet.olfactoryExam.quality.franchness] }},
+              Fineness: {{ olfactoryFinenessLabels[wineSheet.olfactoryExam.quality.fineness] }}
             </span>
           </div>
           <div class="detail-item full-width">
@@ -162,7 +162,7 @@
         <div class="detail-grid">
           <div class="detail-item">
             <span class="detail-label">Intensity</span>
-            <span class="detail-value">{{ wineSheet.gustatoryExam.retroOlfactory.intensity }}</span>
+            <span class="detail-value">{{ olfactoryIntensityLabels[wineSheet.gustatoryExam.retroOlfactory.intensity] }}</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Quality</span>
@@ -203,7 +203,7 @@ import {
   OlfactoryFranchness, OlfactoryFineness, AromaType, OlfactoryComplexity,
   BodyLevel, AlcoholLevel, SoftnessLevel, SugarLevel, AcidityLevel,
   SalinityLevel, TanninLevel, Balance, RetroOlfactoryQuality,
-  RetroOlfactoryPersistence, EvolutionaryState, WineClassification,
+  RetroOlfactoryPersistence, EvolutionaryState, WineClassification,olfactoryIntensityLabels,
   wineClassificationLabels, evolutionaryStateLabels, WineType, wineTypeLabels,olfactoryFranchnessLabels,olfactoryFinenessLabels,
   limpidityLevelLabels, transparencyLevelLabels, fluidityLevelLabels,effervescenceGrainLabels,effervescencePersistenceLabels,
   colorToneLabels, colorIntensityLabels, softnessLevelLabels, sugarLevelLabels,
