@@ -351,7 +351,7 @@
               v-model="selectedAromaTypes"
               class="form-check-input"
             />
-            <label :for="'aroma-' + key" class="form-check-label">{{ value }}</label>
+            <label :for="'aroma-' + key" class="form-check-label">{{ aromaTypeLabels[value] }}</label>
           </div>
         </div>
       </div>
@@ -514,7 +514,7 @@
               required
             >
               <option v-for="(value, key) in olfactoryIntensityOptions" :key="key" :value="value">
-                {{ value }}
+                {{ olfactoryIntensityLabels[value] }}
               </option>
             </select>
           </div>

@@ -151,29 +151,29 @@ export const olfactoryFinenessLabels = {
 };
 
 export enum AromaType {
-    Aromatic = 'Aromatico',
-    Floral = 'Floreale',
-    Fruity = 'Fruttato',
-    Vegetable = 'Vegetale',
-    Balsamic = 'Balsamico',
-    DryFruit = 'Fruttato secco',
-    Mineral = 'Minerale',
-    Woody = 'Legnoso',
-    Ethereal = 'Etereo',
-    Chemical = 'Chimico'
+    AROMATIC = 'AROMATIC',
+    FLORAL = 'FLORAL',
+    FRUITY = 'FRUITY',
+    VEGETABLE = 'VEGETABLE',
+    BALSAMIC = 'BALSAMIC',
+    DRYFRUIT = 'DRYFRUIT',
+    MINERAL = 'MINERAL',
+    WOODY = 'WOODY',
+    ETHEREAL = 'ETHEREAL',
+    CHEMICAL = 'CHEMICAL'
 }
 
 export const aromaTypeLabels = {
-    [AromaType.Aromatic]: 'Aromatico',
-    [AromaType.Floral]: 'Floreale',
-    [AromaType.Fruity]: 'Fruttato',
-    [AromaType.Vegetable]: 'Vegetale',
-    [AromaType.Balsamic]: 'Balsamico',
-    [AromaType.DryFruit]: 'Fruttato secco',
-    [AromaType.Mineral]: 'Minerale',
-    [AromaType.Woody]: 'Legnoso',
-    [AromaType.Ethereal]: 'Etereo',
-    [AromaType.Chemical]: 'Chimico'
+    [AromaType.AROMATIC]: 'Aromatico',
+    [AromaType.FLORAL]: 'Floreale',
+    [AromaType.FRUITY]: 'Fruttato',
+    [AromaType.VEGETABLE]: 'Vegetale',
+    [AromaType.BALSAMIC]: 'Balsamico',
+    [AromaType.DRYFRUIT]: 'Fruttato secco',
+    [AromaType.MINERAL]: 'Minerale',
+    [AromaType.WOODY]: 'Legnoso',
+    [AromaType.ETHEREAL]: 'Etereo',
+    [AromaType.CHEMICAL]: 'Chimico'
 };
 
 export enum OlfactoryComplexity {
@@ -462,7 +462,7 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
                 franchness: OlfactoryFranchness.CLEAR,
                 fineness: OlfactoryFineness.FINE
             },
-            aromaTypes: [AromaType.Fruity],
+            aromaTypes: [AromaType.FRUITY],
             complexity: OlfactoryComplexity.MediumComplex
         },
 

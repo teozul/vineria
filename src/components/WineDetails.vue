@@ -98,7 +98,7 @@
             <span class="detail-value">
               <div class="tag-list">
                 <span v-for="(aroma, index) in wineSheet.olfactoryExam.aromaTypes" :key="index" class="tag">
-                  {{ aroma }}
+                  {{ aromaTypeLabels[aroma] }}
                 </span>
               </div>
             </span>
@@ -201,7 +201,7 @@ import {
   LimpidityLevel, TransparencyLevel, ColorTone, ColorIntensity, FluidityLevel,
   EffervescenceGrain, EffervescencePersistence, OlfactoryIntensity,
   OlfactoryFranchness, OlfactoryFineness, AromaType, OlfactoryComplexity,
-  BodyLevel, AlcoholLevel, SoftnessLevel, SugarLevel, AcidityLevel,
+  BodyLevel, AlcoholLevel, SoftnessLevel, SugarLevel, AcidityLevel,aromaTypeLabels,
   SalinityLevel, TanninLevel, Balance, RetroOlfactoryQuality,
   RetroOlfactoryPersistence, EvolutionaryState, WineClassification,olfactoryIntensityLabels,
   wineClassificationLabels, evolutionaryStateLabels, WineType, wineTypeLabels,olfactoryFranchnessLabels,olfactoryFinenessLabels,
