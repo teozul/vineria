@@ -13,22 +13,23 @@
                     </span>
                 </div>
                 <div class="wine-card-details">
-                    <p><strong>Producer:</strong> {{ wineSheet.producer }}</p>
-                    <p><strong>Vintage:</strong> {{ wineSheet.vintage }}</p>
-                    <p><strong>Classification:</strong> {{
+                    <p><strong>{{ Labels.producer }}:</strong> {{ wineSheet.producer }}</p>
+                    <p><strong>{{ Labels.vintage }}:</strong> {{ wineSheet.vintage }}</p>
+                    <p><strong>{{ Labels.classification }}:</strong> {{
                         wineClassificationLabels[wineSheet.classification]
-                        }} </p>
-                    <p><strong>Tasted on:</strong> {{ formatDate(wineSheet.date) }}</p>
+                    }} </p>
+
+                    <p><strong>{{ Labels.tastedOn }}:</strong> {{ formatDate(wineSheet.date) }}</p>
                 </div>
                 <div class="wine-card-actions">
                     <router-link :to="`/detail/${wineSheet.id}`" class="btn btn-sm">
-                        View Details
+                        {{ Labels.viewDetails }}
                     </router-link>
                     <router-link :to="`/edit/${wineSheet.id}`" class="btn btn-sm btn-secondary">
-                        Edit
+                        {{ Labels.edit }}
                     </router-link>
                     <button @click="tryDelete()" class="btn btn-sm btn-danger">
-                        Delete
+                        {{ Labels.delete }}
                     </button>
                 </div>
             </div>
@@ -39,22 +40,23 @@
     <div v-if="showDeleteConfirm" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Confirm Deletion</h2>
+                <h2>{{ Labels.confirmDeletion }}</h2>
                 <button class="modal-close" @click="rollBackDelete">&times;</button>
             </div>
             <div class="modal-body">
                 <p>
-                    Are you sure you want to delete the tasting sheet for
-                    <strong>{{ wineSheet?.denomination }}</strong> by
+                    {{ Labels.confirmDeletionMessage }}
+                    <strong>{{ wineSheet?.denomination }}</strong>
+                    {{ Labels.by }}
                     <strong>{{ wineSheet?.producer }}</strong>?
                 </p>
-                <p class="warning-text">This action cannot be undone.</p>
+                <p class="warning-text">{{ Labels.confirmDeletionWarning }}</p>
                 <div class="modal-actions">
                     <button @click="rollBackDelete" class="btn btn-secondary">
-                        Cancel
+                        {{ Labels.cancel }}
                     </button>
                     <button @click="confirmDelete" class="btn btn-danger">
-                        Delete
+                        {{ Labels.delete }}
                     </button>
                 </div>
             </div>
@@ -68,6 +70,7 @@ import { ref } from 'vue';
 import { WineTastingSheet, wineClassificationLabels, wineTypeLabels } from '@/models/WineTastingSheet';
 import { getWineTypeClass } from '@/helpers/WineUtils';
 import { formatDate } from '@/helpers/DateUtils';
+import { Labels } from '@/helpers/Labels';
 
 const showDeleteConfirm = ref(false);
 const props = defineProps<{
