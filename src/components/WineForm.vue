@@ -169,7 +169,7 @@
               required
             >
               <option v-for="(value, key) in limpidityOptions" :key="key" :value="value">
-                {{ value }}
+                {{ limpidityLevelLabels[value] }}
               </option>
             </select>
           </div>

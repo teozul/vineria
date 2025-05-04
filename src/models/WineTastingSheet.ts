@@ -1,11 +1,18 @@
-// Enums for various categorical ratings
 export enum LimpidityLevel {
-    Turbid = 'Torbido',
-    Veiled = 'Velato',
-    Limpid = 'Limpido',
-    Crystal = 'Cristallino',
-    Brilliant = 'Brillante'
+    TURBID = 'TURBID',
+    VEILED = 'VEILED',
+    LIMPID = 'LIMPID',
+    CRYSTAL = 'CRYSTAL',
+    BRILLIANT = 'BRILLIANT'
 }
+
+export const limpidityLevelLabels = {
+    [LimpidityLevel.TURBID]: 'Turbido',
+    [LimpidityLevel.VEILED]: 'Velato', 
+    [LimpidityLevel.LIMPID]: 'Limpido',
+    [LimpidityLevel.CRYSTAL]: 'Cristallino',
+    [LimpidityLevel.BRILLIANT]: 'Brillante'
+};
 
 export enum TransparencyLevel {
     Impenetrable = 'Impenetrabile',
@@ -170,8 +177,6 @@ export enum RetroOlfactoryPersistence {
     VeryPersistent = 'Molto persistente'
 }
 
-
-
 export enum EvolutionaryState {
     YOUNG = 'YOUNG',
     READY = 'READY',
@@ -306,7 +311,7 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
         wineType: WineType.RED,
         
         visualExam: {
-            limpidity: LimpidityLevel.Limpid,
+            limpidity: LimpidityLevel.LIMPID,
             transparency: TransparencyLevel.Transparent, 
             color: {
                 tone: ColorTone.RubyRed,
@@ -351,5 +356,91 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
         finalConsiderations: ''
     };
 }
+
+//Translations
+export const transparencyLevelLabels = {
+    [TransparencyLevel.Impenetrable]: 'Impenetrabile',
+    [TransparencyLevel.LowTransparent]: 'Poco trasparente',
+    [TransparencyLevel.Transparent]: 'Trasparente'
+};
+
+export const colorToneLabels = {
+    [ColorTone.GreenishYellow]: 'Giallo verdolino',
+    [ColorTone.StrawYellow]: 'Giallo paglierino',
+    [ColorTone.GoldenYellow]: 'Giallo dorato',
+    [ColorTone.AmberYellow]: 'Giallo ambrato',
+    [ColorTone.LightPink]: 'Rosa tenue',
+    [ColorTone.CherryPink]: 'Rosa cerasuolo',
+    [ColorTone.ClaretPink]: 'Rosa chiaretto',
+    [ColorTone.PurpleRed]: 'Rosso porpora',
+    [ColorTone.RubyRed]: 'Rosso rubino',
+    [ColorTone.GranatRed]: 'Rosso granato',
+    [ColorTone.OrangeRed]: 'Rosso aranciato'
+};
+
+export const colorIntensityLabels = {
+    [ColorIntensity.Light]: 'Tenue',
+    [ColorIntensity.SlightlyIntense]: 'Poco intenso',
+    [ColorIntensity.Intense]: 'Intenso',
+    [ColorIntensity.VeryIntense]: 'Molto intenso'
+};
+
+export const fluidityLevelLabels = {
+    [FluidityLevel.Fluid]: 'Scorrevole',
+    [FluidityLevel.NotDense]: 'Poco denso',
+    [FluidityLevel.Dense]: 'Denso',
+    [FluidityLevel.VeryDense]: 'Molto denso'
+};
+
+export const softnessLevelLabels = {
+    [SoftnessLevel.LittleSoft]: 'Poco morbido',
+    [SoftnessLevel.Soft]: 'Morbido',
+    [SoftnessLevel.Pasty]: 'Pastoso',
+    [SoftnessLevel.Fatty]: 'Grasso'
+};
+
+export const sugarLevelLabels = {
+    [SugarLevel.Dry]: 'Secco',
+    [SugarLevel.OffDry]: 'Abboccato',
+    [SugarLevel.Sweet]: 'Amabile',
+    [SugarLevel.VerySweet]: 'Dolce',
+    [SugarLevel.ExtremelySweet]: 'Molto dolce'
+};
+
+export const acidityLevelLabels = {
+    [AcidityLevel.Scarce]: 'Scarno',
+    [AcidityLevel.Fresh]: 'Fresco',
+    [AcidityLevel.VividFresh]: 'Fresco vivo',
+    [AcidityLevel.Unripe]: 'Acerbo'
+};
+
+export const salinityLevelLabels = {
+    [SalinityLevel.NotPerceptible]: 'Non percettibile',
+    [SalinityLevel.SlightlySaline]: 'Leggerm. sapido',
+    [SalinityLevel.Saline]: 'Sapido',
+    [SalinityLevel.VerySaline]: 'Molto sapido'
+};
+
+export const tanninLevelLabels = {
+    [TanninLevel.LowTannic]: 'Poco tannico',
+    [TanninLevel.JustTannic]: 'Giusto tannico',
+    [TanninLevel.Tannic]: 'Tannico',
+    [TanninLevel.HighlyTannic]: 'Allappante'
+};
+
+export const balanceLabels = {
+    [Balance.Disharmonic]: 'Disarmonico',
+    [Balance.SlightlyDisharmonic]: 'Leggerm. disarmonico',
+    [Balance.Balanced]: 'Equilibrato',
+    [Balance.Harmonic]: 'Armonico'
+};
+
+export const retroOlfactoryQualityLabels = {
+    [RetroOlfactoryQuality.Common]: 'Comune',
+    [RetroOlfactoryQuality.SlightlyFine]: 'Poco fine',
+    [RetroOlfactoryQuality.SomewhatFine]: 'Abbastanza fine',
+    [RetroOlfactoryQuality.Fine]: 'Fine',
+    [RetroOlfactoryQuality.Excellent]: 'Eccellente'
+};
 
 export default WineTastingSheet;

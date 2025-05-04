@@ -54,7 +54,7 @@
         <div class="detail-grid">
           <div class="detail-item">
             <span class="detail-label">Limpidity</span>
-            <span class="detail-value">{{ wineSheet.visualExam.limpidity }}</span>
+            <span class="detail-value">{{ limpidityLevelLabels[wineSheet.visualExam.limpidity] }}</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Transparency</span>
@@ -197,7 +197,7 @@
 </template>
 
 <script setup lang="ts">
-import { WineTastingSheet, wineClassificationLabels, wineTypeLabels } from '@/models/WineTastingSheet';
+import { WineTastingSheet, wineClassificationLabels, wineTypeLabels,limpidityLevelLabels } from '@/models/WineTastingSheet';
 import { getWineTypeClass } from '@/helpers/WineUtils';
 import { formatDate } from '@/helpers/DateUtils';
 import { Labels } from '@/helpers/Labels';

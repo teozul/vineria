@@ -7,7 +7,8 @@ import {
   BodyLevel, AlcoholLevel, SoftnessLevel, SugarLevel, AcidityLevel,
   SalinityLevel, TanninLevel, Balance, RetroOlfactoryQuality, 
   RetroOlfactoryPersistence, EvolutionaryState, WineClassification,
-  wineClassificationLabels, evolutionaryStateLabels, WineType, wineTypeLabels
+  wineClassificationLabels, evolutionaryStateLabels, WineType, wineTypeLabels,
+  limpidityLevelLabels
 } from '@/models/WineTastingSheet';
 import { Labels } from '@/helpers/Labels';
 export default defineComponent({
@@ -217,12 +218,6 @@ export default defineComponent({
     const wineClassificationOptions = Object.values(WineClassification);
 
     return {
-      //Utils
-      Labels,
-      wineClassificationLabels,
-      evolutionaryStateLabels,
-      wineTypeLabels,
-
       //Data
       localWineSheet,
       submitting,
@@ -261,6 +256,13 @@ export default defineComponent({
       evolutionaryStateOptions,
       wineClassificationOptions,
       WineType,
+
+      //Utils
+      Labels,
+      wineClassificationLabels,
+      evolutionaryStateLabels,
+      wineTypeLabels,
+      limpidityLevelLabels,
     };
   }
 });
