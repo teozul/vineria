@@ -350,47 +350,47 @@ export const evolutionaryStateLabels = {
 };
 
 export interface VisualExam {
-    limpidity: LimpidityLevel;
-    transparency: TransparencyLevel;
-    color: {
-        tone: ColorTone;
-        intensity: ColorIntensity;
+    limpidity?: LimpidityLevel;
+    transparency?: TransparencyLevel;
+    color?: {
+        tone?: ColorTone;
+        intensity?: ColorIntensity;
     };
-    fluidity: FluidityLevel;
+    fluidity?: FluidityLevel;
     effervescence?: {
-        grain: EffervescenceGrain;
-        persistence: EffervescencePersistence;
+        grain?: EffervescenceGrain;
+        persistence?: EffervescencePersistence;
     };
 }
 
 export interface OlfactoryExam {
-    intensity: OlfactoryIntensity;
-    quality: {
-        franchness: OlfactoryFranchness;
-        fineness: OlfactoryFineness;
+    intensity?: OlfactoryIntensity;
+    quality?: {
+        franchness?: OlfactoryFranchness;
+        fineness?: OlfactoryFineness;
     };
     aromaTypes: AromaType[];
-    complexity: OlfactoryComplexity;
+    complexity?: OlfactoryComplexity;
 }
 
 export interface GustatoryExam {
-    body: BodyLevel;
-    softElements: {
-        alcoholLevel: AlcoholLevel;
-        softness: SoftnessLevel;
-        sugars: SugarLevel;
+    body?: BodyLevel;
+    softElements?: {
+        alcoholLevel?: AlcoholLevel;
+        softness?: SoftnessLevel;
+        sugars?: SugarLevel;
     };
-    hardElements: {
-        acidity: AcidityLevel;
-        salinity: SalinityLevel;
-        tannins: TanninLevel;
+    hardElements?: {
+        acidity?: AcidityLevel;
+        salinity?: SalinityLevel;
+        tannins?: TanninLevel;
     };
-    balance: Balance;
-    retroOlfactory: {
-        intensity: OlfactoryIntensity;
-        quality: RetroOlfactoryQuality;
-        mouthAroma: {
-            persistence: RetroOlfactoryPersistence;
+    balance?: Balance;
+    retroOlfactory?: {
+        intensity?: OlfactoryIntensity;
+        quality?: RetroOlfactoryQuality;
+        mouthAroma?: {
+            persistence?: RetroOlfactoryPersistence;
         };
     };
 }
@@ -423,11 +423,11 @@ export const wineTypeLabels = {
 
 // Main Wine Tasting Sheet Interface
 export interface WineTastingSheet {
-    id: string; // Unique identifier for each sheet
+    id: string; 
 
     // Basic Wine Information
     location: string;
-    date: string; // ISO format date string
+    date: string; 
     time: string;
 
     // Wine Details
@@ -445,7 +445,7 @@ export interface WineTastingSheet {
     gustatoryExam: GustatoryExam;
 
     // Evolutionary State
-    evolutionaryState: EvolutionaryState;
+    evolutionaryState?: EvolutionaryState;
 
     // Final Considerations
     finalConsiderations: string;
@@ -468,48 +468,49 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
         wineType: WineType.RED,
 
         visualExam: {
-            limpidity: LimpidityLevel.LIMPID,
-            transparency: TransparencyLevel.TRANSPARENT,
+            limpidity: undefined,
+            transparency: undefined,
             color: {
-                tone: ColorTone.RUBY_RED,
-                intensity: ColorIntensity.INTENSE
+                tone: undefined,
+                intensity: undefined
             },
-            fluidity: FluidityLevel.NOT_DENSE
+            fluidity: undefined,
+            effervescence: undefined
         },
 
         olfactoryExam: {
-            intensity: OlfactoryIntensity.INTENSE,
+            intensity: undefined,
             quality: {
-                franchness: OlfactoryFranchness.CLEAR,
-                fineness: OlfactoryFineness.FINE
+                franchness: undefined,
+                fineness: undefined
             },
-            aromaTypes: [AromaType.FRUITY],
-            complexity: OlfactoryComplexity.SIMPLE
+            aromaTypes: [],
+            complexity: undefined
         },
 
         gustatoryExam: {
-            body: BodyLevel.LIGHT,
+            body: undefined,
             softElements: {
-                alcoholLevel: AlcoholLevel.WARM,
-                softness: SoftnessLevel.SOFT,
-                sugars: SugarLevel.DRY
+                alcoholLevel: undefined,
+                softness: undefined,
+                sugars: undefined
             },
             hardElements: {
-                acidity: AcidityLevel.FRESH,
-                salinity: SalinityLevel.SLIGHTLY_SALINE,
-                tannins: TanninLevel.JUST_TANNIC
+                acidity: undefined,
+                salinity: undefined,
+                tannins: undefined
             },
-            balance: Balance.BALANCED,
+            balance: undefined,
             retroOlfactory: {
-                intensity: OlfactoryIntensity.INTENSE,
-                quality: RetroOlfactoryQuality.FINE,
+                intensity: undefined,
+                quality: undefined,
                 mouthAroma: {
-                    persistence: RetroOlfactoryPersistence.PERSISTENT
+                    persistence: undefined
                 }
             }
         },
 
-        evolutionaryState: EvolutionaryState.READY,
+        evolutionaryState: undefined,
         finalConsiderations: ''
     };
 }

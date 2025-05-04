@@ -100,50 +100,76 @@ export default defineComponent({
       isSparklingWine.value = !!localWineSheet.visualExam.effervescence;
 
       // Adjust color tone options based on wine type
-      if (localWineSheet.wineType === WineType.WHITE && !isWhiteWineColorTone(localWineSheet.visualExam.color.tone)) {
-        localWineSheet.visualExam.color.tone = ColorTone.STRAW_YELLOW;
-      } else if (localWineSheet.wineType === WineType.ROSE && !isRoseWineColorTone(localWineSheet.visualExam.color.tone)) {
-        localWineSheet.visualExam.color.tone = ColorTone.CHERRY_PINK;
-      } else if (localWineSheet.wineType === WineType.RED && !isRedWineColorTone(localWineSheet.visualExam.color.tone)) {
-        localWineSheet.visualExam.color.tone = ColorTone.RUBY_RED;
+      const color = localWineSheet.visualExam?.color;
+      if (!color) return; // If color is undefined, do nothing
+
+      switch (localWineSheet.wineType) {
+        case WineType.WHITE:
+          if (!isWhiteWineColorTone(color.tone)) {
+            color.tone = ColorTone.STRAW_YELLOW;
+          }
+          break;
+        case WineType.ROSE:
+          if (!isRoseWineColorTone(color.tone)) {
+            color.tone = ColorTone.CHERRY_PINK;
+          }
+          break;
+        case WineType.RED:
+          if (!isRedWineColorTone(color.tone)) {
+            color.tone = ColorTone.RUBY_RED;
+          }
+          break;
       }
     });
 
     // Color tone filtering helpers
-    const isWhiteWineColorTone = (tone: ColorTone): boolean => {
+    const isWhiteWineColorTone = (tone: ColorTone | undefined): boolean => {
       return [
         ColorTone.GREENISH_YELLOW,
         ColorTone.STRAW_YELLOW,
         ColorTone.GOLDEN_YELLOW,
         ColorTone.AMBER_YELLOW
-      ].includes(tone);
+      ].includes(tone as ColorTone);
     };
 
-    const isRoseWineColorTone = (tone: ColorTone): boolean => {
+    const isRoseWineColorTone = (tone: ColorTone| undefined): boolean => {
       return [
         ColorTone.LIGHT_PINK,
         ColorTone.CHERRY_PINK,
         ColorTone.CLARET_PINK
-      ].includes(tone);
+      ].includes(tone as ColorTone);
     };
 
-    const isRedWineColorTone = (tone: ColorTone): boolean => {
+    const isRedWineColorTone = (tone: ColorTone| undefined): boolean => {
       return [
         ColorTone.PURPLE_RED,
         ColorTone.RUBY_RED,
         ColorTone.GRANAT_RED,
         ColorTone.ORANGE_RED
-      ].includes(tone);
+      ].includes(tone as ColorTone);
     };
 
     // Watch for changes in wine type to update color tone options
     watch(() => localWineSheet.wineType, (newWineType: WineType): void => {
-      if (newWineType === WineType.WHITE && !isWhiteWineColorTone(localWineSheet.visualExam.color.tone)) {
-        localWineSheet.visualExam.color.tone = ColorTone.STRAW_YELLOW;
-      } else if (newWineType === WineType.ROSE && !isRoseWineColorTone(localWineSheet.visualExam.color.tone)) {
-        localWineSheet.visualExam.color.tone = ColorTone.CHERRY_PINK;
-      } else if (newWineType === WineType.RED && !isRedWineColorTone(localWineSheet.visualExam.color.tone)) {
-        localWineSheet.visualExam.color.tone = ColorTone.RUBY_RED;
+      const color = localWineSheet.visualExam?.color;
+      if (!color) return; // If color is undefined, do nothing
+
+      switch (newWineType) {
+        case WineType.WHITE:
+          if (!isWhiteWineColorTone(color.tone)) {
+            color.tone = ColorTone.STRAW_YELLOW;
+          }
+          break;
+        case WineType.ROSE:
+          if (!isRoseWineColorTone(color.tone)) {
+            color.tone = ColorTone.CHERRY_PINK;
+          }
+          break;
+        case WineType.RED:
+          if (!isRedWineColorTone(color.tone)) {
+            color.tone = ColorTone.RUBY_RED;
+          }
+          break;
       }
     });
 
