@@ -66,7 +66,7 @@
           </div>
           <div class="detail-item">
             <span class="detail-label">Fluidity</span>
-            <span class="detail-value">{{ wineSheet.visualExam.fluidity }}</span>
+            <span class="detail-value">{{ fluidityLevelLabels[wineSheet.visualExam.fluidity] }}</span>
           </div>
           <div v-if="wineSheet.visualExam.effervescence" class="detail-item">
             <span class="detail-label">Effervescence</span>

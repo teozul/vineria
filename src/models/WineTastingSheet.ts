@@ -60,18 +60,33 @@ export const colorToneLabels = {
 };
 
 export enum ColorIntensity {
-    Light = 'Tenue',
-    SlightlyIntense = 'Poco intenso',
-    Intense = 'Intenso',
-    VeryIntense = 'Molto intenso'
+    LIGHT = 'LIGHT',
+    SLIGHTLY_INTENSE = 'SLIGHTLY_INTENSE',
+    INTENSE = 'INTENSE',
+    VERY_INTENSE = 'VERY_INTENSE'
 }
 
+export const colorIntensityLabels = {
+    [ColorIntensity.LIGHT]: 'Tenue',
+    [ColorIntensity.SLIGHTLY_INTENSE]: 'Poco intenso',
+    [ColorIntensity.INTENSE]: 'Intenso',
+    [ColorIntensity.VERY_INTENSE]: 'Molto intenso'
+};
+
 export enum FluidityLevel {
-    Fluid = 'Scorrevole',
-    NotDense = 'Poco denso',
-    Dense = 'Denso',
-    VeryDense = 'Molto denso'
+    FLUID = 'FLUID',
+    NOT_DENSE = 'NOT_DENSE',
+    DENSE = 'DENSE',
+    VERY_DENSE = 'VERY_DENSE'
 }
+
+
+export const fluidityLevelLabels = {
+    [FluidityLevel.FLUID]: 'Scorrevole',
+    [FluidityLevel.NOT_DENSE]: 'Poco denso',
+    [FluidityLevel.DENSE]: 'Denso',
+    [FluidityLevel.VERY_DENSE]: 'Molto denso'
+};
 
 export enum EffervescenceGrain {
     Coarse = 'Grossolana',
@@ -335,9 +350,9 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
             transparency: TransparencyLevel.TRANSPARENT, 
             color: {
                 tone: ColorTone.RUBY_RED,
-                intensity: ColorIntensity.Intense
+                intensity: ColorIntensity.INTENSE
             },
-            fluidity: FluidityLevel.NotDense
+            fluidity: FluidityLevel.NOT_DENSE
         },
         
         olfactoryExam: {
@@ -378,20 +393,6 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
 }
 
 //Translations
-
-export const colorIntensityLabels = {
-    [ColorIntensity.Light]: 'Tenue',
-    [ColorIntensity.SlightlyIntense]: 'Poco intenso',
-    [ColorIntensity.Intense]: 'Intenso',
-    [ColorIntensity.VeryIntense]: 'Molto intenso'
-};
-
-export const fluidityLevelLabels = {
-    [FluidityLevel.Fluid]: 'Scorrevole',
-    [FluidityLevel.NotDense]: 'Poco denso',
-    [FluidityLevel.Dense]: 'Denso',
-    [FluidityLevel.VeryDense]: 'Molto denso'
-};
 
 export const softnessLevelLabels = {
     [SoftnessLevel.LittleSoft]: 'Poco morbido',

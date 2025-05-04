@@ -217,7 +217,7 @@
               required
             >
               <option v-for="(value, key) in colorIntensityOptions" :key="key" :value="value">
-                {{ value }}
+                {{ colorIntensityLabels[value] }}
               </option>
             </select>
           </div>
@@ -235,7 +235,7 @@
               required
             >
               <option v-for="(value, key) in fluidityOptions" :key="key" :value="value">
-                {{ value }}
+                {{ fluidityLevelLabels[value] }}
               </option>
             </select>
           </div>

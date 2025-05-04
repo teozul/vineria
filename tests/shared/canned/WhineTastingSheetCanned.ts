@@ -21,9 +21,9 @@ export const createMockWineSheet = (): WineTastingSheet => {
     transparency: TransparencyLevel.TRANSPARENT,
     color: {
       tone: ColorTone.RUBY_RED,
-      intensity: ColorIntensity.Intense
+      intensity: ColorIntensity.INTENSE
     },
-    fluidity: FluidityLevel.Fluid,
+    fluidity: FluidityLevel.FLUID,
     effervescence: {
       grain: EffervescenceGrain.Fine,
       persistence: EffervescencePersistence.Persistent
