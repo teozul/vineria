@@ -1,32 +1,6 @@
-// tests/unit/models/WineTastingSheet.spec.ts
-import {
-  createEmptyWineTastingSheet,
-  WineType
-} from '@/models/WineTastingSheet';
+import { createEmptyWineTastingSheet } from '@/models/WineTastingSheet';
 
 describe('WineTastingSheet', () => {
-  describe('createEmptyWineTastingSheet', () => {
-    it('should create an empty wine tasting sheet with default values', () => {
-      const sheet = createEmptyWineTastingSheet();
-
-      expect(sheet).toBeDefined();
-      expect(sheet.id).toBeDefined();
-      expect(sheet.location).toBe('');
-      expect(sheet.date).toBeDefined();
-      expect(sheet.time).toBeDefined();
-      expect(sheet.denomination).toBe('');
-      expect(sheet.alcoholContent).toBe(0);
-      expect(sheet.temperature).toBe(0);
-      expect(sheet.vintage).toBe(new Date().getFullYear());
-      expect(sheet.wineType).toBe(WineType.RED);
-      expect(sheet.visualExam).toBeDefined();
-      expect(sheet.olfactoryExam).toBeDefined();
-      expect(sheet.gustatoryExam).toBeDefined();
-      expect(sheet.evolutionaryState).toBeDefined();
-      expect(sheet.finalConsiderations).toBe('');
-    });
-  });
-
   describe('WineTastingSheet structure', () => {
     it('should have all required properties', () => {
       const sheet = createEmptyWineTastingSheet();

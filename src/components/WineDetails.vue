@@ -101,7 +101,7 @@
                 <span v-for="(aroma, index) in wineSheet.olfactoryExam.aromaTypes" :key="index" class="tag">
                   {{ aromaTypeLabels[aroma] }}
                 </span>
-              </div> 
+              </div>
             </span>
           </div>
           <div class="detail-item">
@@ -131,7 +131,8 @@
         <div class="detail-grid">
           <div class="detail-item">
             <span class="detail-label">Alcohol Level</span>
-            <span class="detail-value">{{ alcoholLevelLabels[wineSheet.gustatoryExam.softElements.alcoholLevel] }}</span>
+            <span class="detail-value">{{ alcoholLevelLabels[wineSheet.gustatoryExam.softElements.alcoholLevel]
+            }}</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Softness</span>
@@ -168,11 +169,13 @@
           </div>
           <div class="detail-item">
             <span class="detail-label">Quality</span>
-            <span class="detail-value">{{ retroOlfactoryQualityLabels[wineSheet.gustatoryExam.retroOlfactory.quality] }}</span>
+            <span class="detail-value">{{ retroOlfactoryQualityLabels[wineSheet.gustatoryExam.retroOlfactory.quality]
+            }}</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Mouth Aroma Persistence</span>
-            <span class="detail-value">{{ retroOlfactoryPersistenceLabels[wineSheet.gustatoryExam.retroOlfactory.mouthAroma.persistence] }}</span>
+            <span class="detail-value">{{
+              retroOlfactoryPersistenceLabels[wineSheet.gustatoryExam.retroOlfactory.mouthAroma.persistence] }}</span>
           </div>
         </div>
       </section>
@@ -199,17 +202,11 @@
 
 <script setup lang="ts">
 import {
-  WineTastingSheet, createEmptyWineTastingSheet,
-  LimpidityLevel, TransparencyLevel, ColorTone, ColorIntensity, FluidityLevel,
-  EffervescenceGrain, EffervescencePersistence, OlfactoryIntensity,
-  OlfactoryFranchness, OlfactoryFineness, AromaType, OlfactoryComplexity,retroOlfactoryPersistenceLabels,
-  BodyLevel, AlcoholLevel, SoftnessLevel, SugarLevel, AcidityLevel, aromaTypeLabels, olfactoryComplexityLabels,
-  SalinityLevel, TanninLevel, Balance, RetroOlfactoryQuality,alcoholLevelLabels,bodyLevelLabels,
-  RetroOlfactoryPersistence, EvolutionaryState, WineClassification, olfactoryIntensityLabels,
-  wineClassificationLabels, evolutionaryStateLabels, WineType, wineTypeLabels, olfactoryFranchnessLabels, olfactoryFinenessLabels,
-  limpidityLevelLabels, transparencyLevelLabels, fluidityLevelLabels, effervescenceGrainLabels, effervescencePersistenceLabels,
-  colorToneLabels, colorIntensityLabels, softnessLevelLabels, sugarLevelLabels,
-  acidityLevelLabels, salinityLevelLabels, tanninLevelLabels, balanceLabels,
+  WineTastingSheet, retroOlfactoryPersistenceLabels, aromaTypeLabels, olfactoryComplexityLabels,
+  alcoholLevelLabels, bodyLevelLabels, olfactoryIntensityLabels, wineClassificationLabels, evolutionaryStateLabels,
+  wineTypeLabels, olfactoryFranchnessLabels, olfactoryFinenessLabels, limpidityLevelLabels, transparencyLevelLabels,
+  fluidityLevelLabels, effervescenceGrainLabels, effervescencePersistenceLabels, colorToneLabels, colorIntensityLabels,
+  softnessLevelLabels, sugarLevelLabels, acidityLevelLabels, salinityLevelLabels, tanninLevelLabels, balanceLabels,
   retroOlfactoryQualityLabels
 } from '@/models/WineTastingSheet';
 import { getWineTypeClass } from '@/helpers/WineUtils';
