@@ -62,7 +62,8 @@
           </div>
           <div class="detail-item">
             <span class="detail-label">Color</span>
-            <span class="detail-value">{{ colorToneLabels[wineSheet.visualExam.color.tone] }} ({{ colorIntensityLabels[wineSheet.visualExam.color.intensity] }})</span>
+            <span class="detail-value">{{ colorToneLabels[wineSheet.visualExam.color.tone] }} ({{
+              colorIntensityLabels[wineSheet.visualExam.color.intensity] }})</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Fluidity</span>
@@ -100,7 +101,7 @@
                 <span v-for="(aroma, index) in wineSheet.olfactoryExam.aromaTypes" :key="index" class="tag">
                   {{ aromaTypeLabels[aroma] }}
                 </span>
-              </div>
+              </div> 
             </span>
           </div>
           <div class="detail-item">
@@ -162,7 +163,8 @@
         <div class="detail-grid">
           <div class="detail-item">
             <span class="detail-label">Intensity</span>
-            <span class="detail-value">{{ olfactoryIntensityLabels[wineSheet.gustatoryExam.retroOlfactory.intensity] }}</span>
+            <span class="detail-value">{{ olfactoryIntensityLabels[wineSheet.gustatoryExam.retroOlfactory.intensity]
+              }}</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Quality</span>
@@ -201,11 +203,11 @@ import {
   LimpidityLevel, TransparencyLevel, ColorTone, ColorIntensity, FluidityLevel,
   EffervescenceGrain, EffervescencePersistence, OlfactoryIntensity,
   OlfactoryFranchness, OlfactoryFineness, AromaType, OlfactoryComplexity,
-  BodyLevel, AlcoholLevel, SoftnessLevel, SugarLevel, AcidityLevel,aromaTypeLabels,olfactoryComplexityLabels,
+  BodyLevel, AlcoholLevel, SoftnessLevel, SugarLevel, AcidityLevel, aromaTypeLabels, olfactoryComplexityLabels,
   SalinityLevel, TanninLevel, Balance, RetroOlfactoryQuality,
-  RetroOlfactoryPersistence, EvolutionaryState, WineClassification,olfactoryIntensityLabels,
-  wineClassificationLabels, evolutionaryStateLabels, WineType, wineTypeLabels,olfactoryFranchnessLabels,olfactoryFinenessLabels,
-  limpidityLevelLabels, transparencyLevelLabels, fluidityLevelLabels,effervescenceGrainLabels,effervescencePersistenceLabels,
+  RetroOlfactoryPersistence, EvolutionaryState, WineClassification, olfactoryIntensityLabels,
+  wineClassificationLabels, evolutionaryStateLabels, WineType, wineTypeLabels, olfactoryFranchnessLabels, olfactoryFinenessLabels,
+  limpidityLevelLabels, transparencyLevelLabels, fluidityLevelLabels, effervescenceGrainLabels, effervescencePersistenceLabels,
   colorToneLabels, colorIntensityLabels, softnessLevelLabels, sugarLevelLabels,
   acidityLevelLabels, salinityLevelLabels, tanninLevelLabels, balanceLabels,
   retroOlfactoryQualityLabels

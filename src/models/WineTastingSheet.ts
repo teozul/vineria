@@ -270,7 +270,6 @@ export enum TanninLevel {
     HighlyTannic = 'Allappante'
 }
 
-
 export const tanninLevelLabels = {
     [TanninLevel.LowTannic]: 'Poco tannico',
     [TanninLevel.JustTannic]: 'Giusto tannico',

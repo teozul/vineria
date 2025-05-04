@@ -22,12 +22,12 @@ export class DataService {
   // Create a new wine tasting sheet
   async createSheet(sheetData?: Partial<WineTastingSheet>): Promise<WineTastingSheet> {
     const newSheet = createEmptyWineTastingSheet();
-    
+
     // Apply any provided data
     if (sheetData) {
       Object.assign(newSheet, sheetData);
     }
-    
+
     return storageService.save(newSheet);
   }
 
@@ -51,19 +51,19 @@ export class DataService {
   async importFromJson(jsonString: string): Promise<boolean> {
     try {
       const data = JSON.parse(jsonString) as WineTastingSheet[];
-      
+
       // Validate the data structure (basic validation)
       if (!Array.isArray(data)) {
         throw new Error('Invalid data format: not an array');
       }
-      
+
       // Check if each item has at least an id property
       for (const item of data) {
         if (!item.id) {
           throw new Error('Invalid data: missing ID for one or more items');
         }
       }
-      
+
       return storageService.importData(data);
     } catch (error) {
       console.error('Error importing data:', error);
@@ -77,11 +77,11 @@ export class DataService {
     const blob = new Blob([jsonData], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    
+
     a.href = url;
     a.download = filename;
     a.click();
-    
+
     URL.revokeObjectURL(url);
   }
 
@@ -89,7 +89,7 @@ export class DataService {
   handleFileUpload(file: File): Promise<boolean> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      
+
       reader.onload = async (event) => {
         try {
           if (event.target?.result) {
@@ -103,11 +103,11 @@ export class DataService {
           reject(error);
         }
       };
-      
+
       reader.onerror = () => {
         reject(new Error('Error reading file'));
       };
-      
+
       reader.readAsText(file);
     });
   }

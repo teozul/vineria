@@ -17,7 +17,7 @@
                     <p><strong>Vintage:</strong> {{ wineSheet.vintage }}</p>
                     <p><strong>Classification:</strong> {{
                         wineClassificationLabels[wineSheet.classification]
-                    }}</p>
+                        }} </p>
                     <p><strong>Tasted on:</strong> {{ formatDate(wineSheet.date) }}</p>
                 </div>
                 <div class="wine-card-actions">
