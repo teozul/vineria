@@ -40,9 +40,6 @@ module.exports = {
     '/node_modules/(?!vue-router|@babel|uuid)'
   ],
   setupFiles: ['<rootDir>/tests/unit/setup.ts'],
-  testEnvironmentOptions: {
-    customExportConditions: ['node', 'node-addons'],
-  },
   maxWorkers: 1,
   verbose: true
 };
