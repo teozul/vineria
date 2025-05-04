@@ -204,7 +204,7 @@ import {
   BodyLevel, AlcoholLevel, SoftnessLevel, SugarLevel, AcidityLevel,
   SalinityLevel, TanninLevel, Balance, RetroOlfactoryQuality,
   RetroOlfactoryPersistence, EvolutionaryState, WineClassification,
-  wineClassificationLabels, evolutionaryStateLabels, WineType, wineTypeLabels,
+  wineClassificationLabels, evolutionaryStateLabels, WineType, wineTypeLabels,olfactoryFranchnessLabels,olfactoryFinenessLabels,
   limpidityLevelLabels, transparencyLevelLabels, fluidityLevelLabels,effervescenceGrainLabels,effervescencePersistenceLabels,
   colorToneLabels, colorIntensityLabels, softnessLevelLabels, sugarLevelLabels,
   acidityLevelLabels, salinityLevelLabels, tanninLevelLabels, balanceLabels,

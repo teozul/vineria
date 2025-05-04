@@ -32,7 +32,7 @@ export const createMockWineSheet = (): WineTastingSheet => {
 
   // Olfactory examination
   wineSheet.olfactoryExam = {
-    intensity: OlfactoryIntensity.Intense,
+    intensity: OlfactoryIntensity.INTENSE,
     quality: {
       franchness: OlfactoryFranchness.Clear,
       fineness: OlfactoryFineness.VeryFine
@@ -56,7 +56,7 @@ export const createMockWineSheet = (): WineTastingSheet => {
       tannins: TanninLevel.Tannic
     },
     retroOlfactory: {
-      intensity: OlfactoryIntensity.Intense,
+      intensity: OlfactoryIntensity.INTENSE,
       quality: RetroOlfactoryQuality.Fine,
       mouthAroma: {
         persistence: RetroOlfactoryPersistence.Persistent
