@@ -39,5 +39,10 @@ module.exports = {
   transformIgnorePatterns: [
     '/node_modules/(?!vue-router|@babel|uuid)'
   ],
-  setupFiles: ['<rootDir>/tests/unit/setup.ts']
+  setupFiles: ['<rootDir>/tests/unit/setup.ts'],
+  testEnvironmentOptions: {
+    customExportConditions: ['node', 'node-addons'],
+  },
+  maxWorkers: 1,
+  verbose: true
 };
