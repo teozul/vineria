@@ -62,8 +62,7 @@
           </div>
           <div class="detail-item">
             <span class="detail-label">Color</span>
-            <span class="detail-value">{{ wineSheet.visualExam.color.tone }} ({{ wineSheet.visualExam.color.intensity
-              }})</span>
+            <span class="detail-value">{{ colorToneLabels[wineSheet.visualExam.color.tone] }} ({{ colorIntensityLabels[wineSheet.visualExam.color.intensity] }})</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Fluidity</span>
@@ -178,7 +177,7 @@
 
       <!-- Final Evaluation Section -->
       <section class="detail-section">
-        <h2 class="section-title">{{Labels.finalEvaluation}}</h2>
+        <h2 class="section-title">{{ Labels.finalEvaluation }}</h2>
         <div class="detail-grid">
           <div class="detail-item">
             <span class="detail-label">{{ Labels.evolutionaryState }}</span>
@@ -206,9 +205,9 @@ import {
   SalinityLevel, TanninLevel, Balance, RetroOlfactoryQuality,
   RetroOlfactoryPersistence, EvolutionaryState, WineClassification,
   wineClassificationLabels, evolutionaryStateLabels, WineType, wineTypeLabels,
-  limpidityLevelLabels,  transparencyLevelLabels,  fluidityLevelLabels,
-  colorToneLabels,  colorIntensityLabels, softnessLevelLabels,  sugarLevelLabels,
-  acidityLevelLabels,  salinityLevelLabels,  tanninLevelLabels,  balanceLabels,
+  limpidityLevelLabels, transparencyLevelLabels, fluidityLevelLabels,
+  colorToneLabels, colorIntensityLabels, softnessLevelLabels, sugarLevelLabels,
+  acidityLevelLabels, salinityLevelLabels, tanninLevelLabels, balanceLabels,
   retroOlfactoryQualityLabels
 } from '@/models/WineTastingSheet';
 import { getWineTypeClass } from '@/helpers/WineUtils';

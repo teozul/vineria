@@ -24,7 +24,7 @@ import {
 import { Labels } from '@/helpers/Labels';
 export default defineComponent({
   name: 'WineForm',
-  props: {
+  props: { 
     wineSheet: {
       type: Object as PropType<WineTastingSheet | null>,
       default: () => createEmptyWineTastingSheet()
@@ -99,49 +99,49 @@ export default defineComponent({
 
       // Adjust color tone options based on wine type
       if (localWineSheet.wineType === WineType.WHITE && !isWhiteWineColorTone(localWineSheet.visualExam.color.tone)) {
-        localWineSheet.visualExam.color.tone = ColorTone.StrawYellow;
+        localWineSheet.visualExam.color.tone = ColorTone.STRAW_YELLOW;
       } else if (localWineSheet.wineType === WineType.ROSE && !isRoseWineColorTone(localWineSheet.visualExam.color.tone)) {
-        localWineSheet.visualExam.color.tone = ColorTone.CherryPink;
+        localWineSheet.visualExam.color.tone = ColorTone.CHERRY_PINK;
       } else if (localWineSheet.wineType === WineType.RED && !isRedWineColorTone(localWineSheet.visualExam.color.tone)) {
-        localWineSheet.visualExam.color.tone = ColorTone.RubyRed;
+        localWineSheet.visualExam.color.tone = ColorTone.RUBY_RED;
       }
     });
 
     // Color tone filtering helpers
     const isWhiteWineColorTone = (tone: ColorTone): boolean => {
       return [
-        ColorTone.GreenishYellow,
-        ColorTone.StrawYellow,
-        ColorTone.GoldenYellow,
-        ColorTone.AmberYellow
+        ColorTone.GREENISH_YELLOW,
+        ColorTone.STRAW_YELLOW,
+        ColorTone.GOLDEN_YELLOW,
+        ColorTone.AMBER_YELLOW
       ].includes(tone);
     };
 
     const isRoseWineColorTone = (tone: ColorTone): boolean => {
       return [
-        ColorTone.LightPink,
-        ColorTone.CherryPink,
-        ColorTone.ClaretPink
+        ColorTone.LIGHT_PINK,
+        ColorTone.CHERRY_PINK,
+        ColorTone.CLARET_PINK
       ].includes(tone);
     };
 
     const isRedWineColorTone = (tone: ColorTone): boolean => {
       return [
-        ColorTone.PurpleRed,
-        ColorTone.RubyRed,
-        ColorTone.GranatRed,
-        ColorTone.OrangeRed
+        ColorTone.PURPLE_RED,
+        ColorTone.RUBY_RED,
+        ColorTone.GRANAT_RED,
+        ColorTone.ORANGE_RED
       ].includes(tone);
     };
 
     // Watch for changes in wine type to update color tone options
     watch(() => localWineSheet.wineType, (newWineType: WineType): void => {
       if (newWineType === WineType.WHITE && !isWhiteWineColorTone(localWineSheet.visualExam.color.tone)) {
-        localWineSheet.visualExam.color.tone = ColorTone.StrawYellow;
+        localWineSheet.visualExam.color.tone = ColorTone.STRAW_YELLOW;
       } else if (newWineType === WineType.ROSE && !isRoseWineColorTone(localWineSheet.visualExam.color.tone)) {
-        localWineSheet.visualExam.color.tone = ColorTone.CherryPink;
+        localWineSheet.visualExam.color.tone = ColorTone.CHERRY_PINK;
       } else if (newWineType === WineType.RED && !isRedWineColorTone(localWineSheet.visualExam.color.tone)) {
-        localWineSheet.visualExam.color.tone = ColorTone.RubyRed;
+        localWineSheet.visualExam.color.tone = ColorTone.RUBY_RED;
       }
     });
 
@@ -149,23 +149,23 @@ export default defineComponent({
     const getColorToneOptions = () => {
       if (localWineSheet.wineType === WineType.WHITE) {
         return {
-          GreenishYellow: ColorTone.GreenishYellow,
-          StrawYellow: ColorTone.StrawYellow,
-          GoldenYellow: ColorTone.GoldenYellow,
-          AmberYellow: ColorTone.AmberYellow
+          GreenishYellow: ColorTone.GREENISH_YELLOW,
+          StrawYellow: ColorTone.STRAW_YELLOW,
+          GoldenYellow: ColorTone.GOLDEN_YELLOW,
+          AmberYellow: ColorTone.AMBER_YELLOW
         };
       } else if (localWineSheet.wineType === WineType.ROSE) {
         return {
-          LightPink: ColorTone.LightPink,
-          CherryPink: ColorTone.CherryPink,
-          ClaretPink: ColorTone.ClaretPink
+          LightPink: ColorTone.LIGHT_PINK,
+          CherryPink: ColorTone.CHERRY_PINK,
+          ClaretPink: ColorTone.CLARET_PINK
         };
       } else {
         return {
-          PurpleRed: ColorTone.PurpleRed,
-          RubyRed: ColorTone.RubyRed,
-          GranatRed: ColorTone.GranatRed,
-          OrangeRed: ColorTone.OrangeRed
+          PurpleRed: ColorTone.PURPLE_RED,
+          RubyRed: ColorTone.RUBY_RED,
+          GranatRed: ColorTone.GRANAT_RED,
+          OrangeRed: ColorTone.ORANGE_RED
         };
       }
     };

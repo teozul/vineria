@@ -28,22 +28,36 @@ export const transparencyLevelLabels = {
 
 export enum ColorTone {
     // White wine tones
-    GreenishYellow = 'Giallo verdolino',
-    StrawYellow = 'Giallo paglierino',
-    GoldenYellow = 'Giallo dorato',
-    AmberYellow = 'Giallo ambrato',
+    GREENISH_YELLOW = 'GREENISH_YELLOW',
+    STRAW_YELLOW = 'STRAW_YELLOW',
+    GOLDEN_YELLOW = 'GOLDEN_YELLOW',
+    AMBER_YELLOW = 'AMBER_YELLOW',
     
     // Rose wine tones
-    LightPink = 'Rosa tenue',
-    CherryPink = 'Rosa cerasuolo',
-    ClaretPink = 'Rosa chiaretto',
+    LIGHT_PINK = 'LIGHT_PINK',
+    CHERRY_PINK = 'CHERRY_PINK',
+    CLARET_PINK = 'CLARET_PINK',
     
     // Red wine tones
-    PurpleRed = 'Rosso porpora',
-    RubyRed = 'Rosso rubino',
-    GranatRed = 'Rosso granato',
-    OrangeRed = 'Rosso aranciato'
+    PURPLE_RED = 'PURPLE_RED',
+    RUBY_RED = 'RUBY_RED',
+    GRANAT_RED = 'GRANAT_RED',
+    ORANGE_RED = 'ORANGE_RED'
 }
+
+export const colorToneLabels = {
+    [ColorTone.GREENISH_YELLOW]: 'Giallo verdolino',
+    [ColorTone.STRAW_YELLOW]: 'Giallo paglierino',
+    [ColorTone.GOLDEN_YELLOW]: 'Giallo dorato',
+    [ColorTone.AMBER_YELLOW]: 'Giallo ambrato',
+    [ColorTone.LIGHT_PINK]: 'Rosa tenue',
+    [ColorTone.CHERRY_PINK]: 'Rosa cerasuolo',
+    [ColorTone.CLARET_PINK]: 'Rosa chiaretto',
+    [ColorTone.PURPLE_RED]: 'Rosso porpora',
+    [ColorTone.RUBY_RED]: 'Rosso rubino',
+    [ColorTone.GRANAT_RED]: 'Rosso granato',
+    [ColorTone.ORANGE_RED]: 'Rosso aranciato'
+};
 
 export enum ColorIntensity {
     Light = 'Tenue',
@@ -312,7 +326,7 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
         alcoholContent: 0, 
         temperature: 0,
         vintage: new Date().getFullYear(),
-        classification: WineClassification.IGT,
+        classification: WineClassification.NONE,
         producer: '',
         wineType: WineType.RED,
         
@@ -320,7 +334,7 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
             limpidity: LimpidityLevel.LIMPID,
             transparency: TransparencyLevel.TRANSPARENT, 
             color: {
-                tone: ColorTone.RubyRed,
+                tone: ColorTone.RUBY_RED,
                 intensity: ColorIntensity.Intense
             },
             fluidity: FluidityLevel.NotDense
@@ -364,21 +378,6 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
 }
 
 //Translations
-
-
-export const colorToneLabels = {
-    [ColorTone.GreenishYellow]: 'Giallo verdolino',
-    [ColorTone.StrawYellow]: 'Giallo paglierino',
-    [ColorTone.GoldenYellow]: 'Giallo dorato',
-    [ColorTone.AmberYellow]: 'Giallo ambrato',
-    [ColorTone.LightPink]: 'Rosa tenue',
-    [ColorTone.CherryPink]: 'Rosa cerasuolo',
-    [ColorTone.ClaretPink]: 'Rosa chiaretto',
-    [ColorTone.PurpleRed]: 'Rosso porpora',
-    [ColorTone.RubyRed]: 'Rosso rubino',
-    [ColorTone.GranatRed]: 'Rosso granato',
-    [ColorTone.OrangeRed]: 'Rosso aranciato'
-};
 
 export const colorIntensityLabels = {
     [ColorIntensity.Light]: 'Tenue',

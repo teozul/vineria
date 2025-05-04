@@ -202,7 +202,7 @@
               required
             >
               <option v-for="(value, key) in getColorToneOptions()" :key="key" :value="value">
-                {{ value }}
+                {{ colorToneLabels[value] }}
               </option>
             </select>
           </div>
