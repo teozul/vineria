@@ -138,16 +138,16 @@ export const olfactoryFranchnessLabels = {
 };
 
 export enum OlfactoryFineness {
-    Common = 'Comune',
-    MediumFine = 'Mediamente fine',
-    Fine = 'Fine',
-    VeryFine = 'Molto fine'
+    COMMON = 'COMMON',
+    MEDIUM_FINE = 'MEDIUM_FINE',
+    FINE = 'FINE',
+    VERY_FINE = 'VERY_FINE'
 }
 export const olfactoryFinenessLabels = {
-    [OlfactoryFineness.Common]: 'Comune',
-    [OlfactoryFineness.MediumFine]: 'Mediamente fine',
-    [OlfactoryFineness.Fine]: 'Fine',
-    [OlfactoryFineness.VeryFine]: 'Molto fine'
+    [OlfactoryFineness.COMMON]: 'Comune',
+    [OlfactoryFineness.MEDIUM_FINE]: 'Mediamente fine',
+    [OlfactoryFineness.FINE]: 'Fine',
+    [OlfactoryFineness.VERY_FINE]: 'Molto fine'
 };
 
 export enum AromaType {
@@ -460,7 +460,7 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
             intensity: OlfactoryIntensity.INTENSE,
             quality: {
                 franchness: OlfactoryFranchness.CLEAR,
-                fineness: OlfactoryFineness.Fine
+                fineness: OlfactoryFineness.FINE
             },
             aromaTypes: [AromaType.Fruity],
             complexity: OlfactoryComplexity.MediumComplex

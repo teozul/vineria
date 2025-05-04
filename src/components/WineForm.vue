@@ -329,7 +329,7 @@
               required
             >
               <option v-for="(value, key) in olfactoryFinenessOptions" :key="key" :value="value">
-                {{ value }}
+                {{ olfactoryFinenessLabels[value] }}
               </option>
             </select>
           </div>
