@@ -31,7 +31,7 @@ const routes: Array<RouteRecordRaw> = [
 
 // Create router instance
 const router = createRouter({
-  history: createWebHistory(process.env.NODE_ENV === 'production' ? '/vineria/' : '/'), 
+  history: createWebHistory(process.env.NODE_ENV === 'production' ? '/vineria/' : '/'),
   routes
 });
 

@@ -10,7 +10,7 @@ import {
   wineClassificationLabels, evolutionaryStateLabels, WineType, wineTypeLabels,
   limpidityLevelLabels,
   transparencyLevelLabels,
-  fluidityLevelLabels,effervescenceGrainLabels,
+  fluidityLevelLabels, effervescenceGrainLabels,
   colorToneLabels,
   colorIntensityLabels,
   softnessLevelLabels,
@@ -18,15 +18,15 @@ import {
   acidityLevelLabels,
   salinityLevelLabels,
   tanninLevelLabels,
-  balanceLabels,effervescencePersistenceLabels,olfactoryFranchnessLabels,olfactoryFinenessLabels,
-  retroOlfactoryQualityLabels,olfactoryComplexityLabels,
+  balanceLabels, effervescencePersistenceLabels, olfactoryFranchnessLabels, olfactoryFinenessLabels,
+  retroOlfactoryQualityLabels, olfactoryComplexityLabels,
   olfactoryIntensityLabels,
   aromaTypeLabels
 } from '@/models/WineTastingSheet';
 import { Labels } from '@/helpers/Labels';
 export default defineComponent({
   name: 'WineForm',
-  props: { 
+  props: {
     wineSheet: {
       type: Object as PropType<WineTastingSheet | null>,
       default: () => createEmptyWineTastingSheet()
@@ -285,8 +285,8 @@ export default defineComponent({
       acidityLevelLabels,
       salinityLevelLabels,
       tanninLevelLabels,
-      balanceLabels,olfactoryIntensityLabels,aromaTypeLabels,olfactoryComplexityLabels,
-      retroOlfactoryQualityLabels,effervescenceGrainLabels,effervescencePersistenceLabels,olfactoryFranchnessLabels,olfactoryFinenessLabels,
+      balanceLabels, olfactoryIntensityLabels, aromaTypeLabels, olfactoryComplexityLabels,
+      retroOlfactoryQualityLabels, effervescenceGrainLabels, effervescencePersistenceLabels, olfactoryFranchnessLabels, olfactoryFinenessLabels,
     };
   }
 });
