@@ -181,7 +181,7 @@
         <div class="detail-grid">
           <div class="detail-item">
             <span class="detail-label">{{ Labels.evolutionaryState }}</span>
-            <span class="detail-value">{{ wineSheet.evolutionaryState }}</span>
+            <span class="detail-value">{{ evolutionaryStateLabels[wineSheet.evolutionaryState] }}</span>
           </div>
           <div class="detail-item full-width">
             <span class="detail-label">{{ Labels.finalConsiderations }}</span>
@@ -205,7 +205,7 @@ import {
   SalinityLevel, TanninLevel, Balance, RetroOlfactoryQuality,
   RetroOlfactoryPersistence, EvolutionaryState, WineClassification,
   wineClassificationLabels, evolutionaryStateLabels, WineType, wineTypeLabels,
-  limpidityLevelLabels, transparencyLevelLabels, fluidityLevelLabels,
+  limpidityLevelLabels, transparencyLevelLabels, fluidityLevelLabels,effervescenceGrainLabels,
   colorToneLabels, colorIntensityLabels, softnessLevelLabels, sugarLevelLabels,
   acidityLevelLabels, salinityLevelLabels, tanninLevelLabels, balanceLabels,
   retroOlfactoryQualityLabels

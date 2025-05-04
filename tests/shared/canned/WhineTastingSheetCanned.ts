@@ -25,7 +25,7 @@ export const createMockWineSheet = (): WineTastingSheet => {
     },
     fluidity: FluidityLevel.FLUID,
     effervescence: {
-      grain: EffervescenceGrain.Fine,
+      grain: EffervescenceGrain.FINE,
       persistence: EffervescencePersistence.Persistent
     }
   };

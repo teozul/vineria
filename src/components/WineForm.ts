@@ -10,7 +10,7 @@ import {
   wineClassificationLabels, evolutionaryStateLabels, WineType, wineTypeLabels,
   limpidityLevelLabels,
   transparencyLevelLabels,
-  fluidityLevelLabels,
+  fluidityLevelLabels,effervescenceGrainLabels,
   colorToneLabels,
   colorIntensityLabels,
   softnessLevelLabels,
@@ -54,7 +54,7 @@ export default defineComponent({
 
     // Handle effervescence properties separately
     const effervescenceGrain = ref<EffervescenceGrain>(
-      localWineSheet.visualExam.effervescence?.grain || EffervescenceGrain.Fine
+      localWineSheet.visualExam.effervescence?.grain || EffervescenceGrain.FINE
     );
 
     const effervescencePersistence = ref<EffervescencePersistence>(
@@ -284,7 +284,7 @@ export default defineComponent({
       salinityLevelLabels,
       tanninLevelLabels,
       balanceLabels,
-      retroOlfactoryQualityLabels
+      retroOlfactoryQualityLabels,effervescenceGrainLabels
     };
   }
 });

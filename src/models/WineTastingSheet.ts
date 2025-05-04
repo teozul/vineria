@@ -80,7 +80,6 @@ export enum FluidityLevel {
     VERY_DENSE = 'VERY_DENSE'
 }
 
-
 export const fluidityLevelLabels = {
     [FluidityLevel.FLUID]: 'Scorrevole',
     [FluidityLevel.NOT_DENSE]: 'Poco denso',
@@ -89,10 +88,16 @@ export const fluidityLevelLabels = {
 };
 
 export enum EffervescenceGrain {
-    Coarse = 'Grossolana',
-    Fine = 'Fine',
-    VeryFine = 'Molto fine'
+    COARSE = 'COARSE',
+    FINE = 'FINE',
+    VERY_FINE = 'VERY_FINE'
 }
+
+export const effervescenceGrainLabels = {
+    [EffervescenceGrain.COARSE]: 'Grossolana',
+    [EffervescenceGrain.FINE]: 'Fine',
+    [EffervescenceGrain.VERY_FINE]: 'Molto fine'
+};
 
 export enum EffervescencePersistence {
     Evanescent = 'Evanescente',
@@ -393,7 +398,6 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
 }
 
 //Translations
-
 export const softnessLevelLabels = {
     [SoftnessLevel.LittleSoft]: 'Poco morbido',
     [SoftnessLevel.Soft]: 'Morbido',
