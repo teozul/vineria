@@ -15,10 +15,16 @@ export const limpidityLevelLabels = {
 };
 
 export enum TransparencyLevel {
-    Impenetrable = 'Impenetrabile',
-    LowTransparent = 'Poco trasparente',
-    Transparent = 'Trasparente'
+    IMPENETRABLE = 'IMPENETRABLE',
+    LOW_TRANSPARENT = 'LOW_TRANSPARENT',
+    TRANSPARENT = 'TRANSPARENT'
 }
+
+export const transparencyLevelLabels = {
+    [TransparencyLevel.IMPENETRABLE]: 'Impenetrabile',
+    [TransparencyLevel.LOW_TRANSPARENT]: 'Poco trasparente',
+    [TransparencyLevel.TRANSPARENT]: 'Trasparente'
+};
 
 export enum ColorTone {
     // White wine tones
@@ -312,7 +318,7 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
         
         visualExam: {
             limpidity: LimpidityLevel.LIMPID,
-            transparency: TransparencyLevel.Transparent, 
+            transparency: TransparencyLevel.TRANSPARENT, 
             color: {
                 tone: ColorTone.RubyRed,
                 intensity: ColorIntensity.Intense
@@ -358,11 +364,7 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
 }
 
 //Translations
-export const transparencyLevelLabels = {
-    [TransparencyLevel.Impenetrable]: 'Impenetrabile',
-    [TransparencyLevel.LowTransparent]: 'Poco trasparente',
-    [TransparencyLevel.Transparent]: 'Trasparente'
-};
+
 
 export const colorToneLabels = {
     [ColorTone.GreenishYellow]: 'Giallo verdolino',

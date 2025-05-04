@@ -184,7 +184,7 @@
               required
             >
               <option v-for="(value, key) in transparencyOptions" :key="key" :value="value">
-                {{ value }}
+                {{ transparencyLevelLabels[value] }}
               </option>
             </select>
           </div>

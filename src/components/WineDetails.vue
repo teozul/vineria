@@ -58,7 +58,7 @@
           </div>
           <div class="detail-item">
             <span class="detail-label">Transparency</span>
-            <span class="detail-value">{{ wineSheet.visualExam.transparency }}</span>
+            <span class="detail-value">{{ transparencyLevelLabels[wineSheet.visualExam.transparency] }}</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Color</span>
@@ -197,7 +197,20 @@
 </template>
 
 <script setup lang="ts">
-import { WineTastingSheet, wineClassificationLabels, wineTypeLabels,limpidityLevelLabels } from '@/models/WineTastingSheet';
+import {
+  WineTastingSheet, createEmptyWineTastingSheet,
+  LimpidityLevel, TransparencyLevel, ColorTone, ColorIntensity, FluidityLevel,
+  EffervescenceGrain, EffervescencePersistence, OlfactoryIntensity,
+  OlfactoryFranchness, OlfactoryFineness, AromaType, OlfactoryComplexity,
+  BodyLevel, AlcoholLevel, SoftnessLevel, SugarLevel, AcidityLevel,
+  SalinityLevel, TanninLevel, Balance, RetroOlfactoryQuality,
+  RetroOlfactoryPersistence, EvolutionaryState, WineClassification,
+  wineClassificationLabels, evolutionaryStateLabels, WineType, wineTypeLabels,
+  limpidityLevelLabels,  transparencyLevelLabels,  fluidityLevelLabels,
+  colorToneLabels,  colorIntensityLabels, softnessLevelLabels,  sugarLevelLabels,
+  acidityLevelLabels,  salinityLevelLabels,  tanninLevelLabels,  balanceLabels,
+  retroOlfactoryQualityLabels
+} from '@/models/WineTastingSheet';
 import { getWineTypeClass } from '@/helpers/WineUtils';
 import { formatDate } from '@/helpers/DateUtils';
 import { Labels } from '@/helpers/Labels';

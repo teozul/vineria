@@ -1,14 +1,25 @@
 import { ref, reactive, computed, watch, onMounted, defineComponent, PropType } from 'vue';
-import { 
-  WineTastingSheet, createEmptyWineTastingSheet, 
+import {
+  WineTastingSheet, createEmptyWineTastingSheet,
   LimpidityLevel, TransparencyLevel, ColorTone, ColorIntensity, FluidityLevel,
-  EffervescenceGrain, EffervescencePersistence, OlfactoryIntensity, 
+  EffervescenceGrain, EffervescencePersistence, OlfactoryIntensity,
   OlfactoryFranchness, OlfactoryFineness, AromaType, OlfactoryComplexity,
   BodyLevel, AlcoholLevel, SoftnessLevel, SugarLevel, AcidityLevel,
-  SalinityLevel, TanninLevel, Balance, RetroOlfactoryQuality, 
+  SalinityLevel, TanninLevel, Balance, RetroOlfactoryQuality,
   RetroOlfactoryPersistence, EvolutionaryState, WineClassification,
   wineClassificationLabels, evolutionaryStateLabels, WineType, wineTypeLabels,
-  limpidityLevelLabels
+  limpidityLevelLabels,
+  transparencyLevelLabels,
+  fluidityLevelLabels,
+  colorToneLabels,
+  colorIntensityLabels,
+  softnessLevelLabels,
+  sugarLevelLabels,
+  acidityLevelLabels,
+  salinityLevelLabels,
+  tanninLevelLabels,
+  balanceLabels,
+  retroOlfactoryQualityLabels
 } from '@/models/WineTastingSheet';
 import { Labels } from '@/helpers/Labels';
 export default defineComponent({
@@ -28,16 +39,16 @@ export default defineComponent({
     // State
     const submitting = ref<boolean>(false);
     const isSparklingWine = ref<boolean>(false);
-    
+
     // Create a deep copy of the wineSheet prop to avoid mutating it directly
     const localWineSheet = reactive<WineTastingSheet>(JSON.parse(JSON.stringify(props.wineSheet)));
 
     // Computed properties
-    const submitButtonText = computed((): string => 
-      submitting.value 
-        ? 'Saving...' 
-        : props.isEdit 
-          ? 'Update Wine Tasting Sheet' 
+    const submitButtonText = computed((): string =>
+      submitting.value
+        ? 'Saving...'
+        : props.isEdit
+          ? 'Update Wine Tasting Sheet'
           : 'Save Wine Tasting Sheet'
     );
 
@@ -85,7 +96,7 @@ export default defineComponent({
     // Initialize values on component mount
     onMounted((): void => {
       isSparklingWine.value = !!localWineSheet.visualExam.effervescence;
-      
+
       // Adjust color tone options based on wine type
       if (localWineSheet.wineType === WineType.WHITE && !isWhiteWineColorTone(localWineSheet.visualExam.color.tone)) {
         localWineSheet.visualExam.color.tone = ColorTone.StrawYellow;
@@ -162,11 +173,11 @@ export default defineComponent({
     // Form submission handling
     const handleSubmit = async (): Promise<void> => {
       submitting.value = true;
-      
+
       try {
         // Update the aroma types from the selected checkboxes
         localWineSheet.olfactoryExam.aromaTypes = [...selectedAromaTypes.value];
-        
+
         // Update effervescence if it's a sparkling wine
         if (isSparklingWine.value) {
           localWineSheet.visualExam.effervescence = {
@@ -176,7 +187,7 @@ export default defineComponent({
         } else {
           localWineSheet.visualExam.effervescence = undefined;
         }
-        
+
         // Emit the save event with the wine sheet data
         emit('save', JSON.parse(JSON.stringify(localWineSheet)));
       } catch (error) {
@@ -226,7 +237,7 @@ export default defineComponent({
       effervescencePersistence,
       selectedAromaTypes,
       submitButtonText,
-      handleSubmit, 
+      handleSubmit,
       cancel,
       getColorToneOptions,
       WineClassification,
@@ -263,6 +274,17 @@ export default defineComponent({
       evolutionaryStateLabels,
       wineTypeLabels,
       limpidityLevelLabels,
+      transparencyLevelLabels,
+      colorToneLabels,
+      colorIntensityLabels,
+      fluidityLevelLabels,
+      softnessLevelLabels,
+      sugarLevelLabels,
+      acidityLevelLabels,
+      salinityLevelLabels,
+      tanninLevelLabels,
+      balanceLabels,
+      retroOlfactoryQualityLabels
     };
   }
 });

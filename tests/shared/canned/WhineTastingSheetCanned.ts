@@ -18,7 +18,7 @@ export const createMockWineSheet = (): WineTastingSheet => {
   // Visual examination
   wineSheet.visualExam = {
     limpidity: LimpidityLevel.LIMPID,
-    transparency: TransparencyLevel.Transparent,
+    transparency: TransparencyLevel.TRANSPARENT,
     color: {
       tone: ColorTone.RubyRed,
       intensity: ColorIntensity.Intense
