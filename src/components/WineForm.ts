@@ -7,14 +7,14 @@ import {
   BodyLevel, AlcoholLevel, SoftnessLevel, SugarLevel, AcidityLevel,
   SalinityLevel, TanninLevel, Balance, RetroOlfactoryQuality, 
   RetroOlfactoryPersistence, EvolutionaryState, WineClassification,
-  wineClassificationLabels
+  wineClassificationLabels, WineType, wineTypeLabels
 } from '@/models/WineTastingSheet';
  
 export default defineComponent({
   name: 'WineForm',
   props: {
     wineSheet: {
-      type: Object as PropType<WineTastingSheet>,
+      type: Object as PropType<WineTastingSheet | null>,
       default: () => createEmptyWineTastingSheet()
     },
     isEdit: {
@@ -86,11 +86,11 @@ export default defineComponent({
       isSparklingWine.value = !!localWineSheet.visualExam.effervescence;
       
       // Adjust color tone options based on wine type
-      if (localWineSheet.wineType === 'Bianco' && !isWhiteWineColorTone(localWineSheet.visualExam.color.tone)) {
+      if (localWineSheet.wineType === WineType.WHITE && !isWhiteWineColorTone(localWineSheet.visualExam.color.tone)) {
         localWineSheet.visualExam.color.tone = ColorTone.StrawYellow;
-      } else if (localWineSheet.wineType === 'Rosé' && !isRoseWineColorTone(localWineSheet.visualExam.color.tone)) {
+      } else if (localWineSheet.wineType === WineType.ROSE && !isRoseWineColorTone(localWineSheet.visualExam.color.tone)) {
         localWineSheet.visualExam.color.tone = ColorTone.CherryPink;
-      } else if (localWineSheet.wineType === 'Rosso' && !isRedWineColorTone(localWineSheet.visualExam.color.tone)) {
+      } else if (localWineSheet.wineType === WineType.RED && !isRedWineColorTone(localWineSheet.visualExam.color.tone)) {
         localWineSheet.visualExam.color.tone = ColorTone.RubyRed;
       }
     });
@@ -123,26 +123,26 @@ export default defineComponent({
     };
 
     // Watch for changes in wine type to update color tone options
-    watch(() => localWineSheet.wineType, (newWineType: string): void => {
-      if (newWineType === 'Bianco' && !isWhiteWineColorTone(localWineSheet.visualExam.color.tone)) {
+    watch(() => localWineSheet.wineType, (newWineType: WineType): void => {
+      if (newWineType === WineType.WHITE && !isWhiteWineColorTone(localWineSheet.visualExam.color.tone)) {
         localWineSheet.visualExam.color.tone = ColorTone.StrawYellow;
-      } else if (newWineType === 'Rosé' && !isRoseWineColorTone(localWineSheet.visualExam.color.tone)) {
+      } else if (newWineType === WineType.ROSE && !isRoseWineColorTone(localWineSheet.visualExam.color.tone)) {
         localWineSheet.visualExam.color.tone = ColorTone.CherryPink;
-      } else if (newWineType === 'Rosso' && !isRedWineColorTone(localWineSheet.visualExam.color.tone)) {
+      } else if (newWineType === WineType.RED && !isRedWineColorTone(localWineSheet.visualExam.color.tone)) {
         localWineSheet.visualExam.color.tone = ColorTone.RubyRed;
       }
     });
 
     // Get color tone options based on wine type
     const getColorToneOptions = () => {
-      if (localWineSheet.wineType === 'Bianco') {
+      if (localWineSheet.wineType === WineType.WHITE) {
         return {
           GreenishYellow: ColorTone.GreenishYellow,
           StrawYellow: ColorTone.StrawYellow,
           GoldenYellow: ColorTone.GoldenYellow,
           AmberYellow: ColorTone.AmberYellow
         };
-      } else if (localWineSheet.wineType === 'Rosé') {
+      } else if (localWineSheet.wineType === WineType.ROSE) {
         return {
           LightPink: ColorTone.LightPink,
           CherryPink: ColorTone.CherryPink,
@@ -224,7 +224,7 @@ export default defineComponent({
       effervescencePersistence,
       selectedAromaTypes,
       submitButtonText,
-      handleSubmit,
+      handleSubmit, 
       cancel,
       getColorToneOptions,
       WineClassification,
@@ -252,7 +252,9 @@ export default defineComponent({
       retroOlfactoryQualityOptions,
       retroOlfactoryPersistenceOptions,
       evolutionaryStateOptions,
-      wineClassificationOptions
+      wineClassificationOptions,
+      WineType,
+      wineTypeLabels
     };
   }
 });

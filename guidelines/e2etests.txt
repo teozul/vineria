@@ -312,3 +312,17 @@ npm run cypress:run   # For headless mode
 ```
 
 As you develop the application further, continue to update and expand these tests to ensure all functionality works as expected.
+
+// Test data
+const testWineData = {
+  producer: 'Test Producer',
+  denomination: 'Test Wine',
+  vintage: 2020,
+  classification: 'DOCG',
+  wineType: WineType.RED,
+  alcoholContent: 13.5,
+  temperature: 18
+};
+
+// Test case
+cy.get('#wineType').select(testWineData.wineType);

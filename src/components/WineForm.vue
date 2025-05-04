@@ -116,9 +116,9 @@
               class="form-control" 
               required
             >
-              <option value="Rosso">Rosso</option>
-              <option value="Bianco">Bianco</option>
-              <option value="Rosé">Rosé</option>
+              <option v-for="(value, key) in WineType" :key="key" :value="value">
+                {{ wineTypeLabels[value] }}
+              </option> 
             </select>
           </div>
         </div>

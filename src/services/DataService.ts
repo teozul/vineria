@@ -72,7 +72,7 @@ export class DataService {
   }
 
   // Download the JSON file
-  async downloadJsonFile(filename: string = 'wine-tasting-sheets.json'): Promise<void> {
+  async downloadJsonFile(filename = 'wine-tasting-sheets.json'): Promise<void> {
     const jsonData = await this.exportToJson();
     const blob = new Blob([jsonData], { type: 'application/json' });
     const url = URL.createObjectURL(blob);

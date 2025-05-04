@@ -1,3 +1,4 @@
+import { WineType } from '@/models/WineTastingSheet';
 
 describe('Create Wine Tasting Sheet', () => {
     it('should create a new wine tasting sheet', () => {
@@ -20,7 +21,7 @@ describe('Create Wine Tasting Sheet', () => {
       cy.get('#denomination').type('Barolo Test');
       cy.get('#classification').select('DOCG');
       cy.get('#vintage').type('2018');
-      cy.get('#wineType').select('Rosso');
+      cy.get('#wineType').select(WineType.RED);
       cy.get('#alcoholContent').type('14.5');
       cy.get('#temperature').type('18');
       

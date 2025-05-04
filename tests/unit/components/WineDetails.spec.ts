@@ -1,104 +1,9 @@
 import { mount } from '@vue/test-utils';
 import WineDetails from '@/components/WineDetails.vue';
-import { 
-  WineTastingSheet, 
-  createEmptyWineTastingSheet,
-  LimpidityLevel,
-  TransparencyLevel,
-  ColorTone,
-  ColorIntensity,
-  FluidityLevel,
-  EffervescenceGrain,
-  EffervescencePersistence,
-  OlfactoryIntensity,
-  OlfactoryFranchness,
-  OlfactoryFineness,
-  AromaType,
-  OlfactoryComplexity,
-  BodyLevel,
-  AlcoholLevel,
-  SoftnessLevel,
-  SugarLevel,
-  AcidityLevel,
-  SalinityLevel,
-  TanninLevel,
-  Balance,
-  RetroOlfactoryQuality,
-  RetroOlfactoryPersistence,
-  EvolutionaryState,
-  WineClassification
-} from '@/models/WineTastingSheet';
+import { WineType } from '@/models/WineTastingSheet';
+import { createMockWineSheet } from '../../shared/canned/WhineTastingSheetCanned';
 
 describe('WineDetails.vue', () => {
-  // Helper function to create a mock wine sheet
-  const createMockWineSheet = (): WineTastingSheet => {
-    const sheet = createEmptyWineTastingSheet();
-    sheet.denomination = 'Chianti Classico';
-    sheet.producer = 'Antinori';
-    sheet.classification = WineClassification.DOCG;
-    sheet.vintage = 2018;
-    sheet.alcoholContent = 13.5;
-    sheet.temperature = 18;
-    sheet.location = 'Tuscany';
-    sheet.date = '2023-01-01';
-    sheet.time = '14:30';
-    sheet.wineType = 'Rosso';
-
-    // Visual examination
-    sheet.visualExam = {
-      limpidity: LimpidityLevel.Limpid,
-      transparency: TransparencyLevel.Transparent,
-      color: {
-        tone: ColorTone.RubyRed,
-        intensity: ColorIntensity.Intense
-      },
-      fluidity: FluidityLevel.Fluid,
-      effervescence: {
-        grain: EffervescenceGrain.Fine,
-        persistence: EffervescencePersistence.Persistent
-      }
-    };
-
-    // Olfactory examination
-    sheet.olfactoryExam = {
-      intensity: OlfactoryIntensity.Intense,
-      quality: {
-        franchness: OlfactoryFranchness.Clear,
-        fineness: OlfactoryFineness.VeryFine
-      },
-      aromaTypes: [AromaType.Fruity, AromaType.Woody, AromaType.Balsamic],
-      complexity: OlfactoryComplexity.Complex
-    };
-
-    // Gustatory examination
-    sheet.gustatoryExam = {
-      body: BodyLevel.Structured,
-      balance: Balance.Harmonic,
-      softElements: {
-        alcoholLevel: AlcoholLevel.Warm,
-        softness: SoftnessLevel.Soft,
-        sugars: SugarLevel.Dry
-      },
-      hardElements: {
-        acidity: AcidityLevel.Fresh,
-        salinity: SalinityLevel.SlightlySaline,
-        tannins: TanninLevel.Tannic
-      },
-      retroOlfactory: {
-        intensity: OlfactoryIntensity.Intense,
-        quality: RetroOlfactoryQuality.Fine,
-        mouthAroma: {
-          persistence: RetroOlfactoryPersistence.Persistent
-        }
-      }
-    };
-
-    sheet.evolutionaryState = EvolutionaryState.Ready;
-    sheet.finalConsiderations = 'A well-balanced wine with good aging potential.';
-
-    return sheet;
-  };
-
   it('displays no data message when wineSheet prop is null', () => {
     const wrapper = mount(WineDetails, {
       props: {
@@ -125,14 +30,16 @@ describe('WineDetails.vue', () => {
 
   it('applies correct CSS class based on wine type', () => {
     const mockSheet = createMockWineSheet();
+    mockSheet.wineType = WineType.RED;
+
     const wrapper = mount(WineDetails, {
       props: {
         wineSheet: mockSheet
       }
     });
 
-    const badge = wrapper.find('.wine-badge');
-    expect(badge.classes()).toContain('wine-badge-red');
+    const badge = wrapper.find('.wine-type');
+    expect(badge.classes()).toContain('wine-type-red');
     expect(badge.text()).toBe('Rosso');
   });
 
@@ -146,15 +53,15 @@ describe('WineDetails.vue', () => {
 
     // Mock Date.toLocaleDateString to return a predictable output
     const originalToLocaleDateString = Date.prototype.toLocaleDateString;
-    Date.prototype.toLocaleDateString = function() {
+    Date.prototype.toLocaleDateString = function () {
       return '1/1/2023'; // Match the actual format we're getting
     };
 
     // Find the detail item that contains the date
-    const dateDetailItem = wrapper.findAll('.detail-item').find(item => 
+    const dateDetailItem = wrapper.findAll('.detail-item').find(item =>
       item.find('.detail-label').text() === 'Tasted On'
     );
-    
+
     // Ensure the element exists before checking its text
     expect(dateDetailItem).toBeTruthy();
     if (dateDetailItem) {
@@ -216,7 +123,7 @@ describe('WineDetails.vue', () => {
     });
 
     const considerations = wrapper.find('.consideration-text');
-    expect(considerations.text()).toBe('No final considerations provided.');
+    expect(considerations.text()).toBe('Nessuna considerazione finale.');
   });
 
   it('displays all gustatory examination subsections', () => {
@@ -232,5 +139,19 @@ describe('WineDetails.vue', () => {
     expect(subsectionTitles[1].text()).toBe('Soft Elements');
     expect(subsectionTitles[2].text()).toBe('Hard Elements');
     expect(subsectionTitles[3].text()).toBe('Retro-Olfactory');
+  });
+
+  it('should display wine details correctly', () => {
+    const sheet = createMockWineSheet();
+    sheet.wineType = WineType.RED;
+
+    const wrapper = mount(WineDetails, {
+      props: {
+        wineSheet: sheet
+      }
+    });
+
+    expect(wrapper.text()).toContain('Rosso');
+    expect(wrapper.find('.wine-type').text()).toBe('Rosso');
   });
 }); 
