@@ -365,7 +365,7 @@
           required
         >
           <option v-for="(value, key) in olfactoryComplexityOptions" :key="key" :value="value">
-            {{ value }}
+            {{ olfactoryComplexityLabels[value] }}
           </option>
         </select>
       </div>

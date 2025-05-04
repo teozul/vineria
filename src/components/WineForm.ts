@@ -19,7 +19,7 @@ import {
   salinityLevelLabels,
   tanninLevelLabels,
   balanceLabels,effervescencePersistenceLabels,olfactoryFranchnessLabels,olfactoryFinenessLabels,
-  retroOlfactoryQualityLabels,
+  retroOlfactoryQualityLabels,olfactoryComplexityLabels,
   olfactoryIntensityLabels,
   aromaTypeLabels
 } from '@/models/WineTastingSheet';
@@ -285,7 +285,7 @@ export default defineComponent({
       acidityLevelLabels,
       salinityLevelLabels,
       tanninLevelLabels,
-      balanceLabels,olfactoryIntensityLabels,aromaTypeLabels,
+      balanceLabels,olfactoryIntensityLabels,aromaTypeLabels,olfactoryComplexityLabels,
       retroOlfactoryQualityLabels,effervescenceGrainLabels,effervescencePersistenceLabels,olfactoryFranchnessLabels,olfactoryFinenessLabels,
     };
   }

@@ -38,7 +38,7 @@ export const createMockWineSheet = (): WineTastingSheet => {
       fineness: OlfactoryFineness.FINE
     },
     aromaTypes: [AromaType.FRUITY, AromaType.WOODY, AromaType.BALSAMIC],
-    complexity: OlfactoryComplexity.Complex
+    complexity: OlfactoryComplexity.COMPLEX
   };
 
   // Gustatory examination

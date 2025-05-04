@@ -177,11 +177,18 @@ export const aromaTypeLabels = {
 };
 
 export enum OlfactoryComplexity {
-    Simple = 'Semplice',
-    MediumComplex = 'Mediamente complesso',
-    Complex = 'Complesso',
-    Sumptuous = 'Sontuoso'
+    SIMPLE = 'SIMPLE',
+    MEDIUM_COMPLEX = 'MEDIUM_COMPLEX',
+    COMPLEX = 'COMPLEX',
+    SUMPTUOUS = 'SUMPTUOUS'
 }
+
+export const olfactoryComplexityLabels = {
+    [OlfactoryComplexity.SIMPLE]: 'Semplice',
+    [OlfactoryComplexity.MEDIUM_COMPLEX]: 'Mediamente complesso',
+    [OlfactoryComplexity.COMPLEX]: 'Complesso',
+    [OlfactoryComplexity.SUMPTUOUS]: 'Sontuoso'
+};
 
 export enum BodyLevel {
     Light = 'Leggero',
@@ -463,7 +470,7 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
                 fineness: OlfactoryFineness.FINE
             },
             aromaTypes: [AromaType.FRUITY],
-            complexity: OlfactoryComplexity.MediumComplex
+            complexity: OlfactoryComplexity.SIMPLE
         },
 
         gustatoryExam: {

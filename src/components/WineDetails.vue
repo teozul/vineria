@@ -105,7 +105,7 @@
           </div>
           <div class="detail-item">
             <span class="detail-label">Complexity</span>
-            <span class="detail-value">{{ wineSheet.olfactoryExam.complexity }}</span>
+            <span class="detail-value">{{ olfactoryComplexityLabels[wineSheet.olfactoryExam.complexity] }}</span>
           </div>
         </div>
       </section>
@@ -201,7 +201,7 @@ import {
   LimpidityLevel, TransparencyLevel, ColorTone, ColorIntensity, FluidityLevel,
   EffervescenceGrain, EffervescencePersistence, OlfactoryIntensity,
   OlfactoryFranchness, OlfactoryFineness, AromaType, OlfactoryComplexity,
-  BodyLevel, AlcoholLevel, SoftnessLevel, SugarLevel, AcidityLevel,aromaTypeLabels,
+  BodyLevel, AlcoholLevel, SoftnessLevel, SugarLevel, AcidityLevel,aromaTypeLabels,olfactoryComplexityLabels,
   SalinityLevel, TanninLevel, Balance, RetroOlfactoryQuality,
   RetroOlfactoryPersistence, EvolutionaryState, WineClassification,olfactoryIntensityLabels,
   wineClassificationLabels, evolutionaryStateLabels, WineType, wineTypeLabels,olfactoryFranchnessLabels,olfactoryFinenessLabels,
