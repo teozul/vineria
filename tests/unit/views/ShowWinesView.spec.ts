@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import WineCard from '@/components/WineCard.vue';
 import { dataService } from '@/services/DataService';
-import ShowWineCardsView from '@/views/ShowWineCardsView.vue';
+import ShowWinesView from '@/views/ShowWinesView.vue';
 import { createMockWineSheets } from '../../shared/canned/WhineTastingSheetCanned';
 
 
@@ -25,7 +25,7 @@ describe('WineList.vue', () => {
         (dataService.getAllSheets as jest.Mock).mockResolvedValue(mockWineSheets);
 
         // Mount the component
-        const wrapper = mount(ShowWineCardsView, {
+        const wrapper = mount(ShowWinesView, {
             global: {
                 components: {
                     RouterLink: {
@@ -47,7 +47,7 @@ describe('WineList.vue', () => {
 
     it('shows loading state initially', () => {
         (dataService.getAllSheets as jest.Mock).mockResolvedValue([]);
-        const wrapper = mount(ShowWineCardsView, {
+        const wrapper = mount(ShowWinesView, {
             global: {
                 components: {
                     RouterLink: {
@@ -64,7 +64,7 @@ describe('WineList.vue', () => {
     it('shows empty state when no wine sheets exist', async () => {
         (dataService.getAllSheets as jest.Mock).mockResolvedValue([]);
 
-        const wrapper = mount(ShowWineCardsView, {
+        const wrapper = mount(ShowWinesView, {
             global: {
                 components: {
                     RouterLink: {
@@ -85,7 +85,7 @@ describe('WineList.vue', () => {
         (dataService.getAllSheets as jest.Mock).mockResolvedValue([...mockWineSheets]);
         (dataService.deleteSheet as jest.Mock).mockResolvedValue(true);
 
-        const wrapper = mount(ShowWineCardsView, {
+        const wrapper = mount(ShowWinesView, {
             global: {
                 components: {
                     RouterLink: {

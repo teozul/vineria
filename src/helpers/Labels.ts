@@ -1,5 +1,3 @@
-import { effervescenceGrainLabels } from "@/models/WineTastingSheet";
-
 export const Labels = {
     //UI
     delete: 'Elimina',
@@ -16,7 +14,7 @@ export const Labels = {
     effervescence: 'Effervescenza',
     isSparkingWine: 'Spumante?',
     wineTastingSheets: 'Lista degustazioni',
-
+    noWineTastingSheets: 'Non hai ancora nessuna degustazione!',
     //Import/Export
     importExportData: 'Importa / Esporta dati',
     importData: 'Importa dati',
@@ -26,7 +24,7 @@ export const Labels = {
     exportDataDescription: 'Scarica tutte le tue degustazioni in formato JSON.',    
     selectJSONFile: 'Seleziona file JSON',
     importDataWarning: 'Attenzione: L\'importazione dei dati sostituirà tutte le degustazioni esistenti!',
-    
+    createNewWineTastingSheet: 'Nuova degustazione',
     //Wine
     //todo change with name
     wineType: 'Tipo di vino',

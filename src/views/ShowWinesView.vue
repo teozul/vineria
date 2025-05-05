@@ -6,9 +6,8 @@
 
         <div v-else-if="wineSheets.length === 0" class="empty-state">
             <div class="card">
-                <h3>No Wine Tasting Sheets Yet</h3>
-                <p>Start by creating your first wine tasting sheet!</p>
-                <router-link to="/create" class="btn">Create New</router-link>
+                <h3>{{ Labels.noWineTastingSheets }}</h3>
+                <router-link to="/create" class="btn">{{ Labels.createNewWineTastingSheet }}</router-link>
             </div>
         </div>
 
@@ -25,7 +24,7 @@ import WineCard from '@/components/WineCard.vue'
 import { ref, onMounted } from 'vue';
 import { WineTastingSheet } from '../models/WineTastingSheet';
 import { dataService } from '../services/DataService';
-
+import { Labels } from '../helpers/Labels';
 const wineSheets = ref<WineTastingSheet[]>([]);
 const loading = ref(true);
 const showDeleteConfirm = ref(false);

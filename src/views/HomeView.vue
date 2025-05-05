@@ -5,13 +5,13 @@
       <ImportExportView />
     </div>
   </div>
-  <ShowWineCardsView />
+  <ShowWinesView />
 
 
 </template>
 
 <script setup lang="ts">
-import ShowWineCardsView from './ShowWineCardsView.vue';
+import ShowWinesView from './ShowWinesView.vue';
 import ImportExportView from './ImportExportView.vue';
 import { Labels } from '../helpers/Labels';
 </script>

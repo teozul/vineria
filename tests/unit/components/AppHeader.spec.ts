@@ -54,7 +54,7 @@ describe('AppHeader.vue', () => {
 
     // Check if the links have the correct text
     expect(navLinks[0].text()).toBe('Home');
-    expect(navLinks[1].text()).toBe('New Tasting');
+    expect(navLinks[1].text()).toBe('Nuova degustazione');
 
     // Check if the links have the correct href attributes
     expect(navLinks[0].attributes('href')).toBe('/');
