@@ -14,6 +14,7 @@ jest.mock('@/services/StorageService', () => {
       delete: jest.fn(),
       importData: jest.fn(),
       exportData: jest.fn(),
+      search: jest.fn(),
     }
   };
 });
@@ -307,6 +308,29 @@ describe('DataService', () => {
       (window as any).FileReader = jest.fn(() => mockFileReader);
       
       await expect(dataService.handleFileUpload(mockFile)).rejects.toThrow('Failed to read file');
+    });
+  });
+
+  describe('searchSheets', () => {
+    it('should return sheets matching the query', async () => {
+      const mockResults = [
+        { id: '1', producer: 'Producer 1' },
+        { id: '2', producer: 'Producer 2' }
+      ] as WineTastingSheet[];
+
+      (storageService.search as jest.Mock).mockResolvedValue(mockResults);
+
+      const result = await dataService.searchSheets('producer');
+      expect(storageService.search).toHaveBeenCalledWith('producer');
+      expect(result).toEqual(mockResults);
+    });
+
+    it('should return an empty array if no sheets match', async () => {
+      (storageService.search as jest.Mock).mockResolvedValue([]);
+
+      const result = await dataService.searchSheets('nonexistent');
+      expect(storageService.search).toHaveBeenCalledWith('nonexistent');
+      expect(result).toEqual([]);
     });
   });
 });
