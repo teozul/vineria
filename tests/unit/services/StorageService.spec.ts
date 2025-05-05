@@ -1,6 +1,6 @@
 // tests/unit/services/StorageService.spec.ts
 import { LocalStorageProvider } from '@/services/StorageService';
-import { createEmptyWineTastingSheet, WineTastingSheet } from '@/models/WineTastingSheet';
+import { AromaType, createEmptyWineTastingSheet, WineTastingSheet } from '@/models/WineTastingSheet';
 
 // Mock local storage
 const localStorageMock = (() => {
@@ -278,6 +278,62 @@ describe('LocalStorageProvider', () => {
       expect(exportedData).toHaveLength(2);
       expect(exportedData[0].id).toBe('123');
       expect(exportedData[1].id).toBe('456');
+    });
+  });
+
+  describe('search', () => {
+    it('should find sheets matching a string in any field', async () => {
+      const sheet1 = createEmptyWineTastingSheet();
+      sheet1.id = '1';
+      sheet1.denomination = 'Chianti Classico';
+      sheet1.producer = 'Antinori';
+      sheet1.vintage = 2018;
+      sheet1.visualExam.color = { tone: 'Ruby', intensity: 'Intense' } as any;
+      sheet1.olfactoryExam.aromaTypes = [AromaType.FRUITY, AromaType.WOODY];
+
+      const sheet2 = createEmptyWineTastingSheet();
+      sheet2.id = '2';
+      sheet2.denomination = 'Vermentino';
+      sheet2.producer = 'Argiolas';
+      sheet2.vintage = 2020;
+      sheet2.finalConsiderations = 'Great with seafood';
+      sheet2.olfactoryExam.aromaTypes = [AromaType.FLORAL];
+
+      localStorageMock.setItem('wine-tasting-sheets', JSON.stringify([sheet1, sheet2]));
+
+      // Search by denomination
+      let results = await storageProvider.search('chianti');
+      expect(results).toHaveLength(1);
+      expect(results[0].id).toBe('1');
+
+      // Search by producer
+      results = await storageProvider.search('argiolas');
+      expect(results).toHaveLength(1);
+      expect(results[0].id).toBe('2');
+
+      // Search by vintage (number)
+      results = await storageProvider.search('2018');
+      expect(results).toHaveLength(1);
+      expect(results[0].id).toBe('1');
+
+      // Search by nested color tone
+      results = await storageProvider.search('ruby');
+      expect(results).toHaveLength(1);
+      expect(results[0].id).toBe('1');
+
+      // Search by aroma type
+      results = await storageProvider.search('woody');
+      expect(results).toHaveLength(1);
+      expect(results[0].id).toBe('1');
+
+      // Search by final considerations
+      results = await storageProvider.search('seafood');
+      expect(results).toHaveLength(1);
+      expect(results[0].id).toBe('2');
+
+      // Search for something not present
+      results = await storageProvider.search('nonexistent');
+      expect(results).toHaveLength(0);
     });
   });
 });
