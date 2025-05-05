@@ -111,6 +111,11 @@ export class DataService {
       reader.readAsText(file);
     });
   }
+
+  // Search wine tasting sheets by a query string in all fields
+  async searchSheets(query: string): Promise<WineTastingSheet[]> {
+    return storageService.search(query);
+  }
 }
 
 // Create a singleton instance for application-wide use

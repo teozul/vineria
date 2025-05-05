@@ -12,7 +12,7 @@
             <router-link to="/" class="nav-link">Home</router-link>
           </li>
           <li>
-            <router-link to="/create" class="nav-link">New Tasting</router-link>
+            <router-link to="/create" class="nav-link">{{ Labels.createNewWineTastingSheet }}</router-link>
           </li>
         </ul>
       </nav>
@@ -21,6 +21,7 @@
 </template>
 
 <script setup lang="ts">
+import { Labels } from '../helpers/Labels';
 </script>
 
 <style scoped>

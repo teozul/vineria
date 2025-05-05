@@ -20,6 +20,7 @@ export interface IStorageProvider {
   delete(id: string): Promise<boolean>;
   importData(data: WineTastingSheet[]): Promise<boolean>;
   exportData(): Promise<WineTastingSheet[]>;
+  search(query: string): Promise<WineTastingSheet[]>;
 }
 
 // LocalStorage implementation
@@ -105,6 +106,42 @@ export class LocalStorageProvider implements IStorageProvider {
     } catch (error) {
       console.error('Error importing data:', error);
       return false;
+    }
+  }
+
+  // Could be better
+  private valueContainsQuery(value: any, searchQuery: string): boolean {
+    if (value === null || value === undefined) return false;
+    
+    if (typeof value === 'string') {
+      return value.toLowerCase().includes(searchQuery);
+    }
+    
+    if (typeof value === 'number') {
+      return value.toString().includes(searchQuery);
+    }
+    
+    if (Array.isArray(value)) {
+      return value.some(item => this.valueContainsQuery(item, searchQuery));
+    }
+    
+    if (typeof value === 'object') {
+      return Object.values(value).some(val => this.valueContainsQuery(val, searchQuery));
+    }
+    
+    return false;
+  }
+
+  // Search wine tasting sheets by query string
+  async search(query: string): Promise<WineTastingSheet[]> {
+    try {
+      const sheets = await this.getAll();
+      const searchQuery = query.toLowerCase();
+      
+      return sheets.filter(sheet => this.valueContainsQuery(sheet, searchQuery));
+    } catch (error) {
+      console.error('Error searching wine sheets:', error);
+      return [];
     }
   }
 

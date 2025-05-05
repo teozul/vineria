@@ -1,7 +1,7 @@
 <template>
   <div class="create-wine-view">
     <div class="page-header">
-      <h1>New Wine Tasting Sheet</h1>
+      <h1> {{ Labels.createNewWineTastingSheet }}</h1>
     </div>
 
     <WineForm @save="saveWineSheet" @cancel="goBack" />
@@ -15,6 +15,7 @@ import {
   WineTastingSheet,
 } from '@/models/WineTastingSheet';
 import { dataService } from '@/services/DataService';
+import { Labels } from '@/helpers/Labels';
 
 const router = useRouter();
 

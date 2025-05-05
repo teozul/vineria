@@ -1,20 +1,35 @@
 <template>
     <div class="show-wine-cards-view">
         <div v-if="loading" class="loading-indicator">
-            <p>Loading wine tasting sheets...</p>
+            <p>{{ Labels.loading }}</p>
         </div>
 
-        <div v-else-if="wineSheets.length === 0" class="empty-state">
-            <div class="card">
-                <h3>No Wine Tasting Sheets Yet</h3>
-                <p>Start by creating your first wine tasting sheet!</p>
-                <router-link to="/create" class="btn">Create New</router-link>
+        <div v-else>
+            <!-- Show search input if there are no results or if there are results -->
+            <div v-if="isSearching || wineSheets.length > 0">
+                <div class="search-container">
+                    <input type="text" v-model="searchQuery" @input="handleSearch"
+                        :placeholder="Labels.searchWineSheets" class="search-input" />
+                </div>
             </div>
-        </div>
+            <div v-if="wineSheets.length === 0">
+                <div v-if="isSearching" class="empty-state">
+                    <div class="card">
+                        <h3>{{ Labels.noResultsFound }}</h3>
+                    </div>
+                </div>
+                <div v-else class="empty-state">
+                    <div class="card">
+                        <h3>{{ Labels.noWineTastingSheets }}</h3>
+                        <router-link to="/create" class="btn">{{ Labels.createNewWineTastingSheet }}</router-link>
+                    </div>
+                </div>
+            </div>
 
-        <div v-else class="wine-list">
-            <div v-for="sheet in wineSheets" :key="sheet.id">
-                <WineCard :wine-sheet="sheet" @delete="deleteSingleSheet" />
+            <div v-else class="wine-list">
+                <div v-for="sheet in wineSheets" :key="sheet.id">
+                    <WineCard :wine-sheet="sheet" @delete="deleteSingleSheet" />
+                </div>
             </div>
         </div>
     </div>
@@ -22,13 +37,17 @@
 
 <script setup lang="ts">
 import WineCard from '@/components/WineCard.vue'
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { WineTastingSheet } from '../models/WineTastingSheet';
 import { dataService } from '../services/DataService';
+import { Labels } from '../helpers/Labels';
 
 const wineSheets = ref<WineTastingSheet[]>([]);
 const loading = ref(true);
 const showDeleteConfirm = ref(false);
+const searchQuery = ref('');
+
+const isSearching = computed(() => searchQuery.value.trim().length > 0);
 
 onMounted(async () => {
     try {
@@ -39,6 +58,20 @@ onMounted(async () => {
         loading.value = false;
     }
 });
+
+const handleSearch = async () => {
+    if (!searchQuery.value.trim()) {
+        // If search is empty, show all sheets
+        wineSheets.value = await dataService.getAllSheets();
+        return;
+    }
+
+    try {
+        wineSheets.value = await dataService.searchSheets(searchQuery.value);
+    } catch (error) {
+        console.error('Error searching wine sheets:', error);
+    }
+};
 
 const deleteSingleSheet = async (wineSheetId: string) => {
     try {
@@ -231,6 +264,25 @@ const deleteSingleSheet = async (wineSheetId: string) => {
 
 .file-input-container input[type="file"] {
     display: none;
+}
+
+.search-container {
+    margin-bottom: 2rem;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.2s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #722F37;
+    box-shadow: 0 0 0 2px rgba(114, 47, 55, 0.1);
 }
 
 @media (max-width: 768px) {
