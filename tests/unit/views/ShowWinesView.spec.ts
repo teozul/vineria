@@ -9,7 +9,8 @@ import { createMockWineSheets } from '../../shared/canned/WhineTastingSheetCanne
 jest.mock('@/services/DataService', () => ({
     dataService: {
         getAllSheets: jest.fn(),
-        deleteSheet: jest.fn()
+        deleteSheet: jest.fn(),
+        searchSheets: jest.fn()
     }
 }));
 
@@ -113,5 +114,73 @@ describe('WineList.vue', () => {
         // After deletion there should be one less wine card
         const cards = wrapper.findAllComponents(WineCard);
         expect(cards.length).toBe(mockWineSheets.length - 1);
+    });
+
+    it('filters wine sheets based on search input', async () => {
+        const mockWineSheets = [
+            { id: '1', denomination: 'Barolo', producer: 'Producer A' },
+            { id: '2', denomination: 'Chianti', producer: 'Producer B' }
+        ];
+        (dataService.getAllSheets as jest.Mock).mockResolvedValue(mockWineSheets);
+        (dataService.searchSheets as jest.Mock).mockResolvedValue([mockWineSheets[1]]);
+
+        const wrapper = mount(ShowWinesView, {
+            global: {
+                components: {
+                    RouterLink: {
+                        props: ['to'],
+                        template: '<a :href="to"><slot></slot></a>',
+                    },
+                },
+            },
+        });
+        await wrapper.vm.$nextTick();
+        await new Promise(resolve => setTimeout(resolve, 0));
+
+        // Simulate typing in the search input
+        const input = wrapper.find('input[type="text"]');
+        await input.setValue('Chianti');
+        await input.trigger('input');
+        await wrapper.vm.$nextTick();
+        await new Promise(resolve => setTimeout(resolve, 0));
+
+        // Should call searchSheets with the query
+        expect(dataService.searchSheets).toHaveBeenCalledWith('Chianti');
+        // Should only show the filtered result
+        const cards = wrapper.findAllComponents(WineCard);
+        expect(cards.length).toBe(1);
+        const wineSheet = cards[0].props('wineSheet');
+        expect(wineSheet).toBeDefined();
+        expect((wineSheet as any).denomination).toBe('Chianti');
+    });
+
+    it('shows no results message when search yields nothing', async () => {
+        (dataService.getAllSheets as jest.Mock).mockResolvedValue([{ id: '1', denomination: 'Barolo', producer: 'Producer A' }]);
+        (dataService.searchSheets as jest.Mock).mockResolvedValue([]);
+
+        const wrapper = mount(ShowWinesView, {
+            global: {
+                components: {
+                    RouterLink: {
+                        props: ['to'],
+                        template: '<a :href="to"><slot></slot></a>',
+                    },
+                },
+            },
+        });
+        await wrapper.vm.$nextTick();
+        await new Promise(resolve => setTimeout(resolve, 0));
+
+        // Simulate typing in the search input
+        const input = wrapper.find('input[type="text"]');
+        await input.setValue('Nonexistent');
+        await input.trigger('input');
+        await wrapper.vm.$nextTick();
+        await new Promise(resolve => setTimeout(resolve, 0));
+
+        // Should call searchSheets with the query
+        expect(dataService.searchSheets).toHaveBeenCalledWith('Nonexistent');
+        // Should show the no results message
+        expect(wrapper.html()).toContain('Nessun risultato trovato per la ricerca');
     });
 });
