@@ -1,5 +1,3 @@
-// tests/integration/WineTastingFlow.spec.ts
-
 import { mount, flushPromises, VueWrapper } from '@vue/test-utils';
 import { createRouter, createWebHistory, Router } from 'vue-router';
 import { dataService } from '@/services/DataService';

@@ -1,8 +1,8 @@
 <template>
   <div class="home-view">
     <div class="page-header">
-      <h1>Wine Tasting Sheets</h1>
-      <UploadDownloadView />
+      <h1>{{ Labels.wineTastingSheets }}</h1>
+      <ImportExportView />
     </div>
   </div>
   <ShowWineCardsView />
@@ -12,7 +12,8 @@
 
 <script setup lang="ts">
 import ShowWineCardsView from './ShowWineCardsView.vue';
-import UploadDownloadView from './UploadDownloadView.vue';
+import ImportExportView from './ImportExportView.vue';
+import { Labels } from '../helpers/Labels';
 </script>
 
 <style scoped>
@@ -107,5 +108,4 @@ import UploadDownloadView from './UploadDownloadView.vue';
   display: flex;
   gap: 0.5rem;
 }
-
 </style>

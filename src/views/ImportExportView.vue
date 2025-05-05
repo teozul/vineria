@@ -1,38 +1,37 @@
 <template>
    <div class="action-buttons">
-        <button class="btn btn-sm" @click="openImportExport">
-          Import/Export
+        <button class="btn" @click="openImportExport">
+          {{ Labels.importExportData }}
         </button>
-        <router-link to="/create" class="btn">New Tasting Sheet</router-link>
       </div>
   <!-- Import/Export Modal -->
   <div v-if="showImportExport" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>Import / Export Data</h2>
+        <h2> {{ Labels.importExportData }}</h2>
         <button class="modal-close" @click="showImportExport = false">&times;</button>
       </div>
       <div class="modal-body">
         <div class="import-section">
-          <h3>Import Data</h3>
+          <h3>{{ Labels.importData }}</h3>
           <p class="warning-text">
-            Warning: Importing data will replace all existing wine tasting sheets!
+            {{ Labels.importDataWarning }}
           </p>
           <div class="file-input-container">
             <input type="file" id="import-file" accept=".json" @change="handleFileSelected" ref="fileInput" />
-            <label for="import-file" class="btn">Select JSON File</label>
+            <label for="import-file" class="btn btn-import-export">{{ Labels.selectJSONFile }}</label>
           </div>
           <p v-if="selectedFile">Selected: {{ selectedFile.name }}</p>
-          <button v-if="selectedFile" @click="importData" class="btn" :disabled="importing">
-            {{ importing ? 'Importing...' : 'Import Data' }}
+          <button v-if="selectedFile" @click="importData" class="btn btn-import-export" :disabled="importing">
+            {{ importing ? Labels.importing : Labels.importData }}
           </button>
         </div>
 
         <div class="export-section">
-          <h3>Export Data</h3>
-          <p>Download all your wine tasting sheets as a JSON file.</p>
-          <button @click="exportData" class="btn" :disabled="exporting">
-            {{ exporting ? 'Exporting...' : 'Export Data' }}
+          <h3>{{ Labels.exportData }}</h3>
+          <p>{{ Labels.exportDataDescription }}</p>
+          <button @click="exportData" class="btn btn-import-export" :disabled="exporting">
+            {{ exporting ? Labels.exporting : Labels.exportData }}
           </button>
         </div>
       </div>
@@ -44,6 +43,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { dataService } from '../services/DataService';
+import { Labels } from '../helpers/Labels';
 // State variables
 const showImportExport = ref(false);
 const selectedFile = ref<File | null>(null);
@@ -198,6 +198,16 @@ async function exportData() {
 
 .file-input-container input[type="file"] {
   display: none;
+}
+
+.btn {
+  min-width: 160px;
+  text-align: center;
+}
+
+.btn-import-export {
+  min-width: 190px;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
