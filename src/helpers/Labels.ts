@@ -15,7 +15,18 @@ export const Labels = {
     details: 'Dettagli',
     effervescence: 'Effervescenza',
     isSparkingWine: 'Spumante?',
-   
+    wineTastingSheets: 'Lista degustazioni',
+
+    //Import/Export
+    importExportData: 'Importa / Esporta dati',
+    importData: 'Importa dati',
+    exportData: 'Esporta dati',
+    importing: 'Importazione in corso...',
+    exporting: 'Esportazione in corso...',
+    exportDataDescription: 'Scarica tutte le tue degustazioni in formato JSON.',    
+    selectJSONFile: 'Seleziona file JSON',
+    importDataWarning: 'Attenzione: L\'importazione dei dati sostituirà tutte le degustazioni esistenti!',
+    
     //Wine
     //todo change with name
     wineType: 'Tipo di vino',
