@@ -1,9 +1,9 @@
 <template>
-   <div class="action-buttons">
-        <button class="btn" @click="openImportExport">
-          {{ Labels.importExportData }}
-        </button>
-      </div>
+  <div class="action-buttons">
+    <button class="btn" @click="openImportExport">
+      {{ Labels.importExportData }}
+    </button>
+  </div>
   <!-- Import/Export Modal -->
   <div v-if="showImportExport" class="modal">
     <div class="modal-content">
@@ -15,7 +15,7 @@
         <div class="import-section">
           <h3>{{ Labels.importData }}</h3>
           <p class="warning-text">
-            {{ Labels.importDataWarning }}
+            {{ Labels.importDataWarning }} 
           </p>
           <div class="file-input-container">
             <input type="file" id="import-file" accept=".json" @change="handleFileSelected" ref="fileInput" />
@@ -111,7 +111,6 @@ async function exportData() {
 </script>
 
 <style scoped>
-
 .action-buttons {
   display: flex;
   gap: 1rem;
