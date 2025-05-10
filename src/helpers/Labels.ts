@@ -4,7 +4,6 @@ export const Labels = {
     cancel: 'Annulla',
     edit: 'Modifica',
     loading: 'Caricamento in corso...',
-    viewDetails: 'Visualizza dettagli',
     confirmDeletion: 'Conferma eliminazione',
     tastedOn: 'Assaggiato il',
     confirmDeletionWarning: 'Questa azione non può essere annullata.',
@@ -18,7 +17,8 @@ export const Labels = {
     noWineTastingSheets: 'Non hai ancora nessuna degustazione!',
     searchWineSheets: 'Cerca degustazioni...',
     noResultsFound: 'Nessun risultato trovato per la ricerca.',
-
+    actions: 'Azioni',
+    
     //Import/Export
     importExportData: 'Importa / Esporta dati',
     importData: 'Importa dati',
@@ -89,4 +89,4 @@ export const Labels = {
     finalEvaluation: 'Valutazione finale',
     evolutionaryState: 'Stato evolutivo',
     finalConsiderations: 'Considerazioni finali',
-};
+} as const;

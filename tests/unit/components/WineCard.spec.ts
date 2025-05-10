@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import WineCard from '@/components/WineCard.vue';
 import { createMockWineSheet } from '../../shared/canned/WhineTastingSheetCanned';
-import {  WineType, WineTastingSheet } from '@/models/WineTastingSheet';
+import { WineType, WineTastingSheet } from '@/models/WineTastingSheet';
 
 describe('WineCard.vue', () => {
     let wrapper: ReturnType<typeof mount>;
@@ -58,7 +58,7 @@ describe('WineCard.vue', () => {
         const detailLink = wrapper.find('a[href="/detail/123"]');
         expect(detailLink.exists()).toBe(true);
         expect(detailLink.attributes('href')).toBe('/detail/123');
-        expect(detailLink.text()).toBe('Visualizza dettagli');
+        expect(detailLink.text()).toBe('Dettagli');
 
         const editLink = wrapper.find('a[href="/edit/123"]');
         expect(editLink.exists()).toBe(true);
