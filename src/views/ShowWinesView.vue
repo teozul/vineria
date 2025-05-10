@@ -13,14 +13,13 @@
                             :placeholder="Labels.searchWineSheets" class="search-input" />
                     </div>
                     <div class="view-switcher">
-                        <button @click="currentView = 'cards'" 
-                            :class="['btn', 'btn-sm', { 'btn-primary': currentView === 'cards' }]">
-                            <i class="fas fa-th-large"></i> Cards
-                        </button>
-                        <button @click="currentView = 'grid'" 
-                            :class="['btn', 'btn-sm', { 'btn-primary': currentView === 'grid' }]">
-                            <i class="fas fa-table"></i> Grid
-                        </button>
+                        <div class="toggle-switch" @click="currentView = currentView === 'cards' ? 'grid' : 'cards'">
+                            <span :class="['toggle-label', { active: currentView === 'cards' }]">Cards</span>
+                            <span class="toggle-track">
+                                <span class="toggle-knob" :class="{ right: currentView === 'grid' }"></span>
+                            </span>
+                            <span :class="['toggle-label', { active: currentView === 'grid' }]">Grid</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -297,19 +296,69 @@ const deleteSingleSheet = async (wineSheetId: string) => {
     flex: 1;
 }
 
+.search-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.2s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #722F37;
+    box-shadow: 0 0 0 2px rgba(114, 47, 55, 0.1);
+}
+
 .view-switcher {
     display: flex;
     gap: 0.5rem;
+    align-items: center;
 }
 
-.view-switcher .btn {
+.toggle-switch {
     display: flex;
     align-items: center;
+    cursor: pointer;
+    user-select: none;
     gap: 0.5rem;
 }
-
-.view-switcher .btn i {
-    font-size: 0.9rem;
+.toggle-label {
+    font-size: 1rem;
+    color: #666;
+    transition: color 0.2s;
+    min-width: 40px;
+    text-align: center;
+}
+.toggle-label.active {
+    color: #2d4373;
+    font-weight: 600;
+}
+.toggle-track {
+    width: 48px;
+    height: 28px;
+    background: #d1d5db;
+    border-radius: 14px;
+    position: relative;
+    margin: 0 0.5rem;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+}
+.toggle-knob {
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: 24px;
+    height: 24px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    transition: left 0.2s;
+}
+.toggle-knob.right {
+    left: 22px;
 }
 
 @media (max-width: 768px) {
