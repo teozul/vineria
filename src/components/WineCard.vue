@@ -21,7 +21,7 @@
                 </div>
                 <div class="wine-card-actions">
                     <router-link :to="`/detail/${wineSheet.id}`" class="btn btn-sm">
-                        {{ Labels.viewDetails }}
+                        {{ Labels.details }}
                     </router-link>
                     <router-link :to="`/edit/${wineSheet.id}`" class="btn btn-sm btn-secondary">
                         {{ Labels.edit }}

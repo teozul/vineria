@@ -4,7 +4,6 @@ export const Labels = {
     cancel: 'Annulla',
     edit: 'Modifica',
     loading: 'Caricamento in corso...',
-    viewDetails: 'Visualizza dettagli',
     confirmDeletion: 'Conferma eliminazione',
     tastedOn: 'Assaggiato il',
     confirmDeletionWarning: 'Questa azione non può essere annullata.',

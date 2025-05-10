@@ -24,7 +24,7 @@
                     <td>{{ formatDate(sheet.date) }}</td>
                     <td class="actions-cell">
                         <router-link :to="`/detail/${sheet.id}`" class="btn btn-sm">
-                            {{ Labels.viewDetails }}
+                            {{ Labels.details }}
                         </router-link>
                         <router-link :to="`/edit/${sheet.id}`" class="btn btn-sm btn-secondary">
                             {{ Labels.edit }}
@@ -38,12 +38,8 @@
         </table>
     </div>
 
-    <DeleteConfirmationModal
-        :show="showDeleteConfirm"
-        :item="selectedWine"
-        @cancel="rollBackDelete"
-        @confirm="confirmDelete"
-    />
+    <DeleteConfirmationModal :show="showDeleteConfirm" :item="selectedWine" @cancel="rollBackDelete"
+        @confirm="confirmDelete" />
 </template>
 
 <script setup lang="ts">
@@ -108,6 +104,9 @@ function confirmDelete() {
     background-color: #f8f9fa;
     font-weight: 600;
     color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .wine-table tr:hover {
@@ -142,4 +141,4 @@ function confirmDelete() {
         margin-right: 0;
     }
 }
-</style> 
+</style>
