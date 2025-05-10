@@ -8,9 +8,7 @@
             <div class="wine-card card">
                 <div class="wine-card-header">
                     <h3>{{ wineSheet.denomination }}</h3>
-                    <span class="wine-type" :class="getWineTypeClass(wineSheet.wineType)">
-                        {{ wineTypeLabels[wineSheet.wineType] }}
-                    </span>
+                    <WineTypeBadge :wine-type="wineSheet.wineType" />
                 </div>
                 <div class="wine-card-details">
                     <p><strong>{{ Labels.producer }}:</strong> {{ wineSheet.producer }}</p>
@@ -36,41 +34,21 @@
         </div>
     </div>
 
-    <!-- Delete Confirmation Modal -->
-    <div v-if="showDeleteConfirm" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>{{ Labels.confirmDeletion }}</h2>
-                <button class="modal-close" @click="rollBackDelete">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>
-                    {{ Labels.confirmDeletionMessage }}
-                    <strong>{{ wineSheet?.denomination }}</strong>
-                    {{ Labels.by }}
-                    <strong>{{ wineSheet?.producer }}</strong>?
-                </p>
-                <p class="warning-text">{{ Labels.confirmDeletionWarning }}</p>
-                <div class="modal-actions">
-                    <button @click="rollBackDelete" class="btn btn-secondary">
-                        {{ Labels.cancel }}
-                    </button>
-                    <button @click="confirmDelete" class="btn btn-danger">
-                        {{ Labels.delete }}
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <DeleteConfirmationModal
+        :show="showDeleteConfirm"
+        :item="wineSheet"
+        @cancel="rollBackDelete"
+        @confirm="confirmDelete"
+    />
 </template>
-<script setup lang="ts">
 
+<script setup lang="ts">
 import { ref } from 'vue';
-import { WineTastingSheet, wineClassificationLabels, wineTypeLabels } from '@/models/WineTastingSheet';
-import { getWineTypeClass } from '@/helpers/WineUtils';
+import { WineTastingSheet, wineClassificationLabels } from '@/models/WineTastingSheet';
 import { formatDate } from '@/helpers/DateUtils';
 import { Labels } from '@/helpers/Labels';
+import WineTypeBadge from './WineTypeBadge.vue';
+import DeleteConfirmationModal from './DeleteConfirmationModal.vue';
 
 const showDeleteConfirm = ref(false);
 const props = defineProps<{
@@ -79,7 +57,7 @@ const props = defineProps<{
 
 const emits = defineEmits<{
     delete: [wineSheetId: string],
-}>()
+}>();
 
 function tryDelete() {
     showDeleteConfirm.value = true;
@@ -94,7 +72,6 @@ function confirmDelete() {
     emits('delete', props.wineSheet!.id);
 }
 </script>
-
 
 <style scoped>
 .wine-card {
@@ -117,28 +94,6 @@ function confirmDelete() {
     font-size: 1.2rem;
 }
 
-.wine-type {
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: 500;
-}
-
-.wine-type-red {
-    background-color: #722F37;
-    color: #ffffff;
-}
-
-.wine-type-white {
-    background-color: #fff3cd;
-    color: #856404;
-}
-
-.wine-type-rose {
-    background-color: #f4c4bb;
-    color: #58151c;
-}
-
 .wine-card-details {
     flex-grow: 1;
     margin-bottom: 1rem;
@@ -153,103 +108,7 @@ function confirmDelete() {
     gap: 0.5rem;
 }
 
-/* Modal Styles */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-content {
-    background-color: white;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 600px;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid #eee;
-}
-
-.modal-header h2 {
-    margin: 0;
-    font-size: 1.5rem;
-}
-
-.modal-close {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #666;
-}
-
-.modal-body {
-    padding: 1.5rem;
-}
-
-.modal-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-    margin-top: 1.5rem;
-}
-
-.import-section,
-.export-section {
-    margin-bottom: 2rem;
-}
-
-.import-section h3,
-.export-section h3 {
-    margin-bottom: 1rem;
-}
-
-.warning-text {
-    color: #721c24;
-    background-color: #f8d7da;
-    padding: 0.5rem;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-}
-
-.file-input-container {
-    margin-bottom: 1rem;
-}
-
-.file-input-container input[type="file"] {
-    display: none;
-}
-
 @media (max-width: 768px) {
-    .page-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .action-buttons {
-        margin-top: 1rem;
-        width: 100%;
-    }
-
-    .wine-list {
-        grid-template-columns: 1fr;
-    }
-
     .wine-card-actions {
         flex-direction: column;
     }
