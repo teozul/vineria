@@ -89,4 +89,5 @@ export const Labels = {
     finalEvaluation: 'Valutazione finale',
     evolutionaryState: 'Stato evolutivo',
     finalConsiderations: 'Considerazioni finali',
-};
+    actions: 'Actions',
+} as const;

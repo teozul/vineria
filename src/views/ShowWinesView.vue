@@ -7,9 +7,21 @@
         <div v-else>
             <!-- Show search input if there are no results or if there are results -->
             <div v-if="isSearching || wineSheets.length > 0">
-                <div class="search-container">
-                    <input type="text" v-model="searchQuery" @input="handleSearch"
-                        :placeholder="Labels.searchWineSheets" class="search-input" />
+                <div class="view-controls">
+                    <div class="search-container">
+                        <input type="text" v-model="searchQuery" @input="handleSearch"
+                            :placeholder="Labels.searchWineSheets" class="search-input" />
+                    </div>
+                    <div class="view-switcher">
+                        <button @click="currentView = 'cards'" 
+                            :class="['btn', 'btn-sm', { 'btn-primary': currentView === 'cards' }]">
+                            <i class="fas fa-th-large"></i> Cards
+                        </button>
+                        <button @click="currentView = 'grid'" 
+                            :class="['btn', 'btn-sm', { 'btn-primary': currentView === 'grid' }]">
+                            <i class="fas fa-table"></i> Grid
+                        </button>
+                    </div>
                 </div>
             </div>
             <div v-if="wineSheets.length === 0">
@@ -26,9 +38,14 @@
                 </div>
             </div>
 
-            <div v-else class="wine-list">
-                <div v-for="sheet in wineSheets" :key="sheet.id">
-                    <WineCard :wine-sheet="sheet" @delete="deleteSingleSheet" />
+            <div v-else>
+                <WineGrid v-if="currentView === 'grid'" 
+                    :wine-sheets="wineSheets" 
+                    @delete="deleteSingleSheet" />
+                <div v-else class="wine-list">
+                    <div v-for="sheet in wineSheets" :key="sheet.id">
+                        <WineCard :wine-sheet="sheet" @delete="deleteSingleSheet" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -37,6 +54,7 @@
 
 <script setup lang="ts">
 import WineCard from '@/components/WineCard.vue'
+import WineGrid from '@/components/WineGrid.vue'
 import { ref, onMounted, computed } from 'vue';
 import { WineTastingSheet } from '../models/WineTastingSheet';
 import { dataService } from '../services/DataService';
@@ -46,6 +64,7 @@ const wineSheets = ref<WineTastingSheet[]>([]);
 const loading = ref(true);
 const showDeleteConfirm = ref(false);
 const searchQuery = ref('');
+const currentView = ref<'cards' | 'grid'>('cards');
 
 const isSearching = computed(() => searchQuery.value.trim().length > 0);
 
@@ -266,23 +285,31 @@ const deleteSingleSheet = async (wineSheetId: string) => {
     display: none;
 }
 
-.search-container {
+.view-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 2rem;
+    gap: 1rem;
 }
 
-.search-input {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    transition: border-color 0.2s ease;
+.search-container {
+    flex: 1;
 }
 
-.search-input:focus {
-    outline: none;
-    border-color: #722F37;
-    box-shadow: 0 0 0 2px rgba(114, 47, 55, 0.1);
+.view-switcher {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.view-switcher .btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.view-switcher .btn i {
+    font-size: 0.9rem;
 }
 
 @media (max-width: 768px) {
@@ -302,6 +329,19 @@ const deleteSingleSheet = async (wineSheetId: string) => {
 
     .wine-card-actions {
         flex-direction: column;
+    }
+
+    .view-controls {
+        flex-direction: column;
+    }
+
+    .search-container {
+        width: 100%;
+    }
+
+    .view-switcher {
+        width: 100%;
+        justify-content: center;
     }
 }
 </style>
