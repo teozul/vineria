@@ -68,6 +68,7 @@ function rollBackDelete() {
 }
 
 function confirmDelete() {
+    
     showDeleteConfirm.value = false;
     emits('delete', props.wineSheet!.id);
 }
