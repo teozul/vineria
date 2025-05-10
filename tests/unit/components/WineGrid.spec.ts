@@ -46,7 +46,7 @@ describe('WineGrid.vue', () => {
         const wrapper = factory();
         const headers = wrapper.findAll('th');
         expect(headers.map(h => h.text())).toEqual([
-            'Nome', 'Produttore', 'Anno', 'Tipo di vino', 'Classificazione', 'Assaggiato il', 'Actions'
+            'Nome', 'Produttore', 'Anno', 'Tipo di vino', 'Classificazione', 'Assaggiato il', 'Azioni'
         ]);
     });
 
