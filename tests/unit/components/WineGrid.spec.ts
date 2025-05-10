@@ -82,27 +82,27 @@ describe('WineGrid.vue', () => {
         expect(wrapper.findComponent({ name: 'DeleteConfirmationModal' }).exists()).toBe(true);
     });
 
-    it('closes the modal when cancel or close is clicked', async () => {
+    it('closes the delete confirmation modal when the cancel button is clicked', async () => {
         const wrapper = factory();
-        await wrapper.findAll('button.btn-danger')[0].trigger('click');
-        await wrapper.find('.btn-secondary').trigger('click');
-        await wrapper.vm.$nextTick();
-        await wrapper.vm.$nextTick();
+        await wrapper.find('button.btn-danger').trigger('click');
+        expect(wrapper.find('.modal').exists()).toBe(true);
+        await wrapper.find('.modal-actions button.btn-secondary').trigger('click');
         expect(wrapper.find('.modal').exists()).toBe(false);
+    });
 
-        await wrapper.findAll('button.btn-danger')[0].trigger('click');
+    it('closes the delete confirmation modal when the close button (x) is clicked', async () => {
+        const wrapper = factory();
+        await wrapper.find('button.btn-danger').trigger('click');
+        expect(wrapper.find('.modal').exists()).toBe(true);
         await wrapper.find('.modal-close').trigger('click');
-        await wrapper.vm.$nextTick();
-        await wrapper.vm.$nextTick();
         expect(wrapper.find('.modal').exists()).toBe(false);
     });
 
     it('emits delete event with correct id when confirm is clicked', async () => {
         const wrapper = factory();
-        await wrapper.findAll('button.btn-danger')[0].trigger('click');
-        await wrapper.findComponent({ name: 'DeleteConfirmationModal' }).vm.$emit('confirm');
-        await wrapper.vm.$nextTick();
+        await wrapper.find('button.btn-danger').trigger('click');
+        await wrapper.find('.modal-actions button.btn-danger').trigger('click');
         expect(wrapper.emitted('delete')).toBeTruthy();
-        expect(wrapper.emitted('delete')![0]).toEqual(['1']);
+        expect(wrapper.emitted('delete')![0]).toEqual([mockWineSheets[0].id]);
     });
 }); 
