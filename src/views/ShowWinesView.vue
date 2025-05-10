@@ -54,7 +54,7 @@
 <script setup lang="ts">
 import WineCard from '@/components/WineCard.vue'
 import WineGrid from '@/components/WineGrid.vue'
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, watch } from 'vue';
 import { WineTastingSheet } from '../models/WineTastingSheet';
 import { dataService } from '../services/DataService';
 import { Labels } from '../helpers/Labels';
@@ -68,6 +68,11 @@ const currentView = ref<'cards' | 'grid'>('cards');
 const isSearching = computed(() => searchQuery.value.trim().length > 0);
 
 onMounted(async () => {
+    // Restore view from localStorage
+    const savedView = localStorage.getItem('wineViewType');
+    if (savedView === 'cards' || savedView === 'grid') {
+        currentView.value = savedView;
+    }
     try {
         wineSheets.value = await dataService.getAllSheets();
     } catch (error) {
@@ -75,6 +80,10 @@ onMounted(async () => {
     } finally {
         loading.value = false;
     }
+});
+
+watch(currentView, (val) => {
+    localStorage.setItem('wineViewType', val);
 });
 
 const handleSearch = async () => {
@@ -323,6 +332,8 @@ const deleteSingleSheet = async (wineSheetId: string) => {
     cursor: pointer;
     user-select: none;
     gap: 0.5rem;
+    width: 160px;
+    justify-content: center;
 }
 .toggle-label {
     font-size: 1rem;
