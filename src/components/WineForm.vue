@@ -231,14 +231,21 @@
         </div>
       </div>
 
-      <div class="form-group">
-        <label class="form-label">{{ Labels.aromaTypes }}</label>
-        <div class="aroma-options">
-          <div v-for="(value, key) in aromaTypeOptions" :key="key" class="form-check">
-            <input type="checkbox" :id="'aroma-' + key" :value="value" v-model="selectedAromaTypes"
-              class="form-check-input" />
-            <label :for="'aroma-' + key" class="form-check-label">{{ aromaTypeLabels[value] }}</label>
+      <div class="form-group aroma-flex-row">
+        <div class="aroma-checkboxes">
+          <label class="form-label column-header">{{ Labels.aromaTypes }}</label>
+          <div class="aroma-options">
+            <div v-for="(value, key) in aromaTypeOptions" :key="key" class="form-check">
+              <input type="checkbox" :id="'aroma-' + key" :value="value" v-model="olfactorySelectedAromaTypes"
+                class="form-check-input" />
+              <label :for="'aroma-' + key" class="form-check-label aroma-label">{{ aromaTypeLabels[value] }}</label>
+            </div>
           </div>
+        </div>
+        <div class="aroma-considerations">
+          <label class="form-label column-header">{{ Labels.considerations }}</label>
+          <textarea id="olfactoryConsiderations" v-model="localWineSheet.olfactoryExam.considerations"
+            class="form-control" rows="8"></textarea>
         </div>
       </div>
 
@@ -340,9 +347,6 @@
         </div>
       </div>
       <div class="form-group">
-        Effervescenza? (wip)
-      </div>
-      <div class="form-group">
         <label for="balance" class="form-label">{{ Labels.balance }}</label>
         <select id="balance" v-model="localWineSheet.gustatoryExam.balance" class="form-control" required>
           <option v-for="(value, key) in balanceOptions" :key="key" :value="value">
@@ -357,8 +361,8 @@
         <div class="form-col">
           <div class="form-group">
             <label for="retroIntensity" class="form-label">Intensity</label>
-            <select id="retroIntensity" v-model="localWineSheet.gustatoryExam.retroOlfactory.intensity"
-              class="form-control" required>
+            <select id="retroIntensity" v-model="localWineSheet.retroOlfactoryExam.intensity" class="form-control"
+              required>
               <option v-for="(value, key) in olfactoryIntensityOptions" :key="key" :value="value">
                 {{ olfactoryIntensityLabels[value] }}
               </option>
@@ -368,8 +372,7 @@
         <div class="form-col">
           <div class="form-group">
             <label for="retroQuality" class="form-label">Quality</label>
-            <select id="retroQuality" v-model="localWineSheet.gustatoryExam.retroOlfactory.quality" class="form-control"
-              required>
+            <select id="retroQuality" v-model="localWineSheet.retroOlfactoryExam.quality" class="form-control" required>
               <option v-for="(value, key) in retroOlfactoryQualityOptions" :key="key" :value="value">
                 {{ retroOlfactoryQualityLabels[value] }}
               </option>
@@ -378,19 +381,31 @@
         </div>
 
       </div>
-      <div class="form-group">
-        Natura dell'aroma (wip)
+      <div class="form-group aroma-flex-row">
+        <div class="aroma-checkboxes">
+          <label class="form-label column-header">{{ Labels.aromaTypes }}</label>
+          <div class="aroma-options">
+            <div v-for="(value, key) in aromaTypeOptions" :key="key" class="form-check">
+              <input type="checkbox" :id="'aroma-' + key" :value="value" v-model="retroOlfactorySelectedAromaTypes"
+                class="form-check-input" />
+              <label :for="'aroma-' + key" class="form-check-label aroma-label">{{ aromaTypeLabels[value] }}</label>
+            </div>
+          </div>
+        </div>
+        <div class="aroma-considerations">
+          <label class="form-label column-header">{{ Labels.considerations }}</label>
+          <textarea id="retroOlfactoryConsiderations" v-model="localWineSheet.retroOlfactoryExam.considerations"
+            class="form-control" rows="8"></textarea>
+        </div>
       </div>
-      <div class="form-col">
         <div class="form-group">
           <label for="retroPersistence" class="form-label">{{ Labels.retroPersistence }}</label>
-          <select id="retroPersistence" v-model="localWineSheet.gustatoryExam.retroOlfactory.mouthAroma.persistence"
-            class="form-control" required>
+          <select id="retroPersistence" v-model="localWineSheet.retroOlfactoryExam.persistence" class="form-control"
+            required>
             <option v-for="(value, key) in retroOlfactoryPersistenceOptions" :key="key" :value="value">
               {{ retroOlfactoryPersistenceLabels[value] }}
             </option>
           </select>
-        </div>
       </div>
     </div>
 
@@ -426,3 +441,32 @@
 import WineFormComponent from './WineForm';
 export default WineFormComponent;
 </script>
+
+<style scoped>
+.aroma-flex-row {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+.aroma-checkboxes, .aroma-considerations {
+  display: flex;
+  flex-direction: column;
+}
+.column-header {
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+.aroma-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.aroma-label {
+  margin-left: 8px;
+}
+.aroma-considerations {
+  flex: 1;
+  min-width: 250px;
+}
+</style>

@@ -371,6 +371,7 @@ export interface OlfactoryExam {
     };
     aromaTypes: AromaType[];
     complexity?: OlfactoryComplexity;
+    considerations?: string;
 }
 
 export interface GustatoryExam {
@@ -393,6 +394,14 @@ export interface GustatoryExam {
             persistence?: RetroOlfactoryPersistence;
         };
     };
+}
+
+export interface RetroOlfactoryExam {
+    intensity?: OlfactoryIntensity;
+    quality?: RetroOlfactoryQuality;
+    persistence?: RetroOlfactoryPersistence;
+    aromaTypes: AromaType[];
+    considerations?: string;
 }
 
 export enum WineClassification {
@@ -423,11 +432,12 @@ export const wineTypeLabels = {
 
 // Main Wine Tasting Sheet Interface
 export interface WineTastingSheet {
-    id: string; 
+    id: string;
+    version?: number;
 
     // Basic Wine Information
     location: string;
-    date: string; 
+    date: string;
     time: string;
 
     // Wine Details
@@ -443,6 +453,7 @@ export interface WineTastingSheet {
     visualExam: VisualExam;
     olfactoryExam: OlfactoryExam;
     gustatoryExam: GustatoryExam;
+    retroOlfactoryExam: RetroOlfactoryExam;
 
     // Evolutionary State
     evolutionaryState?: EvolutionaryState;
@@ -485,6 +496,7 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
                 fineness: undefined
             },
             aromaTypes: [],
+            considerations: '',
             complexity: undefined
         },
 
@@ -509,7 +521,14 @@ export function createEmptyWineTastingSheet(): WineTastingSheet {
                 }
             }
         },
-
+        retroOlfactoryExam: {
+            intensity: undefined,
+            quality: undefined,
+            persistence: undefined,
+            aromaTypes: [],
+            considerations: ''
+        },
+        
         evolutionaryState: undefined,
         finalConsiderations: ''
     };
