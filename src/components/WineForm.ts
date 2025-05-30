@@ -44,6 +44,19 @@ export default defineComponent({
 
     // Create a deep copy of the wineSheet prop to avoid mutating it directly
     const localWineSheet = reactive<WineTastingSheet>(JSON.parse(JSON.stringify(props.wineSheet)));
+    
+    //V901s
+    //Move from version 1 to version 2
+    if(localWineSheet.version===undefined || localWineSheet.version===1 && localWineSheet.retroOlfactoryExam===undefined){
+      localWineSheet.retroOlfactoryExam = {
+        intensity: localWineSheet.gustatoryExam.retroOlfactory?.intensity,
+        quality: localWineSheet.gustatoryExam.retroOlfactory?.quality,
+        persistence: localWineSheet.gustatoryExam.retroOlfactory?.mouthAroma?.persistence,
+        aromaTypes: [],
+        considerations: ''
+      };
+      localWineSheet.version=2;
+    }
 
     // Computed properties
     const submitButtonText = computed((): string =>
@@ -64,8 +77,12 @@ export default defineComponent({
     );
 
     // Handle aroma types as a separate array for checkboxes
-    const selectedAromaTypes = ref<AromaType[]>(
+    const olfactorySelectedAromaTypes = ref<AromaType[]>(
       [...(localWineSheet.olfactoryExam.aromaTypes || [])]
+    );
+
+    const retroOlfactorySelectedAromaTypes = ref<AromaType[]>(
+      [...(localWineSheet.retroOlfactoryExam.aromaTypes || [])]
     );
 
     // Watch for changes in sparklingWine checkbox
@@ -91,8 +108,12 @@ export default defineComponent({
     });
 
     // Watch for changes in selected aroma types
-    watch(selectedAromaTypes, (newAromaTypes: AromaType[]): void => {
+    watch(olfactorySelectedAromaTypes, (newAromaTypes: AromaType[]): void => {
       localWineSheet.olfactoryExam.aromaTypes = [...newAromaTypes];
+    });
+
+    watch(retroOlfactorySelectedAromaTypes, (newAromaTypes: AromaType[]): void => {
+      localWineSheet.retroOlfactoryExam.aromaTypes = [...newAromaTypes];
     });
 
     // Initialize values on component mount
@@ -203,8 +224,11 @@ export default defineComponent({
       submitting.value = true;
 
       try {
+        localWineSheet.version = 2;
+
         // Update the aroma types from the selected checkboxes
-        localWineSheet.olfactoryExam.aromaTypes = [...selectedAromaTypes.value];
+        localWineSheet.olfactoryExam.aromaTypes = [...olfactorySelectedAromaTypes.value];
+        localWineSheet.retroOlfactoryExam.aromaTypes = [...retroOlfactorySelectedAromaTypes.value];
 
         // Update effervescence if it's a sparkling wine
         if (isSparklingWine.value) {
@@ -263,7 +287,7 @@ export default defineComponent({
       isSparklingWine,
       effervescenceGrain,
       effervescencePersistence,
-      selectedAromaTypes,
+      olfactorySelectedAromaTypes,
       submitButtonText,
       handleSubmit,
       cancel,
@@ -271,6 +295,7 @@ export default defineComponent({
       WineClassification,
 
       // Options
+      aromaTypeOptions,
       limpidityOptions,
       transparencyOptions,
       colorIntensityOptions,
@@ -280,7 +305,6 @@ export default defineComponent({
       olfactoryIntensityOptions,
       olfactoryFranchnessOptions,
       olfactoryFinenessOptions,
-      aromaTypeOptions,
       olfactoryComplexityOptions,
       bodyLevelOptions,
       alcoholLevelOptions,

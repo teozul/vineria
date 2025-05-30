@@ -31,6 +31,7 @@ export const Labels = {
     createNewWineTastingSheet: 'Nuova degustazione',
     //Wine
     //todo change with name
+    considerations: 'Considerazioni',
     wineType: 'Tipo di vino',
     denomination: 'Nome',
     alcoholContent: 'Gradazione alcolica',
